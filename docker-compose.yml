@@ -11,7 +11,7 @@ services:
         ports:
             - "5432:5432"
         volumes:
-            - "${PWD}/weeklydire_back_end/data/:/docker-entrypoint-initdb.d/"
+            - "${PWD}/data/:/docker-entrypoint-initdb.d/"
     pgadmin:
         container_name: weeklydire_pgadmin_container
         image: dpage/pgadmin4

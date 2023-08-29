@@ -31,6 +31,13 @@ export const articles = [
     {
         id: 1,
         body: 'Lorem Ipsum articullum bodium. This is the test body of the first article.',
-        title: 'Test title'
-    }
+        title: 'Test title',
+        thumbnail: 'https://w7.pngwing.com/pngs/954/389/png-transparent-atlantic-hurricane-season-hurricane-harvey-hurricane-irma-tropical-cyclone-storm-tornado-atmosphere-cloud-computer-wallpaper-thumbnail.png'
+    },
+    {
+        id: 2,
+        body: 'This is the test body of the SECOND article.',
+        title: 'Test title 2',
+        thumbnail: 'https://w7.pngwing.com/pngs/954/389/png-transparent-atlantic-hurricane-season-hurricane-harvey-hurricane-irma-tropical-cyclone-storm-tornado-atmosphere-cloud-computer-wallpaper-thumbnail.png'
+    },
 ]

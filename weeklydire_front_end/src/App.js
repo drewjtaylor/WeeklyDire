@@ -19,6 +19,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Homepage />} />
                 <Route path='/read' element={<Read />} />
+                <Route path='/read/:articleId' element={<FullArticle />} />
                 <Route path='/listen' element={<Listen />} />
                 <Route path='/watch' element={<Watch />} />
                 <Route path={`/articles/${test_id}`} element={<FullArticle article={articles.find(article => article.id=test_id)}/>} />

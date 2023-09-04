@@ -3,10 +3,8 @@ import {
     Container, 
     Row, 
     Col, 
-    CardImg, 
-    CardBody, 
-    CardTitle, 
-    CardText} 
+    Img
+} 
 from 'reactstrap';
 import { useParams } from 'react-router-dom';
 import { selectArticleById } from '../sampledbOperations';
@@ -17,24 +15,24 @@ const FullArticle = () => {
     console.log('article is:')
     console.log(article);
     if (article) {
-        const {id, body, title, thumbnail} = article;
+        const {body, title, thumbnail} = article;
         
         return (
-            <Card>
-                <CardImg
-                    alt={title}
-                    src={thumbnail}
-                    style={{
-                        height: 180,
-                        width: 180
-                        }}
-                    top
-                />
-                <CardBody>
-                    <CardTitle tag='h5'>{title}</CardTitle>
-                    <CardText>{body}</CardText>
-                </CardBody>
-            </Card>
+            <Container>
+                <Row className='mt-3'>
+                    <Col>
+                        <img
+                            alt={title}
+                            src={thumbnail}
+                            className='img-fluid mb-3 rounded-3'
+                        />
+                        <Col>
+                            <h5 className='mb-3'>{title}</h5>
+                            <p>{body}</p>
+                        </Col>
+                    </Col>
+                </Row>
+            </Container>
         )
     };
 

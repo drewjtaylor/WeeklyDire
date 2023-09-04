@@ -13,11 +13,10 @@ const ArticleCard = ({article}) => {
     const {body, title, thumbnail} = article;
 
     return (
-    <Card>
-        <CardImg src={thumbnail}/>
+    <Card className='h-100'>
+        <CardImg src={thumbnail} className='mh-100'/>
         <CardBody>
             <CardTitle>{title}</CardTitle>
-            <CardText>{body}</CardText>
         </CardBody>
     </Card>
   )

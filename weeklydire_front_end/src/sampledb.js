@@ -30,15 +30,15 @@ export const subscribers = [
 export const articles = [
     {
         id: 1,
-        body: 'Lorem Ipsum articullum bodium. This is the test body of the first article.',
-        title: 'Test title',
-        thumbnail: 'https://w7.pngwing.com/pngs/954/389/png-transparent-atlantic-hurricane-season-hurricane-harvey-hurricane-irma-tropical-cyclone-storm-tornado-atmosphere-cloud-computer-wallpaper-thumbnail.png'
+        body: 'A kindhearted couple who won £100,000 on the Euromillions is planning to spend their winnings on fostering children.\nAlready parents to three children, the couple in their 40s will now convert their garage into extra bedrooms to begin fostering kids in need, a dream they’ve always shared.\nKathleen Reece admits she’s often moaned in the past about her husband Mark playing the Euromillions every week, believing they weren’t lucky enough to ever win.\nAnd she thought Mark was playing a practical joke on her when he asked her to check the winning ticket while he went out to get some milk in North Worcestershire, England.\nBut her daughter helped her double-checked the numbers online. “We called out the winning numbers to each other and, as the realization of what this meant hit us, we sat there in disbelief.”\n“I decided to call the number on the back of the ticket and was talking to a lady from The National Lottery when Mark came home with the milk.\n“I told him to shush, as I was on the phone to The National Lottery. His jaw dropped.\n“He looked at me in disbelief so I put the phone on speaker and the lady confirmed we’d won £100,770.”\nKathleen, Mark and their daughter and two sons all sat in the kitchen staring at each other before hiding the winning ticket in Mark’s passport for safekeeping.\n“I’ve always wanted to foster children,” said Kathleen. “Mark and I discussed it many years ago and then we had our own.\n“My three kids will be leaving home soon and I have too much love to give. I’ve always wanted to foster, however having enough space has always been an issue.”\nKathleen, a full-time teaching assistant said the win was a brilliant way to finish off her summer break.',
+        title: 'Couple Wins Lottery--Plans to Foster with the Winnings',
+        thumbnail: 'https://www.goodnewsnetwork.org/wp-content/uploads/2023/09/happy-couple-in-40s-Kathleen-and-Mark-Reece-SWNS.jpg'
     },
     {
         id: 2,
-        body: 'This is the test body of the SECOND article.',
-        title: 'Test title 2',
-        thumbnail: 'https://w7.pngwing.com/pngs/954/389/png-transparent-atlantic-hurricane-season-hurricane-harvey-hurricane-irma-tropical-cyclone-storm-tornado-atmosphere-cloud-computer-wallpaper-thumbnail.png'
+        body: 'Hurricane Idalia made landfall near Keaton Beach, Fla., has knocked out power to hundreds of thousands of customers, grounded more than 800 flights and unleashed floods along Florida\'s coast far from where it came ashore as a Category 3 storm early Wednesday morning',
+        title: 'Hurricane Idalia Floods Tarpon Springs',
+        thumbnail: 'https://media.npr.org/assets/img/2023/08/30/gettyimages-1648519799_custom-38ab3c4594f1f80e8bfa8521a76a6fa3f1ff1804-s1100-c50.jpg'
     },
     {
         id: 3,

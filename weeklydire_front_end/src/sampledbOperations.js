@@ -15,3 +15,7 @@ export const selectAllArticles = () => {
 export const selectArticleById = (id) => {
     return articles.find((article) => article.id===parseInt(id))
 }
+
+export const selectArticlesByTag = (tag) => {
+    return articles.filter((article) => article.tags.includes(tag))
+}

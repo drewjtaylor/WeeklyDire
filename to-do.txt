@@ -1,1 +1,6 @@
 fix "test-id" on app.js for display page. Change it to "use params"
+
+Make images optional for articles
+
+Make tags show up in articles
+Make "tagged article list" for user to click an article, then be brought to a page where only articles with that tag show up

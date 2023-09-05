@@ -8,10 +8,10 @@ import Read from './Pages/Read';
 import Listen from './Pages/Listen';
 import Watch from './Pages/Watch';
 import FullArticle from './Pages/FullArticle';
+import TaggedArticles from './Pages/TaggedArticles';
 import { articles } from './sampledb';
 
 function App() {
-    const test_id = 1;
   
     return (
     <div className="App">
@@ -20,9 +20,9 @@ function App() {
                 <Route path='/' element={<Homepage />} />
                 <Route path='/read' element={<Read />} />
                 <Route path='/read/:articleId' element={<FullArticle />} />
+                <Route path='read/tags/:selectedTag' element={<TaggedArticles />} />
                 <Route path='/listen' element={<Listen />} />
                 <Route path='/watch' element={<Watch />} />
-                <Route path={`/articles/${test_id}`} element={<FullArticle article={articles.find(article => article.id=test_id)}/>} />
             </Routes>
         <Footer />
     </div>

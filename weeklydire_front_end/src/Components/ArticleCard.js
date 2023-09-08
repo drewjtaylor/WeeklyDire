@@ -13,8 +13,8 @@ const ArticleCard = ({article}) => {
     const {body, title, thumbnail} = article;
 
     return (
-    <Card className='h-100'>
-        <CardImg src={thumbnail} className='mh-100'/>
+    <Card className='h-100 shadow zoom'>
+            <CardImg src={thumbnail} className='mh-100'/>
         <CardBody>
             <CardTitle>{title}</CardTitle>
         </CardBody>

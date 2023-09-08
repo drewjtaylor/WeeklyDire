@@ -16,3 +16,7 @@
 .subtext {
     color: #949494
 }
+
+.logo {
+    max-height: 90px;
+}

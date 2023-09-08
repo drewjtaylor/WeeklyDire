@@ -1,7 +1,7 @@
 import {Container, Row, Col} from 'reactstrap'
 const Footer = () => {
   return (
-    <div className="footer sticky-bottom">
+    <div className="footer">
         <Container>
             <h1>This is the footer</h1>
             <p>Link</p>

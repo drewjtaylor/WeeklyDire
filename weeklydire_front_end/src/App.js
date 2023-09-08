@@ -16,14 +16,14 @@ function App() {
     return (
     <div className="App">
         <Header />
-            <Routes>
-                <Route path='/' element={<Homepage />} />
-                <Route path='/read' element={<Read />} />
-                <Route path='/read/:articleId' element={<FullArticle />} />
-                <Route path='read/tags/:selectedTag' element={<TaggedArticles />} />
-                <Route path='/listen' element={<Listen />} />
-                <Route path='/watch' element={<Watch />} />
-            </Routes>
+        <Routes>
+            <Route path='/' element={<Homepage />} />
+            <Route path='/read' element={<Read />} />
+            <Route path='/read/:articleId' element={<FullArticle />} />
+            <Route path='read/tags/:selectedTag' element={<TaggedArticles />} />
+            <Route path='/listen' element={<Listen />} />
+            <Route path='/watch' element={<Watch />} />
+        </Routes>
         <Footer />
     </div>
   );

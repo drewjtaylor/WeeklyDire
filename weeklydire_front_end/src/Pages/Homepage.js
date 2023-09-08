@@ -8,10 +8,6 @@ const Homepage = () => {
 
     return (
         <div className='app'>
-            <div className="background-gray">
-                <h1>Homepage</h1>
-                <p>This is sub text</p>
-            </div>
             <Container>
                 <Row>
                     {articles.map((article) => {

@@ -1,7 +1,7 @@
 import {Container, Row, Col} from 'reactstrap'
 const Footer = () => {
   return (
-    <div className="footer">
+    <div style={footerStyle}>
         <Container>
             <h1>This is the footer</h1>
             <p>Link</p>
@@ -12,6 +12,11 @@ const Footer = () => {
         </Container>
     </div>
   )
+}
+
+const footerStyle = {
+    backgroundColor: '#272727',
+    color: 'white'
 }
 
 export default Footer

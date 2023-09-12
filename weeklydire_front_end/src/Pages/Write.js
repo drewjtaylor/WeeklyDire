@@ -1,7 +1,8 @@
 import {Col, Row, Container, Button, Label, FormGroup } from 'reactstrap';
-import {Formik, Form, Field} from 'formik';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import { creators } from '../sampledb';
-import { useRef } from 'react';
+// import { useRef } from 'react';
+import { validateWriteForm } from '../utils/validateWriteForm';
 
 const Write = () => {
     const handleSubmit = (values, { resetForm }) => {
@@ -11,12 +12,16 @@ const Write = () => {
     };
 
 
-    const tagsRef = useRef(null);
-    const pendingTags = [];
+
+
+
+    // const tagsRef = useRef(null);
+    // const pendingTags = [];
 
     const creatorUser = creators[0];
     // const creatorUser = false; // use this line to try out not being logged in as creator
-    const {first_name, last_name} = creatorUser
+    const {first_name} = creatorUser;
+
 
     if (creatorUser) {
         return (
@@ -38,6 +43,7 @@ const Write = () => {
                                 tags: []
                             }}
                             onSubmit={handleSubmit}
+                            validate={validateWriteForm}
                         >
                             <Form>
                                 <FormGroup row>
@@ -50,6 +56,9 @@ const Write = () => {
                                             placeholder='Title of your Article'
                                             className='form-control'
                                         />
+                                        <ErrorMessage name='title'>
+                                            {(msg) => <p className='text-danger'>{msg}</p>}
+                                        </ErrorMessage>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -64,6 +73,9 @@ const Write = () => {
                                             placeholder='Enter the body of your article here'
                                             className='form-control'
                                         />
+                                        <ErrorMessage name='body'>
+                                            {(msg) => <p className='text-danger'>{msg}</p>}
+                                        </ErrorMessage>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>

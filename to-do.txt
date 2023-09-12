@@ -15,10 +15,6 @@ Separate by comma? Add one at a time? Find a more elegant solution
 
 
 
-Get rid of white bar at the bottom/figure out the footer
-
-
-
 ***After back end/DB implementation***
 
 Make /write actually send info to the database

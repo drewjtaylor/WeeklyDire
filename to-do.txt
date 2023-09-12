@@ -15,7 +15,24 @@ Separate by comma? Add one at a time? Find a more elegant solution
 
 
 
+
+
+
+
 ***After back end/DB implementation***
 
 Make /write actually send info to the database
 make /write require the signed in user to be a contributor
+
+
+
+
+***"Icing on the cake" ideas.***
+These are not part of the MVP (Minimum Viable Product). Once the basics are all DONE and polished, these features can be added.
+No working on these until the MVP is DONE.
+
+--Write page changes
+Add a "publish time" to the "Write" page to allow creators to choose when their articles go live
+Add an "Edit" page to creators can change existing articles (that THEY wrote) (keep previous versions?)
+Add a spot for "highlight quote" for article, and render it in a large bold section aside on its display page
+Instead of a thumbnail, allow uploading files (which would then need altered for storage?)

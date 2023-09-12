@@ -6,3 +6,20 @@ Make tags show up in articles
 Make "tagged article list" for user to click an article, then be brought to a page where only articles with that tag show up
 
 Make a modal "search by tag" modal
+
+
+
+Write a "tags" box into the "write" page.
+Separate by comma? Add one at a time? Find a more elegant solution
+
+
+
+
+Get rid of white bar at the bottom/figure out the footer
+
+
+
+***After back end/DB implementation***
+
+Make /write actually send info to the database
+make /write require the signed in user to be a contributor

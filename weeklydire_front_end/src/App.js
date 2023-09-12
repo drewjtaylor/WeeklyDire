@@ -9,7 +9,7 @@ import Listen from './Pages/Listen';
 import Watch from './Pages/Watch';
 import FullArticle from './Pages/FullArticle';
 import TaggedArticles from './Pages/TaggedArticles';
-import { articles } from './sampledb';
+import Write from './Pages/Write';
 
 function App() {
   
@@ -23,6 +23,7 @@ function App() {
             <Route path='read/tags/:selectedTag' element={<TaggedArticles />} />
             <Route path='/listen' element={<Listen />} />
             <Route path='/watch' element={<Watch />} />
+            <Route path='/write' element={<Write />} />
         </Routes>
         <Footer />
     </div>

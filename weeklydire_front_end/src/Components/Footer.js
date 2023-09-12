@@ -1,7 +1,7 @@
 import {Container, Row, Col} from 'reactstrap'
 const Footer = () => {
   return (
-    <div style={footerStyle}>
+    <div style={footerStyle} className='navbar-static-bottom'>
         <Container>
             <h1>This is the footer</h1>
             <p>Link</p>

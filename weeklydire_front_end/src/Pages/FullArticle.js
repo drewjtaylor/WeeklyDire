@@ -1,9 +1,7 @@
 import {
-    Card, 
     Container, 
     Row, 
-    Col, 
-    Img
+    Col
 } 
 from 'reactstrap';
 import { useParams } from 'react-router-dom';

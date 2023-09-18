@@ -10,6 +10,12 @@ const Homepage = () => {
         <div className='app'>
             <Container>
                 <Row>
+                    <Col className="text-center">
+                        <h1>Welcome to Weeklydire</h1>
+                        <p>A demo news site about how real people overcome tragedy.</p>
+                    </Col>
+                </Row>
+                <Row>
                     {articles.map((article) => {
                         return (
                             <Col md='6' className="mb-5">

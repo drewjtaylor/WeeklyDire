@@ -13,13 +13,15 @@ Write a "tags" box into the "write" page.
 Separate by comma? Add one at a time? Find a more elegant solution
 
 
-
+***Make it load from "json-server" instead of fake db files
 
 
 
 
 
 ***After back end/DB implementation***
+
+Uninstall json-server, get rid of "json-server" folder after a real database is connected
 
 Make /write actually send info to the database
 make /write require the signed in user to be a contributor

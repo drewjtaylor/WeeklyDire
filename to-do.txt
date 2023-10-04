@@ -24,7 +24,7 @@ Uninstall json-server, get rid of "json-server" folder after a real database is 
 Make /write actually send info to the database
 make /write require the signed in user to be a contributor
 
-
+Add error validation to LoginForm and Register Form
 
 
 ***"Icing on the cake" ideas.***

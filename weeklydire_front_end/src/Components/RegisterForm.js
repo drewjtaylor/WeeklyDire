@@ -1,28 +1,34 @@
 import {Formik, Field, Form} from 'formik';
 import {Label, Button, Container, Col, Row} from 'reactstrap';
 
-const LoginForm = () => {
+const RegisterForm = () => {
 
     const initialValues = {
+        email: '',
         username: '',
         password: '',
     };
 
-    const handleLoginSubmit = (values) => console.log(values)
+    const handleRegisterSubmit = (values) => console.log(values)
 
   return (
 <div>
     <Formik
-      initialValues={{
-        username: '',
-        password: ''
-      }}
-      onSubmit={handleLoginSubmit}
+      initialValues={initialValues}
+      onSubmit={handleRegisterSubmit}
     >
       {({ isSubmitting }) => (
         <Form>
           <Row>
-              <Col xs='3'>
+            <Col xs='3'>
+                <Label htmlFor="email" className='me-2'>Email: :</Label>
+            </Col>
+              <Col xs='9'>
+                  <Field name="email" placeholder="" />
+              </Col>
+          </Row>
+          <Row>
+            <Col xs='3'>
                 <Label htmlFor="username" className='me-2'>Username:</Label>
             </Col>
               <Col xs='9'>
@@ -48,4 +54,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default RegisterForm

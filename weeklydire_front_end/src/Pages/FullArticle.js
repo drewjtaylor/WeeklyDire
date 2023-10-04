@@ -1,3 +1,4 @@
+import Loading from '../Components/Loading';
 import {
     Container, 
     Row, 
@@ -27,7 +28,7 @@ const FullArticle = () => {
     }, [articleId])
 
     if (isLoading) {
-        return <h1 className="text-center">Loading ...</h1>
+        return <Loading />
     }
 
     if (article) {

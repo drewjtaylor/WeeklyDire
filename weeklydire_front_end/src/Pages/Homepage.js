@@ -1,5 +1,6 @@
-import ArticleCard from "../Components/ArticleCard"
-import { selectAllArticles, selectAllDbArticles } from "../sampledbOperations";
+import ArticleCard from "../Components/ArticleCard";
+import Loading from "../Components/Loading";
+import { selectAllDbArticles } from "../sampledbOperations";
 import {Row, Col, Container} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ const Homepage = () => {
     const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Fetch articles from database and update "isLoading"
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -24,7 +26,7 @@ const Homepage = () => {
     }, [])
 
     if (isLoading) {
-        return <h1 className="text-center">Loading ...</h1>
+        return <Loading />
     }
 
     return (

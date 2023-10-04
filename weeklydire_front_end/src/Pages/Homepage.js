@@ -11,7 +11,7 @@ const Homepage = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchData() {
+        const fetchData = async () => {
             try {
                 const fetchedArticles = await selectAllDbArticles();
                 setArticles(fetchedArticles);
@@ -24,7 +24,7 @@ const Homepage = () => {
     }, [])
 
     if (isLoading) {
-        return <div>Loading ...</div>
+        return <h1 className="text-center">Loading ...</h1>
     }
 
     return (

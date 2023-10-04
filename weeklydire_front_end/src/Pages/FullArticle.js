@@ -2,19 +2,36 @@ import {
     Container, 
     Row, 
     Col
-} 
-from 'reactstrap';
+} from 'reactstrap';
 import { useParams } from 'react-router-dom';
 import { selectArticleById } from '../sampledbOperations';
+import { useEffect, useState } from 'react';
 
 const FullArticle = () => {
+
+    const [article, setArticle] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
     const {articleId} = useParams();
-    const article = selectArticleById(articleId);
-    console.log('article is:')
-    console.log(article);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const fetchedArticle = await selectArticleById(articleId);
+                setArticle(fetchedArticle);
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error fetching your article: ', error)
+            }
+        }
+        fetchData();
+    }, [articleId])
+
+    if (isLoading) {
+        return <h1 className="text-center">Loading ...</h1>
+    }
+
     if (article) {
         const {body, title, thumbnail} = article;
-        
         return (
             <Container>
                 <Row className='mt-3'>

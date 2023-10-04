@@ -25,13 +25,9 @@ const Homepage = () => {
         fetchData();
     }, [])
 
-    // Wrapped loading screen on homepage in a large div so the footer doesn't jump up while loading.
+
     if (isLoading) {
-        return (
-            <div style={{height: '80vh'}}>
-                <Loading />
-            </div>
-        )
+        return <Loading />
     }
 
     return (

@@ -24,7 +24,7 @@ const Header = () => {
     <Row style={headerStyle} className='sticky-top background-gray mb-3'>
             <Col xs='1'></Col>
             <Col><Link to='/'><img className='img-fluid logo' src={gradientLogo}  /></Link></Col>
-            <Col xs='1 mt-2'><Button onClick={toggleLoginModal}>Sign in</Button></Col>
+            <Col xs='1 mt-2'><Button color='primary' onClick={toggleLoginModal}>Sign in</Button></Col>
             <Col xs='1 mt-2'><Button onClick={toggleRegisterModal}>Register</Button></Col>
             <Col xs='1'></Col>
             <Modal isOpen={loginModal} toggle={toggleLoginModal}>

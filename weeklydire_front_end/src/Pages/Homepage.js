@@ -40,7 +40,8 @@ const Homepage = () => {
                 </Row>
                 
 
-                
+                {}
+
                 <Row>
                     {articles.map((article) => {
                         return (

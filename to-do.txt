@@ -1,11 +1,9 @@
-fix "test-id" on app.js for display page. Change it to "use params"
-
 Make images optional for articles
 
 Make tags show up in articles
 Make "tagged article list" for user to click an article, then be brought to a page where only articles with that tag show up
 
-Make a modal "search by tag" modal
+Make a "search by tag" modal
 
 
 
@@ -13,10 +11,10 @@ Write a "tags" box into the "write" page.
 Separate by comma? Add one at a time? Find a more elegant solution
 
 
-***Make it load from "json-server" instead of fake db files
+***Make data load from "json-server" instead of fake db files
 
 
-
+Fix footer so it doesn't shoot up while loading, or content isn't "tall" enough.
 
 
 ***After back end/DB implementation***

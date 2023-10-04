@@ -38,10 +38,6 @@ const Homepage = () => {
                         <p>A demo news site about how real people overcome tragedy.</p>
                     </Col>
                 </Row>
-                
-
-                {}
-
                 <Row>
                     {articles.map((article) => {
                         return (

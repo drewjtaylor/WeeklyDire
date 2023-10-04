@@ -5,7 +5,7 @@ import {Col} from 'reactstrap';
 const Loading = () => {
   return (
     <Col className='text-center'>
-        <FontAwesomeIcon className='' icon={faSpinner} spin size='2x' />
+        <FontAwesomeIcon className='' icon={faSpinner} size='5x' pulse/>
     </Col>
   )
 }

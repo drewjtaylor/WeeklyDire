@@ -1,8 +1,13 @@
 import { comments, creators, subscribers, articles } from "./sampledb";
 import { dbUrl } from './utils/dbUrl';
 
-export const selectAllComments = () => {
-    return comments
+export const selectAllComments = async () => {
+    const response = await fetch(dbUrl + 'comments');
+    if (!response.ok) {
+        return Promise.reject('Unable to fetch comments, status: ' + response.status);
+    };
+    const data = await response.json();
+    return data
 };
 
 

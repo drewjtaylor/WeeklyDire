@@ -14,7 +14,7 @@ export const selectArticleById = async (articleId) => {
         return Promise.reject('Unable to fetch, status: ' + response.status)
     };
     const data = await response.json();
-    return data[parseInt(articleId)]
+    return data[parseInt(articleId)-1]
 }
 
 

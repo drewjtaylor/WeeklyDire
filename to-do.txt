@@ -5,8 +5,6 @@ Make "tagged article list" for user to click an article, then be brought to a pa
 
 Make a "search by tag" modal
 
-When articles are clicked, they are showing the artcile with the next ID
-
 Write a "tags" box into the "write" page.
 Separate by comma? Add one at a time? Find a more elegant solution
 

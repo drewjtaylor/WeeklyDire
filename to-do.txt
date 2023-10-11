@@ -3,7 +3,7 @@ Make images optional for articles
 Make tags show up in articles
 Make "tagged article list" for user to click an article, then be brought to a page where only articles with that tag show up
 
-Make a "search by tag" modal
+Make a "search by tag" modal (started on sampledboperations file)
 
 Write a "tags" box into the "write" page.
 Separate by comma? Add one at a time? Find a more elegant solution

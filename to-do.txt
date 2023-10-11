@@ -9,11 +9,6 @@ Write a "tags" box into the "write" page.
 Separate by comma? Add one at a time? Find a more elegant solution
 
 
-***Make data load from "json-server" instead of fake db files
-
-
-Fix footer so it doesn't shoot up while loading, or content isn't "tall" enough.
-
 
 ***After back end/DB implementation***
 

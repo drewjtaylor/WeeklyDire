@@ -1,6 +1,7 @@
-import { comments, creators, subscribers, articles } from "./sampledb";
+// import { comments, creators, subscribers, articles } from "./sampledb";
 import { dbUrl } from './utils/dbUrl';
 
+// Returns all comments (not sure if there's a use-case for this)
 export const selectAllComments = async () => {
     const response = await fetch(dbUrl + 'comments');
     if (!response.ok) {
@@ -10,9 +11,7 @@ export const selectAllComments = async () => {
     return data
 };
 
-
-
-
+//Returns a single article matching the given articleId
 export const selectArticleById = async (articleId) => {
     const response = await fetch(dbUrl + 'articles');
     if (!response.ok) {
@@ -22,11 +21,18 @@ export const selectArticleById = async (articleId) => {
     return data[parseInt(articleId)-1]
 }
 
-
-export const selectCommentByArticle = (articleId) => {
-    return comments.find((comment) => parseInt(articleId)===comment.articleId)
+//Returns all comments associated to given articleId
+export const selectCommentByArticle = async (articleId) => {
+    const response = await fetch(dbUrl + 'comments');
+    if (!response.ok) {
+        return Promise.reject('Unable to fetch comments, status: ' + response.status)
+    };
+    const data = await response.json();
+    const comments = data.filter((comment) => parseInt(articleId)===comment.articleId)
+    return comments
 };
 
+//Returns all articles
 export const selectAllDbArticles = async () => {
     const response = await fetch(dbUrl + 'articles');
     if (!response.ok) {
@@ -36,14 +42,21 @@ export const selectAllDbArticles = async () => {
     return data
 }
 
-export const selectAllArticles = () => {
-    return articles
-};
+// export const selectAllArticles = () => {
+//     return articles
+// };
 
 // export const selectArticleById = (id) => {
 //     return articles.find((article) => article.id===parseInt(id))
 // }
 
-export const selectArticlesByTag = (tag) => {
-    return articles.filter((article) => article.tags.includes(tag))
+// Returns articles with matching tag
+export const selectArticlesByTag = async (tag) => {
+    const response = await fetch(dbUrl + 'articles');
+    if (!response.ok) {
+        return Promise.reject('Unable to fetch, status: ' + response.status)
+    };
+    const data = await response.json();
+    const articles = data.filter((article) => article.tags.includes(tag));
+    return articles
 }

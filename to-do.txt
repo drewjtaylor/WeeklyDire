@@ -7,15 +7,12 @@ Make a "search by tag" modal
 
 Make a better looking error component.
 
+Make a "search by tag" modal (started on sampledboperations file)
+
 Write a "tags" box into the "write" page.
 Separate by comma? Add one at a time? Find a more elegant solution
 
-
-***Make data load from "json-server" instead of fake db files
-
-
-Fix footer so it doesn't shoot up while loading, or content isn't "tall" enough.
-
+Finish making sampledboperations all use json-server instead
 
 ***After back end/DB implementation***
 

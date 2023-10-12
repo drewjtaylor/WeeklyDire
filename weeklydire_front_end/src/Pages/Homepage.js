@@ -1,5 +1,6 @@
 import ArticleCard from "../Components/ArticleCard";
 import Loading from "../Components/Loading";
+import Error from "../Components/Error";
 import { selectAllDbArticles } from "../sampledbOperations";
 import {Row, Col, Container} from 'reactstrap';
 import {Link} from 'react-router-dom';
@@ -10,6 +11,7 @@ const Homepage = () => {
 
     const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('');
 
     // Fetch articles from database and update "isLoading"
     useEffect(() => {
@@ -19,6 +21,8 @@ const Homepage = () => {
                 setArticles(fetchedArticles);
                 setIsLoading(false);
             } catch (error) {
+                setIsLoading(false);
+                setErrorMessage(error.message);
                 console.error('Error fetching articles: ', error)
             }
         }
@@ -28,6 +32,10 @@ const Homepage = () => {
 
     if (isLoading) {
         return <Loading />
+    }
+
+    if (errorMessage !== '') {
+        return <Error errorMessage={errorMessage} />
     }
 
     return (

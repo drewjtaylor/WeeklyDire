@@ -5,7 +5,8 @@
     "body": "This is the body of the first test comment. Lorem ipsum ad infinitum.",
     "subscriber_author": 1,
     "articleId": 1
-}],
+    }
+],
   "creators": [
     {
         "id": 1,
@@ -22,6 +23,16 @@
         "id": 1,
         "email": "ISubscribeToThings@example.com",
         "password": "password"
+    },
+    {
+        "id": 2,
+        "email": "newsjunkie@mailinator.com",
+        "password": "1234"
+    },
+    {
+        "id": 3,
+        "email": "elvis@music.com",
+        "password": "heartbreakhotel"
     }
 ],
   "articles": [

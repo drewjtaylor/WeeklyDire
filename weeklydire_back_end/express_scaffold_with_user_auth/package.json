@@ -1,7 +1,7 @@
 {
-    "name": "node-express",
+    "name": "WeeklyDire-express",
     "version": "1.0.0",
-    "description": "A server for handling requests to MongoDB for users",
+    "description": "An express server for handling requests to MongoDB for the Weekly Dire app",
     "main": "./bin/www",
     "jest": {
         "preset": "@shelf/jest-mongodb"

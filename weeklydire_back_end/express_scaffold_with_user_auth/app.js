@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-const eventRouter = require('./routes/eventsRouter');
+// const eventRouter = require('./routes/eventsRouter');
 const userRouter = require('./routes/usersRouter');
 const config = require('./config');
 
@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(passport.initialize());
 
 // Route references
-app.use('/events', eventRouter);
+// app.use('/events', eventRouter);
 app.use('/users', userRouter)
 
 // Essentially means, "static files are served at THIS FOLDER + /public".

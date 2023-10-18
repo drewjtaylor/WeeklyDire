@@ -21,7 +21,7 @@ userRouter.route('/')
 })
 .post((req, res, next) => {
     User.register(
-        new User({username: req.body.username, email: req.body.email}),
+        new User({email: req.body.email}),
         req.body.password,
         (err, user) => {
             if (err) {
@@ -72,8 +72,8 @@ userRouter.post('/login', passport.authenticate('local'), (req, res, next) => {
 })
 
 // Route searches for user by username
-userRouter.get('/finduser/:username', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-    User.findOne({username: req.params.username})
+userRouter.get('/finduser/:email', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+    User.findOne({email: req.params.email})
     .then(user => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -84,51 +84,51 @@ userRouter.get('/finduser/:username', authenticate.verifyUser, authenticate.veri
 
 // Routes for dealing with single user
 userRouter.route('/:userId')
-.get(
-    authenticate.verifyUser,
-    authenticate.verifyAdmin,
-    (req, res, next) => {
-    User.findById(req.params.userId)
-    .then(user => {
-        console.log('user found');
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(user);
+    .get(
+        authenticate.verifyUser,
+        authenticate.verifyAdmin,
+        (req, res, next) => {
+        User.findById(req.params.userId)
+        .then(user => {
+            console.log('user found');
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(user);
+        })
+        .catch(err => next(err))
     })
-    .catch(err => next(err))
-})
-.post((req, res, next) => {
-    res.statusCode = 403;
-    res.end(`POST operation not supported on /users/${req.params.userId}\nUsers must be adding by sending a POST request to /users`)
-})
-.put(
-    authenticate.verifyUser,
-    authenticate.verifyAdmin,
-    (req, res, next) => {
-    User.findByIdAndUpdate(req.params.userId, 
+    .post((req, res, next) => {
+        res.statusCode = 403;
+        res.end(`POST operation not supported on /users/${req.params.userId}\nUsers must be adding by sending a POST request to /users`)
+    })
+    .put(
+        authenticate.verifyUser,
+        authenticate.verifyAdmin,
+        (req, res, next) => {
+        User.findByIdAndUpdate(req.params.userId, 
+            {
+                $set: req.body
+            },
         {
-            $set: req.body
-        },
-    {
-        new: true
+            new: true
+        })
+        .then(user => {
+            res.statusCode = 201;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(user);
+        })
+        .catch(err => next(err))
     })
-    .then(user => {
-        res.statusCode = 201;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(user);
-    })
-    .catch(err => next(err))
-})
-.delete(
-    authenticate.verifyUser,
-    authenticate.verifyAdmin,
-    (req, res, next) => {
-    User.findByIdAndDelete(req.params.userId)
-    .then(response => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(response);
-    })
-});
+    .delete(
+        authenticate.verifyUser,
+        authenticate.verifyAdmin,
+        (req, res, next) => {
+        User.findByIdAndDelete(req.params.userId)
+        .then(response => {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(response);
+        })
+    });
 
 module.exports = userRouter;

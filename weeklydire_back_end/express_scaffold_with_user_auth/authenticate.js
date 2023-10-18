@@ -26,6 +26,16 @@ exports.verifyAdmin = (req, res, next) => {
     }
 };
 
+exports.verifyCreator = (req, res, next) => {
+    if (req.user.creator) {
+        return next()
+    } else {
+        err = new Error('You do not have a creator account, so you are not authorized for this operation.');
+        err.statusCode = 403;
+        return next(err)
+    }
+}
+
 exports.verifyUser = passport.authenticate('jwt', {session: false});
 
 const opts = {};

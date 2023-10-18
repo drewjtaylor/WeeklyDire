@@ -5,6 +5,7 @@ const passport = require('passport');
 
 // const eventRouter = require('./routes/eventsRouter');
 const userRouter = require('./routes/usersRouter');
+const commentRouter = require('./routes/commentsRouter');
 const config = require('./config');
 
 const hostname = 'localhost';
@@ -51,6 +52,7 @@ app.use(passport.initialize());
 // Route references
 // app.use('/events', eventRouter);
 app.use('/users', userRouter)
+app.use('./comments', commentRouter)
 
 // Essentially means, "static files are served at THIS FOLDER + /public".
 app.use(express.static(__dirname + '/public'));

@@ -6,6 +6,7 @@ const passport = require('passport');
 // const eventRouter = require('./routes/eventsRouter');
 const userRouter = require('./routes/usersRouter');
 const commentRouter = require('./routes/commentsRouter');
+const articleRouter = require('./routes/articlesRouter');
 const config = require('./config');
 
 const hostname = 'localhost';
@@ -24,7 +25,6 @@ connect.then(
     () => console.log('Connected correctly to the database server'),
     err => console.log(err)
 )
-
 
 const app = express();
 
@@ -53,6 +53,7 @@ app.use(passport.initialize());
 // app.use('/events', eventRouter);
 app.use('/users', userRouter)
 app.use('./comments', commentRouter)
+app.use('./articles', articleRouter)
 
 // Essentially means, "static files are served at THIS FOLDER + /public".
 app.use(express.static(__dirname + '/public'));

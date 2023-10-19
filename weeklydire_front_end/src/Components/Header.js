@@ -1,4 +1,4 @@
-import {Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Container, Row, Col, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import gradientLogo from '../Assets/WeeklyDireLogoGradient.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';

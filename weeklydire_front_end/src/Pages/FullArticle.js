@@ -50,6 +50,13 @@ const FullArticle = () => {
                         </Col>
                     </Col>
                 </Row>
+                <Row>
+                    <Col>Tags: {article.tags.map((tag, index, fullList) => {
+                        return index === fullList.length-1 ?
+                            `${tag}` : 
+                            `${tag}, `
+                    })}</Col>
+                </Row>
             </Container>
         )
     };

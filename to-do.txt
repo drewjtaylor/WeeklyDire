@@ -1,9 +1,10 @@
 Mmake a default picture to show on "articleCard"
 
-Make tags show up in articles
+Test what happens if an article has no tags on fullArticle
+
 Make "tagged article list" for user to click an article, then be brought to a page where only articles with that tag show up
 
-Make a "search by tag" modal
+Make a "search by tag" modal (tagSearchModal)
 
 Make a better looking error component.
 

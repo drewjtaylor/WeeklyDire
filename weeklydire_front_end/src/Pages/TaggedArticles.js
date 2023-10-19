@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import ArticleCard from "../Components/ArticleCard";
 import { selectArticlesByTag } from "../sampledbOperations";
 import {Row, Col, Container} from 'reactstrap';
@@ -5,8 +6,15 @@ import {Link, useParams} from 'react-router-dom';
 
 
 const TaggedArticles = () => {
+
+    const [articles, setArticles] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
     const {selectedTag} = useParams(); // Comes from 'read/tags/:selectedTag' on App.js
     const taggedArticles = selectArticlesByTag(selectedTag); // returns an array of articles with that tag
+
+    useEffect(() => {
+        
+    })
 
     // Copied mostly from "Homepage", which just shows all/featured articles
     // This example just shows articles based on the "tag(s)" provided by user

@@ -1,4 +1,4 @@
-Make images optional for articles
+Mmake a default picture to show on "articleCard"
 
 Make tags show up in articles
 Make "tagged article list" for user to click an article, then be brought to a page where only articles with that tag show up

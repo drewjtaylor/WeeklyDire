@@ -63,6 +63,13 @@
         "title": "Florida man threw live Gator in Wendy\"s drive-thru window",
         "thumbnail": "https://www.wdtn.com/wp-content/uploads/sites/45/2023/08/Alligator-launch-TIM-SMITH.jpg?strip=1",
         "tags": ["florida"]
+    },
+    {
+        "id": 5,
+        "body": "This is the body of an article with no image",
+        "title": "This is the title of an article with no image",
+        "thumbnail": "",
+        "tags": ["florida"]
     }
 ]
 }

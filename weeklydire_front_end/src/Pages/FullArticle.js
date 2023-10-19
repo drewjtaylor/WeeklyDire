@@ -37,11 +37,13 @@ const FullArticle = () => {
             <Container>
                 <Row className='mt-3'>
                     <Col>
-                        <img
-                            alt={title}
-                            src={thumbnail}
-                            className='img-fluid mb-3 rounded-3'
-                        />
+                        {thumbnail ? 
+                            <img
+                                alt={title}
+                                src={thumbnail}
+                                className='img-fluid mb-3 rounded-3'
+                            />
+                            : null}
                         <Col>
                             <h5 className='mb-3'>{title}</h5>
                             <p>{body}</p>

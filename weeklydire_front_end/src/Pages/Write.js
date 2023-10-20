@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const Write = () => {
     const [pendingTags, setPendingTags] = useState(['Florida', 'Hurricane']);
-    const [newTag, setNewTag] = useState('')
+    // const [newTag, setNewTag] = useState('')
 
 
     // Currently submits nowhere
@@ -15,6 +15,10 @@ const Write = () => {
         console.log('form values:', values);
         console.log('in JSON format:', JSON.stringify(values));
         resetForm();
+    };
+
+    const updateTags = (values) => {
+        setPendingTags([...pendingTags, values.tags])
     };
 
     // const tagsRef = useRef(null);
@@ -103,7 +107,7 @@ const Write = () => {
                                         />
                                     </Col>
                                     <Col md='4'>
-                                        <Button type='button' onClick={() => {console.log('add tag button clicked')}}>Add tag</Button>
+                                        <Button type='button' onClick={updateTags}>Add tag</Button>
                                     </Col>
                                 </FormGroup>
                                 <Row>

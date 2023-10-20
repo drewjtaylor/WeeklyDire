@@ -6,10 +6,6 @@ Make a "search by tag" modal (tagSearchModal)
 
 Make a better looking error component.
 
-Write a "tags" box into the "write" page.
-Enter tags one at a time, display a list of "pending tags" (with 'x's to allow removing tags)
-On "submit", the full list of tags should be the accumulated list of pending tags
-
 ***After back end/DB implementation***
 
 Calls to "selectarticlebyid" calls ALL articles, then uses "find()" to pick one. It would be less expensive to have the back end provide just one article, rather than all of them every time

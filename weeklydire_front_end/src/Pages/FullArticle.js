@@ -7,6 +7,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { selectArticleById } from '../sampledbOperations';
 import { useEffect, useState } from 'react';
+import logo from '../Assets/WeeklyDireLogoGradient.png';
 
 const FullArticle = () => {
 
@@ -42,8 +43,12 @@ const FullArticle = () => {
                                 alt={title}
                                 src={thumbnail}
                                 className='img-fluid mb-3 rounded-3'
-                            />
-                            : null}
+                            /> :
+                            <img
+                                alt='Weekly Dire'
+                                src={logo}
+                                className='img-fluid mb-3 rounded-3'
+                            />}
                         <Col>
                             <h5 className='mb-3'>{title}</h5>
                             <p>{body}</p>

@@ -1,6 +1,4 @@
-Mmake a default picture to show on "articleCard"
-
-Test what happens if an article has no tags on fullArticle
+Test what happens if an article has no tags on fullArticle (article 6 in json-server)
 
 Make "tagged article list" for user to click an article, then be brought to a page where only articles with that tag show up
 

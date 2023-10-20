@@ -70,6 +70,13 @@
         "title": "This is the title of an article with no image",
         "thumbnail": "",
         "tags": ["florida"]
+    },
+    {
+        "id": 6,
+        "body": "This is the body of an article with no image or tags",
+        "title": "This is the title of an article with no image or tags",
+        "thumbnail": "",
+        "tags": []
     }
 ]
 }

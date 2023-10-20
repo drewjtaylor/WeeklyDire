@@ -3,20 +3,21 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import { creators } from '../sampledb';
 // import { useRef } from 'react';
 import { validateWriteForm } from '../utils/validateWriteForm';
+import { useState } from 'react';
 
 const Write = () => {
+    const [pendingTags, setPendingTags] = useState(['Florida', 'Hurricane']);
+    const [newTag, setNewTag] = useState('')
+
+
+    // Currently submits nowhere
     const handleSubmit = (values, { resetForm }) => {
         console.log('form values:', values);
         console.log('in JSON format:', JSON.stringify(values));
         resetForm();
     };
 
-
-
-
-
     // const tagsRef = useRef(null);
-    // const pendingTags = [];
 
     const creatorUser = creators[0];
     // const creatorUser = false; // use this line to try out not being logged in as creator
@@ -91,6 +92,34 @@ const Write = () => {
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
+                                    <Label htmlFor='tags' md='2'>
+                                        Tags
+                                    </Label>
+                                    <Col md='6'>
+                                        <Field
+                                            name='tags'
+                                            placeholder='Enter one tag at a time (i.e., "Hurricane", "Florida")'
+                                            className='form-control'
+                                        />
+                                    </Col>
+                                    <Col md='4'>
+                                        <Button type='button' onClick={() => {console.log('add tag button clicked')}}>Add tag</Button>
+                                    </Col>
+                                </FormGroup>
+                                <Row>
+                                    <Col md='2'/>
+                                    <Col>
+                                        {pendingTags ? pendingTags.map((tag, idx) => (
+                                            <Button className='me-2 mb-2'
+                                                type='button' 
+                                                onClick={() => {
+                                                    setPendingTags(
+                                                        pendingTags.filter(currentTag => currentTag !== tag)
+                                                    )
+                                                }} key={idx}>{tag} X</Button>)) : null }
+                                    </Col>
+                                </Row>
+                                <FormGroup row>
                                     <Col md={{ size: 10, offset: 2 }}>
                                         <Button type='submit' color='primary'>
                                             Submit
@@ -109,7 +138,7 @@ const Write = () => {
         <Container>
             <Row>
                 <Col>
-                    You are not logged in as a contributor.
+                    Your account is not designated as a creator.
                 </Col>
             </Row>
         </Container>

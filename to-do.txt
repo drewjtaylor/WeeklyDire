@@ -7,7 +7,8 @@ Make a "search by tag" modal (tagSearchModal)
 Make a better looking error component.
 
 Write a "tags" box into the "write" page.
-Separate by comma? Add one at a time? Find a more elegant solution
+Enter tags one at a time, display a list of "pending tags" (with 'x's to allow removing tags)
+On "submit", the full list of tags should be the accumulated list of pending tags
 
 ***After back end/DB implementation***
 

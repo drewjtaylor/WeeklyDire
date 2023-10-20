@@ -45,91 +45,94 @@
                                 validate={validateWriteForm}
                                 innerRef={ref}
                             >
-                                <Form>
-                                    <FormGroup row>
-                                        <Label htmlFor='title' md='2'>
-                                            Title
-                                        </Label>
-                                        <Col md='10'>
-                                            <Field
-                                                name='title'
-                                                placeholder='Title of your Article'
-                                                className='form-control'
-                                            />
-                                            <ErrorMessage name='title'>
-                                                {(msg) => <p className='text-danger'>{msg}</p>}
-                                            </ErrorMessage>
-                                        </Col>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label htmlFor='body' md='2'>
-                                            Body
-                                        </Label>
-                                        <Col md='10'>
-                                            <Field
-                                                name='body'
-                                                as='textarea'
-                                                rows='6'
-                                                placeholder='Enter the body of your article here'
-                                                className='form-control'
-                                            />
-                                            <ErrorMessage name='body'>
-                                                {(msg) => <p className='text-danger'>{msg}</p>}
-                                            </ErrorMessage>
-                                        </Col>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label htmlFor='thumbnail' md='2'>
-                                            Thumbnail
-                                        </Label>
-                                        <Col md='10'>
-                                            <Field
-                                                name='thumbnail'
-                                                placeholder='Optionally enter a link to the thumbnail for your article'
-                                                className='form-control'
-                                            />
-                                        </Col>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label htmlFor='tags' md='2'>
-                                            Tags
-                                        </Label>
-                                        <Col md='6'>
-                                            <Field
-                                                name='tags'
-                                                placeholder='Enter one tag at a time (i.e., "Hurricane", "Florida")'
-                                                className='form-control'
-                                            />
-                                        </Col>
-                                        <Col md='4'>
-                                            <Button type='button' onClick={() => {
-                                                    setPendingTags([...pendingTags, ref.current.values.tags])
-                                            }}>
-                                                Add tag
-                                            </Button>
-                                        </Col>
-                                    </FormGroup>
-                                    <Row>
-                                        <Col md='2'/>
-                                        <Col>
-                                            {pendingTags ? pendingTags.map((tag, idx) => (
-                                                <Button className='me-2 mb-2'
-                                                    type='button' 
-                                                    onClick={() => {
-                                                        setPendingTags(
-                                                            pendingTags.filter(currentTag => currentTag !== tag)
-                                                        )
-                                                    }} key={idx}>{tag} X</Button>)) : null }
-                                        </Col>
-                                    </Row>
-                                    <FormGroup row>
-                                        <Col md={{ size: 10, offset: 2 }}>
-                                            <Button type='submit' color='primary'>
-                                                Submit
-                                            </Button>
-                                        </Col>
-                                    </FormGroup>
-                                </Form>
+                                {({setFieldValue}) =>  ( // setFieldValue used to set "tags" field to empty on each addition
+                                    <Form>
+                                        <FormGroup row>
+                                            <Label htmlFor='title' md='2'>
+                                                Title
+                                            </Label>
+                                            <Col md='10'>
+                                                <Field
+                                                    name='title'
+                                                    placeholder='Title of your Article'
+                                                    className='form-control'
+                                                />
+                                                <ErrorMessage name='title'>
+                                                    {(msg) => <p className='text-danger'>{msg}</p>}
+                                                </ErrorMessage>
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label htmlFor='body' md='2'>
+                                                Body
+                                            </Label>
+                                            <Col md='10'>
+                                                <Field
+                                                    name='body'
+                                                    as='textarea'
+                                                    rows='6'
+                                                    placeholder='Enter the body of your article here'
+                                                    className='form-control'
+                                                />
+                                                <ErrorMessage name='body'>
+                                                    {(msg) => <p className='text-danger'>{msg}</p>}
+                                                </ErrorMessage>
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label htmlFor='thumbnail' md='2'>
+                                                Thumbnail
+                                            </Label>
+                                            <Col md='10'>
+                                                <Field
+                                                    name='thumbnail'
+                                                    placeholder='Optionally enter a link to the thumbnail for your article'
+                                                    className='form-control'
+                                                />
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label htmlFor='tags' md='2'>
+                                                Tags
+                                            </Label>
+                                            <Col md='6'>
+                                                <Field
+                                                    name='tags'
+                                                    placeholder='Enter one tag at a time (i.e., "Hurricane", "Florida")'
+                                                    className='form-control'
+                                                />
+                                            </Col>
+                                            <Col md='4'>
+                                                <Button type='button' onClick={() => {
+                                                        setPendingTags([...pendingTags, ref.current.values.tags])
+                                                        setFieldValue('tags', '')
+                                                }}>
+                                                    Add tag
+                                                </Button>
+                                            </Col>
+                                        </FormGroup>
+                                        <Row>
+                                            <Col md='2'/>
+                                            <Col>
+                                                {pendingTags ? pendingTags.map((tag, idx) => (
+                                                    <Button className='me-2 mb-2'
+                                                        type='button' 
+                                                        onClick={() => {
+                                                            setPendingTags(
+                                                                pendingTags.filter(currentTag => currentTag !== tag)
+                                                            )
+                                                        }} key={idx}>{tag} X</Button>)) : null }
+                                            </Col>
+                                        </Row>
+                                        <FormGroup row>
+                                            <Col md={{ size: 10, offset: 2 }}>
+                                                <Button type='submit' color='primary'>
+                                                    Submit
+                                                </Button>
+                                            </Col>
+                                        </FormGroup>
+                                    </Form>
+                                )}
                             </Formik>
                         </Col>
                     </Row>

@@ -56,11 +56,14 @@ const FullArticle = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>Tags: {article.tags.map((tag, index, fullList) => {
-                        return index === fullList.length-1 ?
-                            `${tag}` : 
-                            `${tag}, `
-                    })}</Col>
+                    <Col>
+                        Tags: {article.tags.length === 0 ? 'There are no tags for this article.' : 
+                            article.tags.map((tag, index, fullList) => {
+                                return index === fullList.length-1 ?
+                                    `${tag}` : 
+                                    `${tag}, `
+                            })}
+                    </Col>
                 </Row>
             </Container>
         )

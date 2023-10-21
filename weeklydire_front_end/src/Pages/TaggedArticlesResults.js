@@ -30,7 +30,7 @@ const TaggedArticlesResults = () => {
             }
         }
         fetchData();
-    }, [])
+    }, [tag])
 
 
     if (isLoading) {
@@ -60,7 +60,7 @@ const TaggedArticlesResults = () => {
                     })}
                 </Row>
             </Container>
-  )
+    )
 }
 
 export default TaggedArticlesResults

@@ -4,7 +4,7 @@ import {
     Row, 
     Col
 } from 'reactstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { selectArticleById } from '../sampledbOperations';
 import { useEffect, useState } from 'react';
 import logo from '../Assets/WeeklyDireLogoGradient.png';
@@ -60,8 +60,8 @@ const FullArticle = () => {
                         Tags: {article.tags.length === 0 ? 'There are no tags for this article.' : 
                             article.tags.map((tag, index, fullList) => {
                                 return index === fullList.length-1 ?
-                                    `${tag}` : 
-                                    `${tag}, `
+                                    <Link to={`/read/tags/${tag}`}>{`${tag.toUpperCase()}`}</Link> : 
+                                    <Link to={`/read/tags/${tag}`}>{`${tag.toUpperCase()}, `}</Link>
                             })}
                     </Col>
                 </Row>

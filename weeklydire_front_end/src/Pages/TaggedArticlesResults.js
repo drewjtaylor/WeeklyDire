@@ -1,23 +1,26 @@
 import ArticleCard from "../Components/ArticleCard";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
-import { selectAllDbArticles } from "../sampledbOperations";
+import { selectArticlesByTag } from "../sampledbOperations";
 import {Row, Col, Container} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 
-const Homepage = () => {
+const TaggedArticlesResults = () => {
+
+    const {tag} = useParams();
 
     const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
 
-    // Fetch articles from database and update "isLoading"
+    // Fetch tagged articles from database and update "isLoading"
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const fetchedArticles = await selectAllDbArticles();
+                const fetchedArticles = await selectArticlesByTag(tag);
                 setArticles(fetchedArticles);
                 setIsLoading(false);
             } catch (error) {
@@ -42,8 +45,7 @@ const Homepage = () => {
             <Container>
                 <Row>
                     <Col className="text-center">
-                        <h1>Welcome to Weeklydire</h1>
-                        <p>A demo news site about how real people overcome tragedy.</p>
+                        <h1>See your search results below for <strong>{tag}</strong></h1>
                     </Col>
                 </Row>
                 <Row>
@@ -61,4 +63,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage
+export default TaggedArticlesResults

@@ -2,16 +2,17 @@ Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
 Make a better looking error component.
 
+Add error validation to LoginForm and Register Form
+
 ***After back end/DB implementation***
 
 Calls to "selectarticlebyid" calls ALL articles, then uses "find()" to pick one. It would be less expensive to have the back end provide just one article, rather than all of them every time
 
 Uninstall json-server, get rid of "json-server" folder after a real database is connected
 
-Make /write actually send info to the database
+Make /write actually send info to the database through the back end
 make /write require the signed in user to be a contributor
 
-Add error validation to LoginForm and Register Form
 
 
 ***"Icing on the cake" ideas.***

@@ -7,7 +7,7 @@ This app is comprised of a front end built with React, a back end using node/exp
 ## Front end (React)
 
 Routing: react-router-dom
-Styling and layout: Bootstrap/Rectstrap
+Styling and responsive layout: Bootstrap/Rectstrap
 Forms: Formik
 Iconography: fontawesome
 
@@ -40,9 +40,28 @@ Cons: Programmatically more complicated to figure out
 
 ## Back end (Node/Express)
 
+Routes
+
+Authentication
+
 
 
 
 ## Database (MongoDB)
 
 Will connect to database and node/Express server later
+
+
+## Developement steps
+
+Once I decided on making a fake news site (and not a "fake news" site), I started by researching existing news sites to get ideas.
+
+Before starting on actually coding anything, I made a draw.io diagram/draft of how the database would be laid out. I also made a basic wireframe of how I wanted my pages and forms to look.
+
+Then my "big-picture" plan was to get the front-end pages 80-90% done, then get the back-end and database 80-90% done. Then the last 10-20% in each section and bugs. Lastly, I would deploy it using AWS to stay online. Once the minimum viable product is working, this last phase would also involve setting up some kind of CD/CI system. (at the time of writing, this has not been done yet, so I don't know what I'm going to do. Probably some kind of update everytime the main branch of the github repo is updated.)
+
+
+
+During all steps, I keep a "to-do" file. I have found this greatly helps me stay on track with current tasks. Instead of getting distrcted with wanting to fix bugs or add features, instead I add a note to "to-dos", and continue working on my main goal for that session/day. Then occasionally I go back through my to-do list and go back through the issues I would have forgotten without it.
+
+Big picture the minimum viable product 

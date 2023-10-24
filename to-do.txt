@@ -7,7 +7,12 @@ Add error validation to LoginForm and Register Form
 Make it so if a user is logged in, their name is displayed at the top right next to a "logout" button.
 If the user is also designated as a creator, include a link to "Write" at the top right while logged in.
 
+
+
+
 ***After back end/DB implementation***
+
+Make register/login correctly register a user to the database or log them in.
 
 Calls to "selectarticlebyid" calls ALL articles, then uses "find()" to pick one. It would be less expensive to have the back end provide just one article, rather than all of them every time
 
@@ -15,6 +20,19 @@ Uninstall json-server, get rid of "json-server" folder after a real database is 
 
 Make /write actually send info to the database through the back end
 make /write require the signed in user to be a contributor
+
+Make a basic "Error/this doesn't exist" page for server errors
+
+
+
+
+
+***Before adding to portfolio***
+
+Read and update readme
+
+
+
 
 
 

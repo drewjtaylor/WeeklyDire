@@ -42,6 +42,6 @@ No working on these until the MVP is DONE.
 
 --Write page changes
 Add a "publish time" to the "Write" page to allow creators to choose when their articles go live
-Add an "Edit" page to creators can change existing articles (that THEY wrote) (keep previous versions?)
+Add an "Edit" page to creators can change existing articles (that THEY wrote) (keep previous versions?) Use "PUT" route.
 Add a spot for "highlight quote" for article, and render it in a large bold section aside on its display page
 Instead of a thumbnail, allow uploading files (which would then need altered for storage?)

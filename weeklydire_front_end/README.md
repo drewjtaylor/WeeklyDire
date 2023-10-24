@@ -65,3 +65,7 @@ Then my "big-picture" plan was to get the front-end pages 80-90% done, then get 
 During all steps, I keep a "to-do" file. I have found this greatly helps me stay on track with current tasks. Instead of getting distrcted with wanting to fix bugs or add features, instead I add a note to "to-dos", and continue working on my main goal for that session/day. Then occasionally I go back through my to-do list and go back through the issues I would have forgotten without it.
 
 Big picture the minimum viable product 
+
+## Specific challenges/solutions (rename this)
+
+Changing from original models (combining creators/subscribers into users with a "creator" boolean attribute)

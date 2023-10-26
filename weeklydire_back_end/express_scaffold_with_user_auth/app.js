@@ -51,9 +51,9 @@ app.use(passport.initialize());
 
 // Route references
 // app.use('/events', eventRouter);
-app.use('/users', userRouter)
-app.use('./comments', commentRouter)
-app.use('./articles', articleRouter)
+app.use('/users', userRouter);
+app.use('/comments', commentRouter);
+app.use('/articles', articleRouter);
 
 // Essentially means, "static files are served at THIS FOLDER + /public".
 app.use(express.static(__dirname + '/public'));

@@ -16,6 +16,10 @@ const articleSchema = new Schema({
     tags: {
         type: Array,
         default: []
+    },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 

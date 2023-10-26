@@ -10,7 +10,7 @@ const articleRouter = require('./routes/articlesRouter');
 const config = require('./config');
 
 const hostname = 'localhost';
-const port = 3000;
+const port = 3001;
 
 // Configure and connect to Mongoose
 const url = config.mongoUrl;
@@ -50,12 +50,11 @@ app.use(express.json());
 app.use(passport.initialize());
 
 // Route references
-// app.use('/events', eventRouter);
 app.use('/users', userRouter);
 app.use('/comments', commentRouter);
 app.use('/articles', articleRouter);
 
-// Essentially means, "static files are served at THIS FOLDER + /public".
+// Establish folder for static files
 app.use(express.static(__dirname + '/public'));
 
 

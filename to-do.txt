@@ -12,6 +12,13 @@ If the user is also designated as a creator, include a link to "Write" at the to
 
 ***After back end/DB implementation***
 
+Rethink routes for manipulating comments. The most sensible is probably:
+"[articleId]/comments", then do CRUD operations from there. Move app.use(commentsRouter) from 'app.js' to articlesRouter.js'?
+
+Fix Article model to use a user ID as an author
+
+(After auth) Change article delete route to require admin
+
 Make register/login correctly register a user to the database or log them in.
 
 Calls to "selectarticlebyid" calls ALL articles, then uses "find()" to pick one. It would be less expensive to have the back end provide just one article, rather than all of them every time

@@ -8,10 +8,12 @@ const Article = require('../models/Article');
 // Retrieve all articles
 articleRouter.route('/')
 .get((req, res, next) => {
+    console.log('articles GET triggered');
     Article.find()
     .then(articles => {
         if (!articles) {
-            return
+            res.statusCode = 200;
+            res.end('There were no articles in the database')
         };
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -40,14 +42,13 @@ articleRouter.route('/')
     res.statusCode = 403;
     res.end('PUT operation not supported on articles. If you would like to edit an article, use "/articles/[articleId]" with a PUT request.')
 })
-// Deletes article at "articleId". Requires user to be an admin.
-
 
 
 articleRouter.route('/:articleId')
 .get()
 .post()
 .put()
+// Deletes article at "articleId". Requires user to be an admin.
 .delete(
     // authenticate.verifyAdmin,
     (req, res) => {

@@ -5,8 +5,9 @@ const RegisterForm = () => {
 
     const initialValues = {
         email: '',
-        username: '',
         password: '',
+        firstName: '',
+        lastName: '',
     };
 
     const handleRegisterSubmit = (values) => console.log(values)
@@ -29,10 +30,18 @@ const RegisterForm = () => {
           </Row>
           <Row>
             <Col xs='3'>
-                <Label htmlFor="username" className='me-2'>Username:</Label>
+                <Label htmlFor="firstName" className='me-2'>First Name:</Label>
             </Col>
               <Col xs='9'>
-                  <Field name="username" placeholder="" />
+                  <Field name="firstName" placeholder="optional" />
+              </Col>
+          </Row>
+          <Row>
+            <Col xs='3'>
+                <Label htmlFor="lastName" className='me-2'>Last Name:</Label>
+            </Col>
+              <Col xs='9'>
+                  <Field name="lastName" placeholder="optional" />
               </Col>
           </Row>
 

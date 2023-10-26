@@ -1,3 +1,6 @@
-mongosh mongodb://localhost:27017/weeklydire
-
+Spin up database --from this folder:
 "C:\Program Files\MongoDB\Server\7.0\bin\mongod.exe" --dbpath=".\data\db"
+
+
+Open mongo shell:
+mongosh mongodb://localhost:27017/weeklydire

@@ -59,8 +59,8 @@ userRouter.route('/')
     res.end('PUT operation not supported on /users')
 })
 .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-    res.statusCode = 200;
-    res.end('Deleting all users');
+    res.statusCode = 403;
+    res.end('DELETE operation not supported on /users');
 });
 
 // Route to log in
@@ -71,7 +71,7 @@ userRouter.post('/login', passport.authenticate('local'), (req, res, next) => {
     res.json({success: true, token: token, status: 'You are successfully logged in!'})
 })
 
-// Route searches for user by username
+// Route searches for user by email
 userRouter.get('/finduser/:email', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     User.findOne({email: req.params.email})
     .then(user => {

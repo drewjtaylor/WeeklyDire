@@ -33,15 +33,17 @@ app.use(morgan('dev'));
 
 
 // Redirect non-secure requests to https
-app.all('*', (req, res, next) => {
-    if (req.secure) {
-        return next();
-    } else {
-        const secureUrl = `https://${req.hostname}:${app.get('secPort')}${req.url}`;
-        console.log(`Redirecting to securte address: ${secureUrl}`);
-        res.redirect(308, secureUrl);
-    }
-});
+// Was causing redirects to undefined port. secPort was seeming to stay undefined
+// app.all('*', (req, res, next) => {
+//     if (req.secure) {
+//         return next();
+//     } else {
+//         const secureUrl = `https://${req.hostname}:${app.get('secPort')}${req.url}`;
+//         console.log(`Redirecting to secure address: ${secureUrl}`);
+//         console.log(`secPort is ${app.get('secPort')}`)
+//         res.redirect(308, secureUrl);
+//     }
+// });
 
 // Set up json middleware for dealing with JSON data
 app.use(express.json());

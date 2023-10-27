@@ -38,7 +38,7 @@ app.all('*', (req, res, next) => {
         return next();
     } else {
         const secureUrl = `https://${req.hostname}:${app.get('secPort')}${req.url}`;
-        console.log(`Redirecting to: ${secureUrl}`);
+        console.log(`Redirecting to securte address: ${secureUrl}`);
         res.redirect(308, secureUrl);
     }
 });
@@ -58,7 +58,7 @@ app.use('/articles', articleRouter);
 app.use(express.static(__dirname + '/public'));
 
 
-// Set up a code block to work with the request (req) and response (res) in a default scenario (i.e., localhost:3000 with no additional /public or anything)
+// Set up a code block to work with the request (req) and response (res) in a default scenario (i.e., localhost:3001 with no additional /public or anything)
 app.use((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html');

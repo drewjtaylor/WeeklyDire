@@ -4,7 +4,7 @@ import {Label, Button, Container, Col, Row} from 'reactstrap';
 const LoginForm = () => {
 
     const initialValues = {
-        username: '',
+        email: '',
         password: '',
     };
 
@@ -14,7 +14,7 @@ const LoginForm = () => {
 <div>
     <Formik
       initialValues={{
-        username: '',
+        email: '',
         password: ''
       }}
       onSubmit={handleLoginSubmit}
@@ -23,10 +23,10 @@ const LoginForm = () => {
         <Form>
           <Row>
               <Col xs='3'>
-                <Label htmlFor="username" className='me-2'>Username:</Label>
+                <Label htmlFor="email" className='me-2'>Email:</Label>
             </Col>
               <Col xs='9'>
-                  <Field name="username" placeholder="" />
+                  <Field name="email" placeholder="" />
               </Col>
           </Row>
 

@@ -24,9 +24,6 @@ Make register/login correctly register a user to the database or log them in.
 
 Calls to "selectarticlebyid" calls ALL articles, then uses "find()" to pick one. It would be less expensive to have the back end provide just one article, rather than all of them every time
 
-Uninstall json-server, get rid of "json-server" folder after a real database is connected
-
-Make /write actually send info to the database through the back end
 make /write require the signed in user to be a contributor
 
 Make a basic "Error/this doesn't exist" page for server errors

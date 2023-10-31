@@ -47,7 +47,19 @@ articleRouter.route('/')
 
 
 articleRouter.route('/:articleId')
-.get()
+.get((req, res, next) => {
+    Article.findById(req.params.articleId)
+    .then(article => {
+        if (!article) {
+            res.statusCode = 200;
+            res.end('There were no articles in the database')
+        };
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(article)
+    })
+    .catch(err => next(err))
+    })
 .post()
 .put()
 // Deletes article at "articleId". Requires user to be an admin.

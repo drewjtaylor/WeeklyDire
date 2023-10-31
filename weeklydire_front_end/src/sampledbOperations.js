@@ -13,12 +13,12 @@ export const selectAllComments = async () => {
 
 //Returns a single article matching the given articleId
 export const selectArticleById = async (articleId) => {
-    const response = await fetch(dbUrl + '/articles');
+    const response = await fetch(dbUrl + `/articles/${articleId}`);
     if (!response.ok) {
         return Promise.reject('Unable to fetch, status: ' + response.status)
     };
     const data = await response.json();
-    return data[parseInt(articleId)-1]
+    return data
 }
 
 //Returns all comments associated to given articleId

@@ -8,7 +8,6 @@ const Article = require('../models/Article');
 // Retrieve all articles
 articleRouter.route('/')
 .get((req, res, next) => {
-    console.log('articles GET triggered');
     Article.find()
     .then(articles => {
         if (!articles) {

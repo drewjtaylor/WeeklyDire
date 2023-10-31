@@ -1,5 +1,6 @@
 import {Formik, Field, Form} from 'formik';
 import {Label, Button, Container, Col, Row} from 'reactstrap';
+import { dbUrl } from '../utils/dbUrl';
 
 const RegisterForm = () => {
 
@@ -10,7 +11,30 @@ const RegisterForm = () => {
         lastName: '',
     };
 
-    const handleRegisterSubmit = (values) => console.log(values)
+
+    async function postData(url = dbUrl + "/users", data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+          method: "POST",
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          body: JSON.stringify(data), // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+      }
+
+    const handleRegisterSubmit = async (values) => {
+        console.log(values);
+        await postData(dbUrl + '/users', values);
+        alert(JSON.stringify(values, null, 2));
+    }
 
   return (
 <div>
@@ -22,10 +46,18 @@ const RegisterForm = () => {
         <Form>
           <Row>
             <Col xs='3'>
-                <Label htmlFor="email" className='me-2'>Email: :</Label>
+                <Label htmlFor="email" className='me-2'>Email:</Label>
             </Col>
               <Col xs='9'>
                   <Field name="email" placeholder="" />
+              </Col>
+          </Row>
+          <Row>
+            <Col xs='3'>
+                <Label htmlFor="username" className='me-2'>Username:</Label>
+            </Col>
+              <Col xs='9'>
+                  <Field name="username" placeholder="Your usernmame will be visible to others." />
               </Col>
           </Row>
           <Row>

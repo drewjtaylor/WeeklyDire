@@ -21,7 +21,7 @@ userRouter.route('/')
 })
 .post((req, res, next) => {
     User.register(
-        new User({email: req.body.email}),
+        new User({email: req.body.email, username: req.body.username}),
         req.body.password,
         (err, user) => {
             if (err) {

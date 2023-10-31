@@ -31,6 +31,17 @@ Make a basic "Error/this doesn't exist" page for server errors
 
 
 
+***Dockerizing***
+
+Example: https://github.com/docker/awesome-compose/tree/master/react-express-mongodb
+
+Change root/username in yml file to be variables
+
+Use a mounted folder for data so it persists: https://docs.docker.com/storage/volumes/#mount-a-host-directory-as-a-data-volume
+
+
+
+
 
 ***Before adding to portfolio***
 

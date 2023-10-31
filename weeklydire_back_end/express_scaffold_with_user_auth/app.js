@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const cors = require('cors');
 
 // const eventRouter = require('./routes/eventsRouter');
 const userRouter = require('./routes/usersRouter');
@@ -28,8 +29,12 @@ connect.then(
 
 const app = express();
 
+
 // Set up Morgan middleware logging in dev mode
 app.use(morgan('dev'));
+
+// Set up cors policy
+app.use(cors())
 
 // Only parse query parameters into strings, not objects (see https://masteringjs.io/tutorials/express/query-parameters and https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb)
 app.set('query parser', 'simple');
@@ -64,6 +69,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Set up a code block to work with the request (req) and response (res) in a default scenario (i.e., localhost:3001 with no additional /public or anything)
 app.use((req, res) => {
+    console.log('Sending default response.')
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html');
     res.end('<html><body><h1>This is an Express Server</h1></body></html>')

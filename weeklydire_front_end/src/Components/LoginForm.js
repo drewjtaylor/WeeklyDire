@@ -1,5 +1,5 @@
 import {Formik, Field, Form} from 'formik';
-import {Label, Button, Container, Col, Row} from 'reactstrap';
+import {Label, Button, Col, Row} from 'reactstrap';
 
 const LoginForm = () => {
 
@@ -13,10 +13,7 @@ const LoginForm = () => {
   return (
 <div>
     <Formik
-      initialValues={{
-        username: '',
-        password: ''
-      }}
+      initialValues={initialValues}
       onSubmit={handleLoginSubmit}
     >
       {({ isSubmitting }) => (

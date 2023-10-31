@@ -1,5 +1,5 @@
 import {Formik, Field, Form} from 'formik';
-import {Label, Button, Container, Col, Row} from 'reactstrap';
+import {Label, Button, Col, Row} from 'reactstrap';
 import { dbUrl } from '../utils/dbUrl';
 
 const RegisterForm = () => {

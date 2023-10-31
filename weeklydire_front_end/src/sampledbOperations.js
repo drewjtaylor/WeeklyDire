@@ -3,7 +3,7 @@ import { dbUrl } from './utils/dbUrl';
 
 // Returns all comments (not sure if there's a use-case for this)
 export const selectAllComments = async () => {
-    const response = await fetch(dbUrl + 'comments');
+    const response = await fetch(dbUrl + '/comments');
     if (!response.ok) {
         return Promise.reject('Unable to fetch comments, status: ' + response.status);
     };
@@ -13,7 +13,7 @@ export const selectAllComments = async () => {
 
 //Returns a single article matching the given articleId
 export const selectArticleById = async (articleId) => {
-    const response = await fetch(dbUrl + 'articles');
+    const response = await fetch(dbUrl + '/articles');
     if (!response.ok) {
         return Promise.reject('Unable to fetch, status: ' + response.status)
     };
@@ -23,7 +23,7 @@ export const selectArticleById = async (articleId) => {
 
 //Returns all comments associated to given articleId
 export const selectCommentByArticle = async (articleId) => {
-    const response = await fetch(dbUrl + 'comments');
+    const response = await fetch(dbUrl + '/comments');
     if (!response.ok) {
         return Promise.reject('Unable to fetch comments, status: ' + response.status)
     };
@@ -34,7 +34,7 @@ export const selectCommentByArticle = async (articleId) => {
 
 //Returns all articles
 export const selectAllDbArticles = async () => {
-    const response = await fetch(dbUrl + 'articles');
+    const response = await fetch(dbUrl + '/articles');
     if (!response.ok) {
         return Promise.reject('Unable to fetch, status: ' + response.status)
     };
@@ -42,17 +42,10 @@ export const selectAllDbArticles = async () => {
     return data
 }
 
-// export const selectAllArticles = () => {
-//     return articles
-// };
-
-// export const selectArticleById = (id) => {
-//     return articles.find((article) => article.id===parseInt(id))
-// }
 
 // Returns articles with matching tag
 export const selectArticlesByTag = async (tag) => {
-    const response = await fetch(dbUrl + 'articles');
+    const response = await fetch(dbUrl + '/articles');
     if (!response.ok) {
         return Promise.reject('Unable to fetch, status: ' + response.status)
     };

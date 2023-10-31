@@ -49,9 +49,9 @@ const Homepage = () => {
                 <Row>
                     {articles.map((article) => {
                         return (
-                            <Col md='6' className="mb-5" key={article.id}>
-                                    <Link to={`/read/${article.id}`}>
-                                    <ArticleCard key={article.id} article={article}/>
+                            <Col md='6' className="mb-5" key={article._id}>
+                                    <Link to={`/read/${article._id}`}>
+                                    <ArticleCard key={article._id} article={article}/>
                                 </Link>
                             </Col>
                         )

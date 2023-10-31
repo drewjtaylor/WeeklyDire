@@ -60,8 +60,8 @@ const FullArticle = () => {
                         Tags: {article.tags.length === 0 ? 'There are no tags for this article.' : 
                             article.tags.map((tag, index, fullList) => {
                                 return index === fullList.length-1 ?
-                                    <Link to={`/read/tags/${tag}`}>{`${tag.toUpperCase()}`}</Link> : 
-                                    <Link to={`/read/tags/${tag}`}>{`${tag.toUpperCase()}, `}</Link>
+                                    <Link to={`/read/tags/${tag}`} key={index}>{`${tag.toUpperCase()}`}</Link> : 
+                                    <Link to={`/read/tags/${tag}`} key={index}>{`${tag.toUpperCase()}, `}</Link>
                             })}
                     </Col>
                 </Row>

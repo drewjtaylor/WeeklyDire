@@ -26,15 +26,16 @@ const LoginForm = () => {
           redirect: "follow", // manual, *follow, error
           referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
           body: JSON.stringify(data), // body data type must match "Content-Type" header
-        });
-        setCookie('jwt', JSON.stringify(response), {path: '/'}) // See https://www.tutorialspoint.com/how-to-set-cookies-in-reactjs
-        console.log('cookies:')
-        console.log(cookies);
-        return response.json(); // parses JSON response into native JavaScript objects
+        })
+        const completedResponse = await response.json();
+        const jwt = completedResponse.token;
+        setCookie('jwt', jwt, {path: '/'}) // See https://www.tutorialspoint.com/how-to-set-cookies-in-reactjs
+        return completedResponse;
       }
 
     const handleLoginSubmit = async (values) => {
         await postData(dbUrl + '/users/login', values);
+        console.log(values)
     }
 
   return (

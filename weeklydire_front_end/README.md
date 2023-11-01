@@ -69,3 +69,13 @@ Big picture the minimum viable product
 ## Specific challenges/solutions (rename this)
 
 Changing from original models (combining creators/subscribers into users with a "creator" boolean attribute)
+
+## Authentication
+
+Authentication is the very definition of a necessary evil.
+
+The weeklydire site uses Passport to provide a jwt to the user. The jwt is stored as a cookie with a 24 hour life.
+
+When accessing an endpoint that needs authentication or needs to verify if the user is a creator or admin, the React application provides the jwt as a Bearer token.
+
+Passport-local-mongoose is used mainly to simplify hashing and saving passwords. 

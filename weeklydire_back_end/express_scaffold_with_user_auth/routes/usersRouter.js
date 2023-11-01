@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const authenticate = require('../authenticate');
 const User = require('../models/User');
+const cookieParser = require('cookie-parser');
 
 
 userRouter.route('/')
@@ -65,7 +66,10 @@ userRouter.route('/')
 
 // Route to log in
 userRouter.post('/login', passport.authenticate('local'), (req, res, next) => {
+    cookieParser.JSONCookie()
     const token = authenticate.getToken({_id: req.user._id});
+    console.log('The token received is:');
+    console.log(token);
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json({success: true, token: token, status: 'You are successfully logged in!'})

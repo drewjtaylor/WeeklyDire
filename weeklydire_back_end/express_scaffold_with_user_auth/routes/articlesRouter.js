@@ -22,9 +22,10 @@ articleRouter.route('/')
 })
 // Create a new article. Requires user to be a creator
 .post(
-    // authenticate.verifyUser, 
-    // authenticate.verifyCreator, // Update model, currently set to not require
+    authenticate.verifyUser, 
+    authenticate.verifyCreator, // Update model, currently set to not require
     (req, res, next) => {
+        console.log(req.user);
         const {body, title, thumbnail, tags} = req.body;
         if (body && title && thumbnail && tags) {
             Article.create({body, title, thumbnail, tags}) // After verifying user is working, add ", creator: req.user._id" after tags

@@ -4,10 +4,13 @@
     import { validateWriteForm } from '../utils/validateWriteForm';
     import { useState, useRef } from 'react';
     import {dbUrl} from '../utils/dbUrl';
+    import { useCookies } from 'react-cookie';
 
 
     const Write = () => {
         const ref = useRef(null);
+        const [cookies] = useCookies();
+        console.log(cookies.jwt)
 
         const [pendingTags, setPendingTags] = useState([]);
 
@@ -20,6 +23,7 @@
               credentials: "same-origin", // include, *same-origin, omit
               headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${cookies.jwt}`
                 // 'Content-Type': 'application/x-www-form-urlencoded',
               },
               redirect: "follow", // manual, *follow, error

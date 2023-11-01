@@ -1,5 +1,15 @@
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
+Make "logout" look like the sign in button
+Make the logout button replace the sign in button if logged in.
+
+Make write form not need all fields (articlesRouter post action needs logic fixed)
+
+More gracefully handle failed login attempts
+
+On write form, if non-creator tries to write, handle error more gracefully
+Block "write" from access to non-creators and writers to begin with
+
 Make a better looking error component.
 
 Add error validation to LoginForm and Register Form

@@ -75,9 +75,9 @@ userRouter.post('/login', passport.authenticate('local'), (req, res, next) => {
     res.json({success: true, token: token, status: 'You are successfully logged in!'})
 })
 
-// Route searches for user by email
-userRouter.get('/finduser/:email', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-    User.findOne({email: req.params.email})
+// Route searches for user by username
+userRouter.get('/finduser/:username', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+    User.findOne({username: req.params.username})
     .then(user => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');

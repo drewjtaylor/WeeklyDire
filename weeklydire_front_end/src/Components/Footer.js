@@ -18,7 +18,7 @@ const Footer = () => {
 
                 </Col>
                 <Col sm='6' />
-                <Col sm='3'><img className='img-fluid logo' src={gradientLogo}  /></Col>
+                <Col sm='3'><img className='img-fluid logo' src={gradientLogo} alt='weekly dire' /></Col>
             </Row>
         </Container>
     </footer>

@@ -1,4 +1,4 @@
-import {Container, Row, Col, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {Row, Col, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import gradientLogo from '../Assets/WeeklyDireLogoGradient.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <Row style={headerStyle} className='sticky-top background-gray mb-3'>
             <Col xs='1'></Col>
-            <Col><Link to='/'><img className='img-fluid logo' src={gradientLogo}  /></Link></Col>
+            <Col><Link to='/'><img className='img-fluid logo' src={gradientLogo} alt='weekly dire' /></Link></Col>
             <Col xs='2 mt-2' xl='1'><Button color='primary' onClick={toggleLoginModal}>Sign in</Button></Col>
             <Col xs='2 mt-2' xl='1'><Logout></Logout></Col>
             <Col xs='1 mt-2'><Button onClick={toggleRegisterModal}>Register</Button></Col>

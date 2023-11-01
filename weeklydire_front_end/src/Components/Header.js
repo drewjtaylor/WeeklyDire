@@ -3,6 +3,7 @@ import gradientLogo from '../Assets/WeeklyDireLogoGradient.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import LoginForm from './LoginForm';
+import Logout from './Logout';
 import RegisterForm from './RegisterForm';
 
 
@@ -25,6 +26,7 @@ const Header = () => {
             <Col xs='1'></Col>
             <Col><Link to='/'><img className='img-fluid logo' src={gradientLogo}  /></Link></Col>
             <Col xs='2 mt-2' xl='1'><Button color='primary' onClick={toggleLoginModal}>Sign in</Button></Col>
+            <Col xs='2 mt-2' xl='1'><Logout></Logout></Col>
             <Col xs='1 mt-2'><Button onClick={toggleRegisterModal}>Register</Button></Col>
             <Col xs='1'></Col>
             <Modal isOpen={loginModal} toggle={toggleLoginModal}>

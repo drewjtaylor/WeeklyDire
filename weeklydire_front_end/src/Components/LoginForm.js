@@ -29,7 +29,13 @@ const LoginForm = () => {
         })
         const completedResponse = await response.json();
         const jwt = completedResponse.token;
-        setCookie('jwt', jwt, {path: '/'}) // See https://www.tutorialspoint.com/how-to-set-cookies-in-reactjs
+        setCookie(
+            'jwt', 
+            jwt, 
+            {
+                path: '/',
+                maxAge: 86400
+            }) // See https://www.tutorialspoint.com/how-to-set-cookies-in-reactjs
         return completedResponse;
       }
 

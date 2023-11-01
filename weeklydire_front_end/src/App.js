@@ -10,6 +10,8 @@ import Watch from './Pages/Watch';
 import FullArticle from './Pages/FullArticle';
 import Write from './Pages/Write';
 import TaggedArticlesResults from './Pages/TaggedArticlesResults';
+import { useContext } from 'react';
+import { UserContext } from './utils/UserContext';
 
 function App() {
   

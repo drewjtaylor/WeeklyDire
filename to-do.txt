@@ -1,3 +1,5 @@
+Change register/login/logout to update the context and/or refresh pages.
+
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
 Make "logout" look like the sign in button

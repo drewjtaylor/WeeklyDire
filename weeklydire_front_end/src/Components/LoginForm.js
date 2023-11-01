@@ -2,17 +2,20 @@ import {Formik, Field, Form} from 'formik';
 import {Label, Button, Col, Row} from 'reactstrap';
 import {dbUrl} from "../utils/dbUrl";
 import { useCookies } from "react-cookie";
+import { useContext } from 'react';
+import { UserContext } from '../utils/UserContext';
 
 const LoginForm = () => {
 
     const [cookies, setCookie] = useCookies([]);
+    const [user, setUser] = useContext(UserContext);
 
     const initialValues = {
         username: '',
         password: '',
     };
 
-    async function postData(url, data) {
+    const postData = async (url, data) => {
         // Default options are marked with *
         const response = await fetch(url, {
           method: "POST",
@@ -40,8 +43,9 @@ const LoginForm = () => {
       }
 
     const handleLoginSubmit = async (values) => {
-        await postData(dbUrl + '/users/login', values);
-        console.log(values)
+        const loggedInUser = await postData(dbUrl + '/users/login', values);
+        setUser(loggedInUser);
+        console.log(loggedInUser)
     }
 
   return (

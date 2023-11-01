@@ -6,6 +6,13 @@ const authenticate = require('../authenticate');
 const User = require('../models/User');
 const cookieParser = require('cookie-parser');
 
+// Returns the current logged in user object
+userRouter.route('/current')
+.get(authenticate.verifyUser, (req, res, next) => {
+    res.end(JSON.stringify(req.user))
+})
+
+
 
 userRouter.route('/')
 .get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
@@ -134,5 +141,23 @@ userRouter.route('/:userId')
             res.json(response);
         })
     });
+
+// Returns the current logged in user
+userRouter.route('/current')
+.get(authenticate.verifyUser, (req, res, next) => {
+    res.end(JSON.stringify(req.user))
+})
+.post((req, res) => {
+    res.statusCode = 403;
+    res.end('POST operation not supported on /users/current. Use "GET" to check current user.')
+})
+.put((req, res) => {
+    res.statusCode = 403;
+    res.end('PUT operation not supported on /users/current. Use "GET" to check current user.')
+})
+.delete((req, res) => {
+    res.statusCode = 403;
+    res.end('DELETE operation not supported on /users/current. Use "GET" to check current user.')
+})
 
 module.exports = userRouter;

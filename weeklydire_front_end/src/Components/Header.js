@@ -24,14 +24,11 @@ const Header = () => {
     }
 
     // Use context to check if a user is logged in
-    const currentUser = useContext(UserContext);
-
+    const [currentUser] = useContext(UserContext);
   return (
     <Row style={headerStyle} className='sticky-top background-gray mb-3'>
             <Col xs='1'></Col>
             <Col><Link to='/'><img className='img-fluid logo' src={gradientLogo} alt='weekly dire' /></Link></Col>
-            
-            
             {currentUser.username ?
                 <Col xs='2 mt-2' xl='1'>
                     <p>Welcome, {currentUser.firstName}!</p>

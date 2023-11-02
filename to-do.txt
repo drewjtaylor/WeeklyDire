@@ -1,24 +1,21 @@
-Change register/login/logout to update the context and/or refresh pages.
-
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
 Make "logout" look like the sign in button
-Make the logout button replace the sign in button if logged in.
 
 Make write form not need all fields (articlesRouter post action needs logic fixed)
 
 More gracefully handle failed login attempts
+More gracefully handle error on the "/write" form
 
 On write form, if non-creator tries to write, handle error more gracefully
-Block "write" from access to non-creators and writers to begin with
+Block "write" from access to non-creators and writers to begin with (other than just in express)
 
 Make a better looking error component.
 
 Add error validation to LoginForm and Register Form
 Make register/sign in forms look better.
 
-Make it so if a user is logged in, their name is displayed at the top right next to a "logout" button.
-If the user is also designated as a creator, include a link to "Write" at the top right while logged in.
+If the logged in user is also designated as a creator, include a link to "Write" at the top right while logged in.
 
 
 
@@ -39,11 +36,7 @@ Rethink routes for manipulating comments. The most sensible is probably:
 
 (After auth) Change article delete route to require admin
 
-Make register/login correctly register a user to the database or log them in.
-
 Calls to "selectarticlebyid" calls ALL articles, then uses "find()" to pick one. It would be less expensive to have the back end provide just one article, rather than all of them every time
-
-make /write require the signed in user to be a contributor
 
 Make a basic "Error/this doesn't exist" page for server errors
 
@@ -51,6 +44,8 @@ Make a basic "Error/this doesn't exist" page for server errors
 
 
 ***Dockerizing***
+
+IF (and it's a big if) I decide to dockerize this project...
 
 Example: https://github.com/docker/awesome-compose/tree/master/react-express-mongodb
 

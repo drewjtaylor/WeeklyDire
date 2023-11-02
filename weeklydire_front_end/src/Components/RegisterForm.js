@@ -2,7 +2,7 @@ import {Formik, Field, Form} from 'formik';
 import {Label, Button, Col, Row} from 'reactstrap';
 import { dbUrl } from '../utils/dbUrl';
 
-const RegisterForm = () => {
+const RegisterForm = ({closeModal}) => {
 
     const initialValues = {
         email: '',
@@ -31,9 +31,9 @@ const RegisterForm = () => {
       }
 
     const handleRegisterSubmit = async (values) => {
-        console.log(values);
         await postData(dbUrl + '/users', values);
-        alert(JSON.stringify(values, null, 2));
+        closeModal();
+
     }
 
   return (

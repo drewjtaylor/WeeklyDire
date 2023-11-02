@@ -49,13 +49,13 @@ const Header = () => {
             <Modal isOpen={loginModal} toggle={toggleLoginModal}>
                 <ModalHeader toggle={toggleLoginModal}>If you have an account, please sign in</ModalHeader>
                 <ModalBody>
-                    <LoginForm />
+                    <LoginForm closeModal={toggleLoginModal}/>
                 </ModalBody>
             </Modal>
             <Modal isOpen={registerModal} toggle={toggleRegisterModal}>
                 <ModalHeader toggle={toggleRegisterModal}>Welcome! Please make an account here.</ModalHeader>
                 <ModalBody>
-                    <RegisterForm />
+                    <RegisterForm closeModal={toggleRegisterModal}/>
                 </ModalBody>
             </Modal>
     </Row>

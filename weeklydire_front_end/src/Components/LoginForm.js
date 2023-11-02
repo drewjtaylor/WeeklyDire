@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 import { useContext } from 'react';
 import { UserContext } from '../utils/UserContext';
 
-const LoginForm = () => {
+const LoginForm = ({closeModal}) => {
 
     const [cookies, setCookie] = useCookies([]);
     const [user, setUser] = useContext(UserContext);
@@ -45,7 +45,7 @@ const LoginForm = () => {
     const handleLoginSubmit = async (values) => {
         const loggedInUser = await postData(dbUrl + '/users/login', values);
         setUser(loggedInUser);
-        console.log(loggedInUser)
+        closeModal();
     }
 
   return (

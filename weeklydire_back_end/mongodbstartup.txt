@@ -1,5 +1,5 @@
 Spin up database --from this folder:
-"C:\Program Files\MongoDB\Server\7.0\bin\mongod.exe" --dbpath=".\data\db"
+"C:\Program Files\MongoDB\Server\7.0\bin\mongod.exe" --dbpath=".\data"
 
 
 Open mongo shell:

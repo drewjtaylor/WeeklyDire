@@ -21,6 +21,9 @@ If the logged in user is also designated as a creator, include a link to "Write"
 
 ***After back end/DB implementation***
 
+Implement an "admin" page on the front, and connect up some of the database functions
+For example, have the ability to list out all articles, and have a button to delete them.
+
 username getting entered twice when using register? (username is automatically done by passport I think,
 or passport-local-mongoose. Remove from front end submission and manual entry on route(s))
 

@@ -11,6 +11,18 @@ userRouter.route('/current')
 .get(authenticate.verifyUser, (req, res, next) => {
     res.end(JSON.stringify(req.user))
 })
+.post((req, res, next) => {
+    res.statusCode = 403;
+    res.end('POST operation not supported on /users/current');
+})
+.put((req, res, next) => {
+    res.statusCode = 403;
+    res.end('PUT operation not supported on /users/current');
+})
+.delete((req, res, next) => {
+    res.statusCode = 403;
+    res.end('DELETE operation not supported on /users/current');
+})
 
 
 
@@ -72,7 +84,12 @@ userRouter.route('/')
 });
 
 // Route to log in
-userRouter.post('/login', passport.authenticate('local'), (req, res, next) => {
+userRouter.route('/login')
+.get((req, res) => {
+    res.statusCode = 403;
+    res.end('PUT operation not supported on /users')
+})
+.post(passport.authenticate('local'), (req, res, next) => {
     cookieParser.JSONCookie()
     const token = authenticate.getToken({_id: req.user._id});
     console.log('The token received is:');
@@ -81,9 +98,18 @@ userRouter.post('/login', passport.authenticate('local'), (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.json({success: true, token: token, status: 'You are successfully logged in!'})
 })
+.put((req, res) => {
+    res.statusCode = 403;
+    res.end('PUT operation not supported on /users/login')
+})
+.delete((req, res) => {
+    res.statusCode = 403;
+    res.end('DELETE operation not supported on /users/login')
+})
 
 // Route searches for user by username
-userRouter.get('/finduser/:username', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+userRouter.route('/finduser/:username')
+.get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     User.findOne({username: req.params.username})
     .then(user => {
         res.statusCode = 200;
@@ -92,55 +118,67 @@ userRouter.get('/finduser/:username', authenticate.verifyUser, authenticate.veri
     })
     .catch(err => next(err))
 })
+.post((req, res, next) => {
+    res.statusCode = 403;
+    res.end('POST operation not supported on /users/finduser/[username].');
+})
+.put((req, res, next) => {
+    res.statusCode = 403;
+    res.end('PUT operation not supported on /users/finduser/[username].');
+})
+.delete((req, res, next) => {
+    res.statusCode = 403;
+    res.end('DELETE operation not supported on /users/finduser/[username].');
+})
 
 // Routes for dealing with single user
 userRouter.route('/:userId')
-    .get(
-        authenticate.verifyUser,
-        authenticate.verifyAdmin,
-        (req, res, next) => {
-        User.findById(req.params.userId)
-        .then(user => {
-            console.log('user found');
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.json(user);
-        })
-        .catch(err => next(err))
+.get(
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res, next) => {
+    User.findById(req.params.userId)
+    .then(user => {
+        console.log('user found');
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(user);
     })
-    .post((req, res, next) => {
-        res.statusCode = 403;
-        res.end(`POST operation not supported on /users/${req.params.userId}\nUsers must be adding by sending a POST request to /users`)
-    })
-    .put(
-        authenticate.verifyUser,
-        authenticate.verifyAdmin,
-        (req, res, next) => {
-        User.findByIdAndUpdate(req.params.userId, 
-            {
-                $set: req.body
-            },
+    .catch(err => next(err))
+})
+.post((req, res, next) => {
+    res.statusCode = 403;
+    res.end(`POST operation not supported on /users/${req.params.userId}\nUsers must be adding by sending a POST request to /users`)
+})
+.put(
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res, next) => {
+    User.findByIdAndUpdate(req.params.userId, 
         {
-            new: true
-        })
-        .then(user => {
-            res.statusCode = 201;
-            res.setHeader('Content-Type', 'application/json');
-            res.json(user);
-        })
-        .catch(err => next(err))
+            $set: req.body
+        },
+    {
+        new: true
     })
-    .delete(
-        authenticate.verifyUser,
-        authenticate.verifyAdmin,
-        (req, res, next) => {
-        User.findByIdAndDelete(req.params.userId)
-        .then(response => {
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.json(response);
-        })
-    });
+    .then(user => {
+        res.statusCode = 201;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(user);
+    })
+    .catch(err => next(err))
+})
+.delete(
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res, next) => {
+    User.findByIdAndDelete(req.params.userId)
+    .then(response => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(response);
+    })
+});
 
 // Returns the current logged in user
 userRouter.route('/current')

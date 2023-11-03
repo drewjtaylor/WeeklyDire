@@ -45,6 +45,10 @@ articleRouter.route('/')
     res.statusCode = 403;
     res.end('PUT operation not supported on articles. If you would like to edit an article, use "/articles/[articleId]" with a PUT request.')
 })
+.delete((req, res, next) => {
+    res.statusCode = 403;
+    res.end('DELETE operation not supported on /articles.');
+})
 
 
 articleRouter.route('/:articleId')
@@ -61,11 +65,17 @@ articleRouter.route('/:articleId')
     })
     .catch(err => next(err))
     })
-.post()
-.put()
+.post((req, res, next) => {
+    res.statusCode = 403;
+    res.end('DELETE operation not supported on /articles.');
+})
+.put((req, res, next) => {
+    res.statusCode = 403;
+    res.end('DELETE operation not supported on /articles.');
+})
 // Deletes article at "articleId". Requires user to be an admin.
 .delete(
-    // authenticate.verifyAdmin,
+    authenticate.verifyAdmin,
     (req, res) => {
         Article.findById(req.params.articleId)
         .then(article => {
@@ -80,10 +90,9 @@ articleRouter.route('/:articleId')
         } else {
             const err = new Error('You must be an admin or the creator of this article to delete it.');
             return next(err)
-        }
-    })
+        }})
     res.statusCode = 403;
-    res.end(``)
+    res.end(`There was an error performing DELETE at /articles/${req.params.articleId}`)
 })
 
 module.exports = articleRouter;

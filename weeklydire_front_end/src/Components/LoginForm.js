@@ -2,13 +2,10 @@ import {Formik, Field, Form} from 'formik';
 import {Label, Button, Col, Row} from 'reactstrap';
 import {dbUrl} from "../utils/dbUrl";
 import { useCookies } from "react-cookie";
-import { useContext } from 'react';
-import { UserContext } from '../utils/UserContext';
 
 const LoginForm = ({closeModal}) => {
 
     const [cookies, setCookie] = useCookies([]);
-    const [user, setUser] = useContext(UserContext);
 
     const initialValues = {
         username: '',
@@ -43,8 +40,7 @@ const LoginForm = ({closeModal}) => {
       }
 
     const handleLoginSubmit = async (values) => {
-        const loggedInUser = await postData(dbUrl + '/users/login', values);
-        setUser(loggedInUser);
+        await postData(dbUrl + '/users/login', values);
         closeModal();
     }
 

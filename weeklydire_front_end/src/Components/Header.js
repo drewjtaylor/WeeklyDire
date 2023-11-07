@@ -45,6 +45,14 @@ const Header = () => {
                     </Button>
                 </Col>
             }
+            {currentUser.creator ?
+                <Col xs='2 mt-2' xl='1'>
+                    <Link to='/write'>
+                        <Button as='a' color='success'>Write</Button>
+                    </Link>
+                </Col> :
+                null
+            }
             <Col xs='1'></Col>
             <Modal isOpen={loginModal} toggle={toggleLoginModal}>
                 <ModalHeader toggle={toggleLoginModal}>If you have an account, please sign in</ModalHeader>

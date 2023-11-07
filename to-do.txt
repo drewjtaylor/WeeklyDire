@@ -1,3 +1,5 @@
+Login/Logout should update the header. Try to match behavior of page reload from useEffect on app.js
+
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
 Make "logout" look like the sign in button

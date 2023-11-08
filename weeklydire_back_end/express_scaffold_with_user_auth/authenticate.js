@@ -17,6 +17,8 @@ exports.getToken = user => {
 };
 
 exports.verifyAdmin = (req, res, next) => {
+    console.log('req.user is:');
+    console.log(req.user);
     if (req.user.admin) {
         return next()
     } else {

@@ -43,8 +43,13 @@ export const selectAllDbArticles = async () => {
 }
 
 // Returns all users
-export const selectAllUsers = async () => {
-    const response = await fetch(dbUrl + '/users');
+export const selectAllUsers = async (jwt) => {
+    const response = await fetch(dbUrl + '/users', {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`
+        }
+    });
     if (!response.ok) {
         return Promise.reject('Unable to fetch, status: ' + response.status)
     };

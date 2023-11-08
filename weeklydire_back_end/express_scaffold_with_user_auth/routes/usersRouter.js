@@ -24,8 +24,6 @@ userRouter.route('/current')
     res.end('DELETE operation not supported on /users/current');
 })
 
-
-
 userRouter.route('/')
 .get(
     authenticate.verifyUser, 

@@ -10,6 +10,7 @@ import Watch from './Pages/Watch';
 import FullArticle from './Pages/FullArticle';
 import Write from './Pages/Write';
 import Admin from './Pages/Admin';
+import EditUser from './Pages/EditUser';
 import TaggedArticlesResults from './Pages/TaggedArticlesResults';
 import { UserContext } from './utils/UserContext';
 import { useState } from 'react';
@@ -32,6 +33,7 @@ function App() {
                 <Route path='/watch' element={<Watch />} />
                 <Route path='/write' element={<Write />} />
                 <Route path='/admin' element={<Admin />} />
+                <Route path='/admin/users/:userId' element={<EditUser />} />
             </Routes>
             <Footer />
         </UserContext.Provider>

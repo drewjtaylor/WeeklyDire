@@ -1,5 +1,8 @@
 Make a modal show up on "logout," notifying the user
 
+Made EditUser page refresh or send back to "admin", or give some kind of feedback
+Make EditUser page radio buttons start out checked correctly.
+
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
 Make "logout" look like the sign in button
@@ -72,6 +75,8 @@ Read and update readme
 ***"Icing on the cake" ideas.***
 These are not part of the MVP (Minimum Viable Product). Once the basics are all DONE and polished, these features can be added.
 No working on these until the MVP is DONE.
+
+Make EditUser page ask for confirmation before submitting a request to change an admin
 
 --Write page changes
 Add a "publish time" to the "Write" page to allow creators to choose when their articles go live

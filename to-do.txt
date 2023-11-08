@@ -17,6 +17,7 @@ Make a better looking error component.
 Add error validation to LoginForm and Register Form
 Make register/sign in forms look better.
 
+Split admin page into two. Have /admin give instructions, then have links to "users" and "articles" from there.
 
 ***After back end/DB implementation***
 

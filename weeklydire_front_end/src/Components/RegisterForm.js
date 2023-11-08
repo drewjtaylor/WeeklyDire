@@ -37,7 +37,6 @@ const RegisterForm = ({closeModal}) => {
     }
 
   return (
-<div>
     <Formik
       initialValues={initialValues}
       onSubmit={handleRegisterSubmit}
@@ -91,7 +90,7 @@ const RegisterForm = ({closeModal}) => {
         </Form>
       )}
     </Formik>
-  </div>
+
   )
 }
 

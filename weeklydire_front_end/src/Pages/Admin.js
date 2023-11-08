@@ -51,13 +51,14 @@ const Admin = () => {
 
     return (
         <Container>
+            <h5>Welcome to the admin page. Click a username below to change that user's permissions, or see the <a href="#articles">articles section</a> below.
+            </h5>
             <Row><h1>Users</h1></Row>
             {usersLoading ? <Loading /> : 
                 <Table bordered>
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Username</th>
+                            <th>Username (click to edit)</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Creator?</th>
@@ -67,8 +68,7 @@ const Admin = () => {
                     <tbody>
                         {users.map((user, idx) => 
                             <tr key={idx}>
-                                <td><Link to={`/admin/users/${user._id}`}>Edit</Link></td>
-                                <td>{user.username}</td>
+                                <td><Link to={`/admin/users/${user._id}`}>{user.username}</Link></td>
                                 <td>{user.firstName}</td>
                                 <td>{user.lastName}</td>
                                 <td>{user.creator ? 'Yes' : 'No'}</td>
@@ -76,7 +76,7 @@ const Admin = () => {
                             </tr>)}
                     </tbody>
                 </Table>}
-            <Row><h1>Articles</h1></Row>
+            <Row id='articles'><h1>Articles</h1></Row>
             {articlesLoading ? <Loading /> : 
                 <Table bordered>
                     <thead>

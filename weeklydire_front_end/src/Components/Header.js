@@ -25,6 +25,7 @@ const Header = () => {
 
     // Use context to check if a user is logged in
     const [currentUser] = useContext(UserContext);
+
   return (
     <Row style={headerStyle} className='sticky-top background-gray mb-3'>
             <Col xs='1'></Col>
@@ -49,6 +50,14 @@ const Header = () => {
                 <Col xs='2 mt-2' xl='1'>
                     <Link to='/write'>
                         <Button as='a' color='success'>Write</Button>
+                    </Link>
+                </Col> :
+                null
+            }
+            {currentUser.admin ?
+                <Col xs='2 mt-2' xl='1'>
+                    <Link to='/admin'>
+                        <Button as='a' color='danger'>Admin</Button>
                     </Link>
                 </Col> :
                 null

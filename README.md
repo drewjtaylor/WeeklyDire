@@ -19,6 +19,14 @@ Each article has an array of "tags" indicating the subject matter of the article
 
 Clicking to "Log In" or "Register" at the top right opens an appropriate modal with a form.
 
+### Variable Header
+
+The Header component changes depending on whether or not a user is logged in, and whether or not they are designated as a "creator" or "admin."
+
+When no user is logged in, there will be buttons for "Register" or "Login"
+When any user is logged in, they will see a welcome message and a "Logout" button
+If the user is a creator, they will see a "Write" button that takes them to a form to write an article.
+If the user is an admin, they will see an "Admin" button that takes them to the admin page where various tasks can be performed.
 
 ### "Write" form (Formik, form validation)
 

@@ -13,8 +13,7 @@ import { dbUrl } from './dbUrl';
 const useCheckUser = (user, setUser) => {
     const [cookies] = useCookies();
 
-    useEffect(
-        () => {
+    useEffect(() => {
         if (cookies.jwt) {
             const checkUser = async () => {
                 // Default options are marked with *

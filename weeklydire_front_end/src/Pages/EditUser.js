@@ -6,7 +6,7 @@ import {
     Button,
     Label
 } from 'reactstrap';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { selectUser, updateUser } from '../sampledbOperations';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
@@ -34,8 +34,21 @@ const EditUser = () => {
     }, [userId, cookies.jwt])
 
     const handleEditUserSubmit = async (values) => {
-        // console.log(values)
-        await updateUser(userId, values, cookies.jwt)
+        // Radio buttons use strings. Convert to boolean true/false
+        if (values.admin === "true") {
+            values.admin = true;
+        } else {
+            values.admin = false;
+        };
+
+        if (values.creator === "true") {
+            values.creator = true;
+        } else {
+            values.creator = false
+        }
+
+        // console.log(values);
+        await updateUser(userId, values, cookies.jwt);
     }
 
   return (
@@ -87,6 +100,42 @@ const EditUser = () => {
                     </Col>
                     <Col xs='9'>
                         <Field name="password" />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs='3'>
+                        <p>Admin?</p>
+                    </Col>
+                    <Col>
+                        <div role="group">
+                            <span>
+                                <Label className='m-1'>
+                                    <Field type="radio" name="admin" value='true' />
+                                    Yes
+                                </Label>
+                                <Label className='m-1'>
+                                    <Field type="radio" name="admin" value='false' />
+                                    No
+                                </Label>
+                            </span>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs='3'>
+                        <p>Creator?</p>
+                    </Col>
+                    <Col>
+                        <div role="group">
+                                <Label className='m-1'>
+                                    <Field type="radio" name="creator" value='true' />
+                                    Yes 
+                                </Label>
+                                <Label className='m-1'>
+                                    <Field type="radio" name="creator" value='false' />
+                                    No
+                                </Label>
+                        </div>
                     </Col>
                 </Row>
                 <Button color='primary' type="submit">

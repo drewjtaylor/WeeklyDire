@@ -25,10 +25,10 @@ articleRouter.route('/')
     authenticate.verifyUser, 
     authenticate.verifyCreator, // Update model, currently set to not require
     (req, res, next) => {
-        console.log(req.user);
+        const creatorId = req.user._id;
         const {body, title, thumbnail, tags} = req.body;
         if (body && title && thumbnail && tags) {
-            Article.create({body, title, thumbnail, tags}) // After verifying user is working, add ", creator: req.user._id" after tags
+            Article.create({body, title, thumbnail, tags, creator: creatorId}) // After verifying user is working, add ", creator: req.user._id" after tags
             .then(article => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');

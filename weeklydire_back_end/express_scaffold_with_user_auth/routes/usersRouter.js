@@ -27,7 +27,10 @@ userRouter.route('/current')
 
 
 userRouter.route('/')
-.get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+.get(
+    // authenticate.verifyUser, 
+    // authenticate.verifyAdmin, 
+    (req, res, next) => {
     User.find()
     .then(users => {
         if (!users) {

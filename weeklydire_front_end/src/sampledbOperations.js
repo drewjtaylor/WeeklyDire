@@ -42,6 +42,15 @@ export const selectAllDbArticles = async () => {
     return data
 }
 
+// Returns all users
+export const selectAllUsers = async () => {
+    const response = await fetch(dbUrl + '/users');
+    if (!response.ok) {
+        return Promise.reject('Unable to fetch, status: ' + response.status)
+    };
+    const data = await response.json();
+    return data
+}
 
 // Returns articles with matching tag
 export const selectArticlesByTag = async (tag) => {

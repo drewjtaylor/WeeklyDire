@@ -9,6 +9,7 @@ import Listen from './Pages/Listen';
 import Watch from './Pages/Watch';
 import FullArticle from './Pages/FullArticle';
 import Write from './Pages/Write';
+import Admin from './Pages/Admin';
 import TaggedArticlesResults from './Pages/TaggedArticlesResults';
 import { UserContext } from './utils/UserContext';
 import { useState } from 'react';
@@ -30,6 +31,7 @@ function App() {
                 <Route path='/listen' element={<Listen />} />
                 <Route path='/watch' element={<Watch />} />
                 <Route path='/write' element={<Write />} />
+                <Route path='/admin' element={<Admin />} />
             </Routes>
             <Footer />
         </UserContext.Provider>

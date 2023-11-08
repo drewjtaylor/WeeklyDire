@@ -10,7 +10,8 @@ const Logout = () => {
     
     const handleLogout = () => {
         removeCookie('jwt');
-        setUser({})
+        setCookie('jwt', null);
+        setUser({});
     }
 
   return (

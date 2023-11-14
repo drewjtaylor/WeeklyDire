@@ -6,6 +6,7 @@ const RegisterForm = ({closeModal}) => {
 
     const initialValues = {
         email: '',
+        username: '',
         password: '',
         firstName: '',
         lastName: '',

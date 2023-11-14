@@ -29,39 +29,47 @@ const Header = () => {
   return (
     <Row style={headerStyle} className='sticky-top background-gray mb-3'>
             <Col xs='1'></Col>
+            
+            {/* Logo */}
             <Col><Link to='/'><img className='img-fluid logo' src={gradientLogo} alt='weekly dire' /></Link></Col>
+
+
             {currentUser.username ?
-                <Col xs='2 mt-2' xl='1'>
+                <Col xs='2' md='1' className='mt-3'>
                     <p>Welcome, {currentUser.firstName}!</p>
                 </Col> :
                 <Col xs='1 mt-2'><Button onClick={toggleRegisterModal}>Register</Button></Col>
             }
+
             {currentUser.username ?
-                <Col xs='2 mt-2' xl='1'>
+                <Col xs='2' md='1' className='mt-3'>
                     <Logout />
                 </Col> :
-                <Col xs='2 mt-2' xl='1'>
+                <Col xs='2' md='1' className='mt-3'>
                     <Button color='primary' onClick={toggleLoginModal}>
                         Sign in
                     </Button>
                 </Col>
             }
+
             {currentUser.creator ?
-                <Col xs='2 mt-2' xl='1'>
+                <Col xs='2' md='1' className='mt-3'>
                     <Link to='/write'>
                         <Button as='a' color='success'>Write</Button>
                     </Link>
                 </Col> :
                 null
             }
+
             {currentUser.admin ?
-                <Col xs='2 mt-2' xl='1'>
+                <Col xs='2' md='1' className='mt-3'>
                     <Link to='/admin'>
                         <Button as='a' color='danger'>Admin</Button>
                     </Link>
                 </Col> :
                 null
             }
+            
             <Col xs='1'></Col>
             <Modal isOpen={loginModal} toggle={toggleLoginModal}>
                 <ModalHeader toggle={toggleLoginModal}>If you have an account, please sign in</ModalHeader>

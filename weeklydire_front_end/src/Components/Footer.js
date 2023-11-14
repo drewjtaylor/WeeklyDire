@@ -5,8 +5,8 @@ import gradientLogo from '../Assets/WeeklyDireLogoGradient.png';
 
 const Footer = () => {
   return (
-    <footer style={footerStyle}>
-        <Container>
+    <footer style={footerStyle} className='mt-3'>
+        <Container >
             <Row>
                 <Col sm='3' className='text-center'>
                     <h3>Social Media</h3>

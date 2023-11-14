@@ -94,14 +94,14 @@ const EditUser = () => {
                     </Col>
                 </Row>
 
-                <Row>
+                {/* <Row>
                     <Col xs='3'>
                         <Label htmlFor="password">Password:</Label>
                     </Col>
                     <Col xs='9'>
                         <Field name="password" />
                     </Col>
-                </Row>
+                </Row> */}
                 <Row>
                     <Col xs='3'>
                         <p>Admin?</p>

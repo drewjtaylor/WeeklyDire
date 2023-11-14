@@ -1,20 +1,56 @@
-version: "3.8"
+version: '0.1'
+
 services:
-  mongo: # https://hub.docker.com/_/mongo
-      image: mongo
-      restart: always
-      environment:
-        MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: example
-  mongo-express:
-    image: mongo-express
-    restart: always
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: myapp-server
+    container_name: myapp-node-server
+    command: /usr/src/app/node_modules/.bin/nodemon server.js
+    volumes:
+      - ./server/:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
-      - 8081:8081
+      - "5000:5000"
+    depends_on:
+      - mongo
+    env_file: ./server/.env
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root # Change to variable under using docker secrets before deployment
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example # Change to variable before deployment
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      - NODE_ENV=development
+    networks:
+      - app-network
+  mongo:
+    image: mongo
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: myapp-client
+    container_name: myapp-react-client
+    command: npm start
+    volumes:
+      - ./client/:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
 networks:
-    default:
-        name: nunet
+    app-network:
+        driver: bridge
+
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+      driver: local

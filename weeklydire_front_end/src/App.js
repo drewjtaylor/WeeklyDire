@@ -21,20 +21,22 @@ function App() {
     useCheckUser(user, setUser);
 
     return (
-    <div className="App">
+    <div>
         <UserContext.Provider value={[user, setUser]}>
             <Header />
-            <Routes>
-                <Route path='/' element={<Homepage />} />
-                <Route path='/read' element={<Read />} />
-                <Route path='/read/:articleId' element={<FullArticle />} />
-                <Route path='read/tags/:tag' element={<TaggedArticlesResults />} />
-                <Route path='/listen' element={<Listen />} />
-                <Route path='/watch' element={<Watch />} />
-                <Route path='/write' element={<Write />} />
-                <Route path='/admin' element={<Admin />} />
-                <Route path='/admin/users/:userId' element={<EditUser />} />
-            </Routes>
+            <div className='full-screen'>
+                <Routes>
+                    <Route path='/' element={<Homepage />} />
+                    <Route path='/read' element={<Read />} />
+                    <Route path='/read/:articleId' element={<FullArticle />} />
+                    <Route path='read/tags/:tag' element={<TaggedArticlesResults />} />
+                    <Route path='/listen' element={<Listen />} />
+                    <Route path='/watch' element={<Watch />} />
+                    <Route path='/write' element={<Write />} />
+                    <Route path='/admin' element={<Admin />} />
+                    <Route path='/admin/users/:userId' element={<EditUser />} />
+                </Routes>
+            </div>
             <Footer />
         </UserContext.Provider>
     </div>

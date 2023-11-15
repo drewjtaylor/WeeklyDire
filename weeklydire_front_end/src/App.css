@@ -1,3 +1,7 @@
+.full-screen {
+    min-height: 76vh;
+}
+
 .background-gray {
   background-color: #454347;
   color: white

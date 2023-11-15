@@ -1,7 +1,6 @@
-Make a modal show up on "logout," notifying the user
-
 Made EditUser page refresh or send back to "admin", or give some kind of feedback after clicking submit
 Make EditUser page radio buttons start out checked correctly.
+Make EditUser page ask for confirmation before submitting a request to change an admin
 
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
@@ -61,13 +60,11 @@ Read and update readme
 These are not part of the MVP (Minimum Viable Product). Once the basics are all DONE and polished, these features can be added.
 No working on these until the MVP is DONE.
 
-Make EditUser page ask for confirmation before submitting a request to change an admin
-
 --Write page changes
 Add a "publish time" to the "Write" page to allow creators to choose when their articles go live
 Add an "Edit" page to creators can change existing articles (that THEY wrote) (keep previous versions?) Use "PUT" route.
 Add a spot for "highlight quote" for article, and render it in a large bold section aside on its display page
-Instead of a thumbnail, allow uploading files (which would then need altered for storage?)
+Instead of a thumbnail, allow uploading files (which would then need storage, adding complexity)
 
 
 --"Change password" functionality for users. https://www.npmjs.com/package/passport-local-mongoose

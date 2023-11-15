@@ -1,17 +1,20 @@
     import {Col, Row, Container, Button, Label, FormGroup } from 'reactstrap';
     import {Formik, Form, Field, ErrorMessage} from 'formik';
     import { validateWriteForm } from '../utils/validateWriteForm';
-    import { useState, useRef } from 'react';
+    import { useState, useRef, useEffect } from 'react';
     import {dbUrl} from '../utils/dbUrl';
     import { useCookies } from 'react-cookie';
-
+    import Unauthorized from '../Pages/Unauthorized';
+    import useCheckUser from '../utils/useCheckUser';
 
     const Write = () => {
         const ref = useRef(null);
         const [cookies] = useCookies();
-
         const [pendingTags, setPendingTags] = useState([]);
 
+        // Check current user
+        const [user, setUser] = useState({});
+        useCheckUser(user, setUser);
 
 
         const postData = async (url, data) => {
@@ -41,6 +44,12 @@
             handleArticleSubmit(values);
             resetForm();
         };
+
+        if (!user.creator) {
+            return <Container>
+                <Unauthorized />
+            </Container>
+        }
 
         return (
             <Container>

@@ -3,7 +3,9 @@ import { selectAllDbArticles, selectAllUsers } from "../sampledbOperations";
 import { useCookies } from "react-cookie";
 import {Container, Row, Table} from 'reactstrap';
 import Loading from '../Components/Loading';
+import Unauthorized from '../Pages/Unauthorized';
 import { Link } from "react-router-dom";
+import useCheckUser from "../utils/useCheckUser";
 
 const Admin = () => {
     const [articlesLoading, setArticlesLoading] = useState(true);
@@ -12,6 +14,10 @@ const Admin = () => {
     const [articles, setArticles] = useState([]);
     const [users, setUsers] = useState([]);
     const [cookies] = useCookies();
+    
+    const [currentUser, setCurrentUser] = useState({});
+    useCheckUser(currentUser, setCurrentUser);
+
 
     // Function to find the username from a creator._id
     const findCreatorUsername = (creatorId) => {
@@ -49,65 +55,73 @@ const Admin = () => {
         fetchUsersData();
     }, [cookies.jwt])
 
-    return (
-        <Container>
-            <h5>Welcome to the admin page. Click a username below to change that user's permissions, or see the <a href="#articles">articles section</a> below.
-            </h5>
-            <Row><h1>Users</h1></Row>
-            {usersLoading ? <Loading /> : 
-                <Table bordered>
-                    <thead>
-                        <tr>
-                            <th>Username (click to edit)</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Creator?</th>
-                            <th>Admin?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user, idx) => 
-                            <tr key={idx}>
-                                <td><Link to={`/admin/users/${user._id}`}>{user.username}</Link></td>
-                                <td>{user.firstName}</td>
-                                <td>{user.lastName}</td>
-                                <td>{user.creator ? 'Yes' : 'No'}</td>
-                                <td>{user.admin ? 'Yes' : 'No'}</td>
-                            </tr>)}
-                    </tbody>
-                </Table>}
-            <Row id='articles'><h1>Articles</h1></Row>
-            {articlesLoading ? <Loading /> : 
-                <Table bordered>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Creator</th>
-                            <th>Tags</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {articles.map((article, idx) =>
-                            <tr key={idx}>
-                                <td>{article.title}</td>
-                                <td>
-                                    {findCreatorUsername(article.creator)}
-                                </td>
-                                <td>
-                                    {article.tags.length === 0 ? 'None' :
-                                        article.tags.map((tag, index, fullList) => {
-                                            return index === fullList.length-1 ?
-                                                <div className="m-0 p-0" key={index}>{`${tag.toUpperCase()}`}</div> :
-                                                <div className="m-0 p-0" key={index}>{`${tag.toUpperCase()}, `}</div>
-                                        })
-                                    }
-                                </td>
-                            </tr>)}
-                    </tbody>
-                </Table>
-            }
+    if (!currentUser.admin) {
+        return <Container>
+            <Unauthorized />
         </Container>
-    )
+    }
+
+    if (currentUser.admin) {
+        return (
+            <Container>
+                <h5>Welcome to the admin page. Click a username below to change that user's permissions, or see the <a href="#articles">articles section</a> below.
+                </h5>
+                <Row><h1>Users</h1></Row>
+                {usersLoading ? <Loading /> : 
+                    <Table bordered>
+                        <thead>
+                            <tr>
+                                <th>Username (click to edit)</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Creator?</th>
+                                <th>Admin?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.map((user, idx) => 
+                                <tr key={idx}>
+                                    <td><Link to={`/admin/users/${user._id}`}>{user.username}</Link></td>
+                                    <td>{user.firstName}</td>
+                                    <td>{user.lastName}</td>
+                                    <td>{user.creator ? 'Yes' : 'No'}</td>
+                                    <td>{user.admin ? 'Yes' : 'No'}</td>
+                                </tr>)}
+                        </tbody>
+                    </Table>}
+                <Row id='articles'><h1>Articles</h1></Row>
+                {articlesLoading ? <Loading /> : 
+                    <Table bordered>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Creator</th>
+                                <th>Tags</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {articles.map((article, idx) =>
+                                <tr key={idx}>
+                                    <td>{article.title}</td>
+                                    <td>
+                                        {findCreatorUsername(article.creator)}
+                                    </td>
+                                    <td>
+                                        {article.tags.length === 0 ? 'None' :
+                                            article.tags.map((tag, index, fullList) => {
+                                                return index === fullList.length-1 ?
+                                                    <div className="m-0 p-0" key={index}>{`${tag.toUpperCase()}`}</div> :
+                                                    <div className="m-0 p-0" key={index}>{`${tag.toUpperCase()}, `}</div>
+                                            })
+                                        }
+                                    </td>
+                                </tr>)}
+                        </tbody>
+                    </Table>
+                }
+            </Container>
+        )
+    }
 }
 
 export default Admin

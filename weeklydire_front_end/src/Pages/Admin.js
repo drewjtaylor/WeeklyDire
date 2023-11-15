@@ -5,26 +5,23 @@ import {Container, Row, Table} from 'reactstrap';
 import Loading from '../Components/Loading';
 import Unauthorized from '../Pages/Unauthorized';
 import { Link } from "react-router-dom";
-import useCheckUser from "../utils/useCheckUser";
+import { UserContext } from "../utils/UserContext";
+import { useContext } from "react";
 
 const Admin = () => {
-    const [articlesLoading, setArticlesLoading] = useState(true);
-    const [usersLoading, setUsersLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     const [articles, setArticles] = useState([]);
+    const [articlesLoading, setArticlesLoading] = useState(true);
     const [users, setUsers] = useState([]);
+    const [usersLoading, setUsersLoading] = useState(true);
     const [cookies] = useCookies();
-    
-    const [currentUser, setCurrentUser] = useState({});
-    useCheckUser(currentUser, setCurrentUser);
-
+    const [userFromContext, setUserFromContext] = useContext(UserContext);
 
     // Function to find the username from a creator._id
     const findCreatorUsername = (creatorId) => {
         const user = users.find((user) => user._id === creatorId);
         return user ? user.username : "Unknown";
-  };
-
+    };
 
     // Get users and articles
     useEffect(() => {
@@ -55,13 +52,15 @@ const Admin = () => {
         fetchUsersData();
     }, [cookies.jwt])
 
-    if (!currentUser.admin) {
+    // If the current user is not an admin, display "Unauthorized"
+    if (!userFromContext.admin) {
         return <Container>
             <Unauthorized />
         </Container>
     }
 
-    if (currentUser.admin) {
+    // Double check the userfrom context is an admin, and display the page
+    if (userFromContext.admin) {
         return (
             <Container>
                 <h5>Welcome to the admin page. Click a username below to change that user's permissions, or see the <a href="#articles">articles section</a> below.

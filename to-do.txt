@@ -1,6 +1,6 @@
 Make a modal show up on "logout," notifying the user
 
-Made EditUser page refresh or send back to "admin", or give some kind of feedback
+Made EditUser page refresh or send back to "admin", or give some kind of feedback after clicking submit
 Make EditUser page radio buttons start out checked correctly.
 
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
@@ -12,20 +12,16 @@ Make write form not need all fields (articlesRouter post action needs logic fixe
 More gracefully handle failed login attempts
 More gracefully handle error on the "/write" form
 
-On write form, if non-creator tries to write, handle error more gracefully
-Block "write" from access to non-creators and writers to begin with (other than just in express)
-
-Make a better looking error component.
-
 Add error validation to LoginForm and Register Form
 Make register/sign in forms look better.
 
-Split admin page into two. Have /admin give instructions, then have links to "users" and "articles" from there.
+Split admin page into two.
+Eventually, there will be multiple users, and many articles so it won't show on one page easily.
+Maybe have /admin give instructions, then have links to "users" and "articles" from there.
+
+Add button to delete article
 
 ***After back end/DB implementation***
-
-Implement an "admin" page on the front, and connect up some of the database functions
-For example, have the ability to list out all articles, and have a button to delete them.
 
 username getting entered twice when using register? (username is automatically done by passport I think,
 or passport-local-mongoose. Remove from front end submission and manual entry on route(s))
@@ -34,19 +30,14 @@ Clean up all "post" implementation in front end. Could be more concise.
 Anywhere that has the "postData" function can just be combined with
 whatever function is under it (handleSubmit/login, etc)
 
-Turn on "authentication" lines on routes. Test with postman
 Fix commentsRouter comment.create using the body username, and instead make it use the logged in user.
 
 Rethink routes for manipulating comments. The most sensible is probably:
 "[articleId]/comments", then do CRUD operations from there. Move app.use(commentsRouter) from 'app.js' to articlesRouter.js'?
 
-(After auth) Change article delete route to require admin
-
 Calls to "selectarticlebyid" calls ALL articles, then uses "find()" to pick one. It would be less expensive to have the back end provide just one article, rather than all of them every time
 
 Make a basic "Error/this doesn't exist" page for server errors
-
-
 
 
 ***Dockerizing***
@@ -60,15 +51,9 @@ Change root/username in yml file to be variables
 Use a mounted folder for data so it persists: https://docs.docker.com/storage/volumes/#mount-a-host-directory-as-a-data-volume
 
 
-
-
-
 ***Before adding to portfolio***
 
 Read and update readme
-
-
-
 
 
 

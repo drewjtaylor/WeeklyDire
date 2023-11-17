@@ -93,8 +93,6 @@ userRouter.route('/login')
 .post(passport.authenticate('local'), (req, res, next) => {
     cookieParser.JSONCookie()
     const token = authenticate.getToken({_id: req.user._id});
-    console.log('The token received is:');
-    console.log(token);
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json({success: true, token: token, status: 'You are successfully logged in!'})

@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const cors = require('cors');
+const dotenv = require('dotenv').config();
 
 // const eventRouter = require('./routes/eventsRouter');
 const userRouter = require('./routes/usersRouter');
@@ -13,8 +14,9 @@ const config = require('./config');
 const hostname = 'localhost';
 const port = 3001;
 
+
 // Configure and connect to Mongoose
-const url = config.mongoUrl;
+const url = dotenv.parsed.MONGOURI || config.mongoUrl;
 const connect = mongoose.connect(url, {
     useCreateIndex: true,
     useFindAndModify: false,
@@ -23,7 +25,7 @@ const connect = mongoose.connect(url, {
 });
 
 connect.then(
-    () => console.log('Connected correctly to the database server'),
+    () => console.log(`Connected correctly to the database server at ${url}`),
     err => console.log(err)
 )
 

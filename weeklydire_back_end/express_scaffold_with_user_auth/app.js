@@ -25,7 +25,7 @@ const connect = mongoose.connect(url, {
 });
 
 connect.then(
-    () => console.log(`Connected correctly to the database server at ${url}`),
+    () => console.log(`Connected correctly to the database server.`),
     err => console.log(err)
 )
 

@@ -116,7 +116,10 @@ const Admin = () => {
                                         }
                                     </td>
                                     <td>
-                                        <Button color='primary' onClick={() => deleteArticleById(article._id, cookies.jwt)}>Delete</Button>
+                                        <Button color='primary' onClick={() => {
+                                            deleteArticleById(article._id, cookies.jwt);
+                                            setArticles(articles.filter(each => article._id !== each._id))
+                                        }}>Delete</Button>
                                     </td>
                                 </tr>)}
                         </tbody>

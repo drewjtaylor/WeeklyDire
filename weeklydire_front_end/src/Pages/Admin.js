@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import { selectAllDbArticles, selectAllUsers } from "../sampledbOperations";
+import { useEffect, useState, useContext } from "react";
+import { selectAllDbArticles, selectAllUsers, deleteArticleById } from "../sampledbOperations";
 import { useCookies } from "react-cookie";
-import {Container, Row, Table} from 'reactstrap';
+import {Container, Row, Table, Button} from 'reactstrap';
 import Loading from '../Components/Loading';
 import Unauthorized from '../Pages/Unauthorized';
 import { Link } from "react-router-dom";
 import { UserContext } from "../utils/UserContext";
-import { useContext } from "react";
 
 const Admin = () => {
     const [errorMessage, setErrorMessage] = useState('');
@@ -52,6 +51,7 @@ const Admin = () => {
         fetchUsersData();
     }, [cookies.jwt])
 
+
     // If the current user is not an admin, display "Unauthorized"
     if (!userFromContext.admin) {
         return <Container>
@@ -93,9 +93,10 @@ const Admin = () => {
                     <Table bordered>
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Creator</th>
-                                <th>Tags</th>
+                                <th>Title:</th>
+                                <th>Creator:</th>
+                                <th>Tags:</th>
+                                <th>Action:</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,6 +114,9 @@ const Admin = () => {
                                                     <div className="m-0 p-0" key={index}>{`${tag.toUpperCase()}, `}</div>
                                             })
                                         }
+                                    </td>
+                                    <td>
+                                        <Button color='primary' onClick={() => deleteArticleById(article._id, cookies.jwt)}>Delete</Button>
                                     </td>
                                 </tr>)}
                         </tbody>

@@ -23,12 +23,13 @@ articleRouter.route('/')
 // Create a new article. Requires user to be a creator
 .post(
     authenticate.verifyUser, 
-    authenticate.verifyCreator, // Update model, currently set to not require
+    authenticate.verifyCreator,
     (req, res, next) => {
         const creatorId = req.user._id;
         const {body, title, thumbnail, tags} = req.body;
-        if (body && title && thumbnail && tags) {
-            Article.create({body, title, thumbnail, tags, creator: creatorId}) // After verifying user is working, add ", creator: req.user._id" after tags
+        console.log(req.body);
+        if (body && title) {
+            Article.create({body, title, thumbnail, tags, creator: creatorId})
             .then(article => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
@@ -36,7 +37,7 @@ articleRouter.route('/')
             })
             .catch(err => next(err))
         } else {
-            const err = new Error('This error came from "articlesRouter" in the back end')
+            const err = new Error('This error came from "articlesRouter" the express server')
             err.statusCode = 400;
             return next(err)
         }

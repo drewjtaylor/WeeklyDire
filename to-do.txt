@@ -1,3 +1,5 @@
+***Mainly front end stuff***
+
 Made EditUser page refresh or send back to "admin", or give some kind of feedback after clicking submit
 Make EditUser page radio buttons start out checked correctly.
 Make EditUser page ask for confirmation before submitting a request to change an admin
@@ -16,7 +18,9 @@ Split admin page into two.
 Theoretically there will eventually be many users and articles, so it won't show on one page easily.
 Maybe have /admin give instructions, then have links to "users" and "articles" from there.
 
-***After back end/DB implementation***
+***Involves back end***
+
+Create a way to change/reset password using passport (and possibly https://www.npmjs.com/package/passport-local-mongoose)
 
 username getting entered twice when using register? (username is automatically done by passport I think,
 or passport-local-mongoose. Remove from front end submission and manual entry on route(s))
@@ -60,5 +64,4 @@ Add an "Edit" page to creators can change existing articles (that THEY wrote) (k
 Add a spot for "highlight quote" for article, and render it in a large bold section aside on its display page
 Instead of a thumbnail, allow uploading files (which would then need storage, adding complexity)
 
-
---"Change password" functionality for users. https://www.npmjs.com/package/passport-local-mongoose
+Email verification

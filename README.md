@@ -10,6 +10,8 @@ Routing: react-router-dom
 Styling and responsive layout: Bootstrap/Rectstrap
 Forms: Formik
 
+Deployed on: Netlify. Any pushes to the main branch on github will trigger a redploy of the front end.
+
 ### Home page
 The home page displays all articles from an asynchronous request to the server.
 
@@ -46,6 +48,8 @@ Cons: Programmatically more complicated to figure out
 
 
 ## Back end (Node/Express)
+
+Deployed using Google Cloud Functions
 
 ### Routes
 
@@ -91,7 +95,7 @@ Passport-local-mongoose is used mainly to simplify hashing and saving passwords.
 
 ## Database (MongoDB)
 
-Will connect to database and node/Express server later
+The site uses a MongoDB database deployed using the free version of Atlas, MongoDB's cloud service.
 
 
 ## Developement steps

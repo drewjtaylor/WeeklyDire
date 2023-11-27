@@ -22,7 +22,7 @@ const EditUser = () => {
     const {userId} = useParams();
     const [cookies] = useCookies();
 
-    const [userFromContext, setUserFromContext] = useContext(UserContext);
+    const [userFromContext] = useContext(UserContext);
 
     useEffect(() => {
         const fetchData = async () => {

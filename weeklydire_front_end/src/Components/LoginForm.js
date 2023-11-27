@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 
 const LoginForm = ({closeModal}) => {
 
-    const [cookies, setCookie] = useCookies([]);
+    const setCookie = useCookies([])[1];
 
     const initialValues = {
         username: '',

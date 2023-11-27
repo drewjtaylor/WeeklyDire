@@ -130,6 +130,37 @@ userRouter.route('/finduser/:username')
     res.end('DELETE operation not supported on /users/finduser/[username].');
 })
 
+userRouter.route('/:userId/passwordreset')
+.get((req, res, next) => {
+    res.statusCode = 404;
+    res.end('GET not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
+})
+.post((req, res, next) => {
+    res.statusCode = 404;
+    res.end('POST not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
+})
+.put(
+    authenticate.verifyUser,
+    (req, res, next) => {
+        User.findById(req.params.userId)
+        .then(user => {
+            if (req.user._id === req.params.userId || req.user.admin) {
+                user.changePassword(req.body.oldpassword, req.body.newpassword);
+                res.statusCode = 200;
+                res.end(`The password for ${req.user.username} has been updated successfully.`)
+            } else {
+                res.statusCode = 403;
+                res.end('You cannot change a password unless you are the user or you are an admin.')
+            }
+        })
+        .catch(err => next(err))
+    }
+)
+.delete((req, res, next) => {
+    res.statusCode = 404;
+    res.end('DELETE not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
+})
+
 // Routes for dealing with single user
 userRouter.route('/:userId')
 .get(

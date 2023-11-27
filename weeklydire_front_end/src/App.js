@@ -1,7 +1,7 @@
 
 import './App.css';
 import {Routes, Route} from 'react-router-dom';
-import Header from './Components/Header';
+import NavbarHeader from './Components/NavbarHeader';
 import Footer from './Components/Footer';
 import Homepage from './Pages/Homepage';
 import Read from './Pages/Read';
@@ -23,7 +23,7 @@ function App() {
     return (
     <div>
         <UserContext.Provider value={[user, setUser]}>
-            <Header />
+            <NavbarHeader />
             <div className='full-screen'>
                 <Routes>
                     <Route path='/' element={<Homepage />} />

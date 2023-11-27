@@ -1,12 +1,10 @@
+***Mainly front end stuff***
+
 Made EditUser page refresh or send back to "admin", or give some kind of feedback after clicking submit
 Make EditUser page radio buttons start out checked correctly.
 Make EditUser page ask for confirmation before submitting a request to change an admin
 
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
-
-Make "logout" look like the sign in button
-
-Make write form not need all fields (articlesRouter post action needs logic fixed)
 
 More gracefully handle failed login attempts
 More gracefully handle error on the "/write" form
@@ -14,13 +12,9 @@ More gracefully handle error on the "/write" form
 Add error validation to LoginForm and Register Form
 Make register/sign in forms look better.
 
-Split admin page into two.
-Eventually, there will be multiple users, and many articles so it won't show on one page easily.
-Maybe have /admin give instructions, then have links to "users" and "articles" from there.
+***Involves back end***
 
-Add button to delete article
-
-***After back end/DB implementation***
+Create a way to change/reset password using passport (and possibly https://www.npmjs.com/package/passport-local-mongoose)
 
 username getting entered twice when using register? (username is automatically done by passport I think,
 or passport-local-mongoose. Remove from front end submission and manual entry on route(s))
@@ -33,8 +27,6 @@ Fix commentsRouter comment.create using the body username, and instead make it u
 
 Rethink routes for manipulating comments. The most sensible is probably:
 "[articleId]/comments", then do CRUD operations from there. Move app.use(commentsRouter) from 'app.js' to articlesRouter.js'?
-
-Calls to "selectarticlebyid" calls ALL articles, then uses "find()" to pick one. It would be less expensive to have the back end provide just one article, rather than all of them every time
 
 Make a basic "Error/this doesn't exist" page for server errors
 
@@ -52,7 +44,7 @@ Use a mounted folder for data so it persists: https://docs.docker.com/storage/vo
 
 ***Before adding to portfolio***
 
-Read and update readme
+Write, Read and update readme
 
 
 
@@ -66,5 +58,4 @@ Add an "Edit" page to creators can change existing articles (that THEY wrote) (k
 Add a spot for "highlight quote" for article, and render it in a large bold section aside on its display page
 Instead of a thumbnail, allow uploading files (which would then need storage, adding complexity)
 
-
---"Change password" functionality for users. https://www.npmjs.com/package/passport-local-mongoose
+Email verification for user registration

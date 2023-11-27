@@ -4,8 +4,8 @@ export const validateWriteForm = (values) => {
     // Title cannot be blank
     if (!values.title) {
         errors.title = 'You must enter a title'
-    } else if (values.title.length > 40) {
-        errors.title = 'Your title must be less than 40 characters.'
+    } else if (values.title.length > 80) {
+        errors.title = 'Your title must be less than 80 characters.'
     };
 
     // Body cannot be blank

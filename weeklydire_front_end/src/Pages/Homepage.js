@@ -43,7 +43,7 @@ const Homepage = () => {
                 <Row>
                     <Col className="text-center">
                         <h1>Welcome to Weeklydire</h1>
-                        <p>A demo news site to share good news and showcase the good in spite of tragedy.</p>
+                        <p>A demo news site to share good news and silver linings.</p>
                     </Col>
                 </Row>
                 <Row>

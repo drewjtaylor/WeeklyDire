@@ -6,12 +6,14 @@ import {dbUrl} from '../utils/dbUrl';
 import { useCookies } from 'react-cookie';
 import Unauthorized from '../Pages/Unauthorized';
 import { UserContext } from '../utils/UserContext';
+import Loading from '../Components/Loading';
 
 
     const Write = () => {
         const ref = useRef(null);
         const [cookies] = useCookies();
         const [pendingTags, setPendingTags] = useState([]);
+        const [isLoading, setIsLoading] = useState(true);
         
         // Check current user
         const [userFromContext] = useContext(UserContext);
@@ -43,6 +45,15 @@ import { UserContext } from '../utils/UserContext';
             handleArticleSubmit(values);
             resetForm();
         };
+
+        // Give the app time to check if the existing user is a creator
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+
+        if (isLoading) {
+            return <Loading />
+        }
 
         if (!userFromContext.creator) {
             return <Container>

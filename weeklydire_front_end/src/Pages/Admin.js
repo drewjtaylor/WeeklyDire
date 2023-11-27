@@ -16,6 +16,7 @@ const Admin = () => {
     const [cookies] = useCookies();
     const [userFromContext, setUserFromContext] = useContext(UserContext);
     const [adminChoice, setAdminChoice] = useState('users');
+    const [isLoading, setIsLoading] = useState(true);
 
     // Function to find the username from a creator._id
     const findCreatorUsername = (creatorId) => {
@@ -119,6 +120,14 @@ const Admin = () => {
             </Table>
         }
     </>
+
+    // Give the app time to check if the existing user is an admin
+    setTimeout(() => {
+        setIsLoading(false)
+    }, 500);
+    if (isLoading) {
+        return <Loading />
+    }
 
     // If the current user is not an admin, display "Unauthorized"
     if (!userFromContext.admin) {

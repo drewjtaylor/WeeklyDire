@@ -17,14 +17,14 @@ const port = 3001;
 
 // Configure and connect to Mongoose
 const url = dotenv.parsed.MONGOURI || config.mongoUrl;
-const connect = mongoose.connect(url, {
+const dbConnect = mongoose.connect(url, {
     useCreateIndex: true,
     useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
-connect.then(
+dbConnect.then(
     () => console.log(`Connected correctly to the database server.`),
     err => console.log(err)
 )

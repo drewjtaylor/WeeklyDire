@@ -14,7 +14,10 @@ const fs = require('fs');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3001');
+var port = normalizePort(
+    // process.env.PORT || Google Cloud functions was not playing nice with the injected port.
+    '3001'
+);
 app.set('port', port);
 app.set('secPort', port+443); // add second port for https (comes out to 3443)
 

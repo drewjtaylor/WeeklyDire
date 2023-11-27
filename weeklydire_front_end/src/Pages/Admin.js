@@ -8,13 +8,13 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../utils/UserContext";
 
 const Admin = () => {
-    const [errorMessage, setErrorMessage] = useState('');
+    const setErrorMessage = useState('')[1];
     const [articles, setArticles] = useState([]);
     const [articlesLoading, setArticlesLoading] = useState(true);
     const [users, setUsers] = useState([]);
     const [usersLoading, setUsersLoading] = useState(true);
     const [cookies] = useCookies();
-    const [userFromContext, setUserFromContext] = useContext(UserContext);
+    const [userFromContext] = useContext(UserContext);
     const [adminChoice, setAdminChoice] = useState('users');
     const [isLoading, setIsLoading] = useState(true);
 
@@ -51,7 +51,7 @@ const Admin = () => {
 
         fetchArticleData();
         fetchUsersData();
-    }, [cookies.jwt])
+    }, [cookies.jwt, setErrorMessage])
 
     const usersTable = <>
         <Row><h1>Users</h1></Row>

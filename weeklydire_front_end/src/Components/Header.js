@@ -1,3 +1,11 @@
+// This entire component is deprecated, but being saved for reference if need
+// Instead, the NavbarHeader component is now being used in its place
+// This was done because this component artificially tried to do layout with col/row
+// However, this works better with properly formatted "Nav", "Navbar", etc
+// Doing a "collapse" feature on this component also would have been more difficult
+// Commented out the "export header" line at the end, to make sure the site breaks if this
+// is used by mistake anywhere.
+
 import {Row, Col, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import gradientLogo from '../Assets/WeeklyDireLogoGradient.png';
 import { Link } from 'react-router-dom';
@@ -27,7 +35,7 @@ const Header = () => {
     const [currentUser] = useContext(UserContext);
 
   return (
-    <Row style={headerStyle} className='sticky-top background-gray mb-3'>
+    <Row style={headerStyle} className='sticky-top mb-3'>
             <Col xs='0' sm='1'></Col>
             
             {/* Logo */}
@@ -92,4 +100,4 @@ const headerStyle = {
     color: 'white'
 }
 
-export default Header
+// export default Header

@@ -133,8 +133,12 @@ const Admin = () => {
             <Container>
                 <h5>Welcome to the admin page. Do you want to edit Users or Articles?</h5>
                 <span>
-                    <Button className='m-2' color={adminChoice === 'users' ? 'primary' : 'secondary'} onClick={() => {setAdminChoice('users')}}>Users</Button>
-                    <Button className='m-2' color={adminChoice === 'articles' ? 'primary' : 'secondary'} onClick={() => {setAdminChoice('articles')}}>Articles</Button>
+                    <Button className='m-2' color={adminChoice === 'users' ? 'primary' : 'secondary'} onClick={() => {setAdminChoice('users')}}>
+                        Users
+                    </Button>
+                    <Button className='m-2' color={adminChoice === 'articles' ? 'primary' : 'secondary'} onClick={() => {setAdminChoice('articles')}}>
+                        Articles
+                    </Button>
                 </span>
                 {adminChoice === 'users' ? usersTable : adminChoice === 'articles' ? articlesTable : <p>Please select a table to view.</p>}
             </Container>

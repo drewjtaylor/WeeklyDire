@@ -97,7 +97,7 @@ import { UserContext } from '../utils/UserContext';
                                                 <Field
                                                     name='body'
                                                     as='textarea'
-                                                    rows='6'
+                                                    rows='12'
                                                     placeholder='Enter the body of your article here'
                                                     className='form-control'
                                                 />

@@ -6,17 +6,11 @@ Make EditUser page ask for confirmation before submitting a request to change an
 
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
-Collapse Write/Logout/Admin buttons on narrow screens
-
 More gracefully handle failed login attempts
 More gracefully handle error on the "/write" form
 
 Add error validation to LoginForm and Register Form
 Make register/sign in forms look better.
-
-Split admin page into two.
-Theoretically there will eventually be many users and articles, so it won't show on one page easily.
-Maybe have /admin give instructions, then have links to "users" and "articles" from there.
 
 ***Involves back end***
 
@@ -50,7 +44,7 @@ Use a mounted folder for data so it persists: https://docs.docker.com/storage/vo
 
 ***Before adding to portfolio***
 
-Read and update readme
+Write, Read and update readme
 
 
 
@@ -64,4 +58,4 @@ Add an "Edit" page to creators can change existing articles (that THEY wrote) (k
 Add a spot for "highlight quote" for article, and render it in a large bold section aside on its display page
 Instead of a thumbnail, allow uploading files (which would then need storage, adding complexity)
 
-Email verification
+Email verification for user registration

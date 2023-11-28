@@ -1,7 +1,6 @@
 ***Mainly front end stuff***
 
 Made EditUser page refresh or send back to "admin", or give some kind of feedback after clicking submit
-Make EditUser page radio buttons start out checked correctly.
 Make EditUser page ask for confirmation before submitting a request to change an admin
 
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
@@ -15,15 +14,16 @@ Make register/sign in forms look better.
 ***Involves back end***
 
 Handle failed password resets/login attempts better
-
-Make it so admin can reset a password even without knowing the previous password
-
-Create a way to change/reset password using passport (and possibly https://www.npmjs.com/package/passport-local-mongoose)
+Notify user of successful login
+Notify user of failed login
+Notify user of successful password change
+notify user of failed password change
+    track failed password attempts
 
 username getting entered twice when using register? (username is automatically done by passport I think,
 or passport-local-mongoose. Remove from front end submission and manual entry on route(s))
 
-Clean up all "post" implementation in front end. Could be more concise.
+Clean up "post" implementation in front end. Could be more concise.
 Anywhere that has the "postData" function can just be combined with
 whatever function is under it (handleSubmit/login, etc)
 

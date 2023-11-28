@@ -127,6 +127,10 @@ export const selectUser = async (userId, jwt) => {
 
 //  Updates a user's password
 export const updatePassword = async (userId, oldpassword, newpassword, jwt) => {
+    const passwordData = {
+        oldpassword,
+        newpassword
+    };
     const response = await fetch(dbUrl + `/users/${userId}/passwordreset`, {
         method: "PUT",
         mode: "cors", // no-cors, *cors, same-origin
@@ -138,10 +142,7 @@ export const updatePassword = async (userId, oldpassword, newpassword, jwt) => {
         },
         redirect: "follow", // manual, *follow, error
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: {
-            oldpassword: oldpassword,
-            newpassword: newpassword
-        }
+        body: JSON.stringify(passwordData)
       });
       if (!response.ok) {
         return Promise.reject('Unable to update password: ' + response.status)

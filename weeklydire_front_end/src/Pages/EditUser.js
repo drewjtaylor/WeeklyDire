@@ -4,10 +4,13 @@ import {
     Row, 
     Col,
     Button,
-    Label
+    Label,
+    Modal,
+    ModalHeader,
+    ModalBody
 } from 'reactstrap';
 import { useParams } from 'react-router-dom';
-import { selectUser, updateUser } from '../sampledbOperations';
+import { selectUser, updateUser, updatePassword } from '../sampledbOperations';
 import { useEffect, useState, useContext } from 'react';
 import { useCookies } from 'react-cookie';
 import {Formik, Field, Form} from 'formik';
@@ -21,6 +24,7 @@ const EditUser = () => {
     const [isLoading, setIsLoading] = useState(true);
     const {userId} = useParams();
     const [cookies] = useCookies();
+    const [passwordResetModal, setPasswordResetModal] = useState(false);
 
     const [userFromContext] = useContext(UserContext);
 
@@ -37,6 +41,15 @@ const EditUser = () => {
         fetchData();
     }, [userId, cookies.jwt])
 
+    const initialValues = {
+        email: user.email,
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        admin: String(user.admin),
+        creator: String(user.creator)
+    };
+
     const handleEditUserSubmit = async (values) => {
         // Radio buttons use strings. Convert to boolean true/false
         if (values.admin === "true") {
@@ -51,8 +64,15 @@ const EditUser = () => {
             values.creator = false
         }
 
-        // console.log(values);
         await updateUser(userId, values, cookies.jwt);
+    }
+
+    const togglePasswordResetModal = () => {
+        setPasswordResetModal(!passwordResetModal)
+    };
+
+    const handleNewPasswordSubmit = async (values) => {
+        await updatePassword(userId, values.oldpassword, values.newpassword, cookies.jwt);
     }
 
     if (!userFromContext.admin) {
@@ -66,7 +86,7 @@ const EditUser = () => {
                 <h5>Edit information below for username: {user.username}</h5>
                 <p>Fill out new values below:</p>
                 <Formik
-                    initialValues={user}
+                    initialValues={initialValues}
                     onSubmit={handleEditUserSubmit}
                 >
                     <Form>
@@ -102,15 +122,7 @@ const EditUser = () => {
                                 <Field name="lastName" />
                             </Col>
                         </Row>
-    
-                        {/* <Row>
-                            <Col xs='3'>
-                                <Label htmlFor="password">Password:</Label>
-                            </Col>
-                            <Col xs='9'>
-                                <Field name="password" />
-                            </Col>
-                        </Row> */}
+
                         <Row>
                             <Col xs='3'>
                                 <p>Admin?</p>
@@ -147,16 +159,56 @@ const EditUser = () => {
                                 </div>
                             </Col>
                         </Row>
+                        <Row className='mb-3'>
+                            <Col>
+                                <Button color='danger' onClick={togglePasswordResetModal}>
+                                    Reset password?
+                                </Button>
+                            </Col>
+                        </Row>
                         <Button color='primary' type="submit">
                             Submit
                         </Button>
                     </Form>
                 </Formik>
+
+                <Modal isOpen={passwordResetModal} toggle={togglePasswordResetModal}>
+                    <ModalHeader toggle={togglePasswordResetModal}>
+                        Enter the old password and new password below, then hit submit.
+                    </ModalHeader>
+                        <ModalBody>
+                            <Formik
+                                initialValues={{
+                                    oldpassword: '',
+                                    newpassword: ''
+                                }}
+                                onSubmit={handleNewPasswordSubmit}
+                            >
+                                <Form>
+                                    <Row>
+                                        <Col xs='3'>
+                                            <Label htmlFor="oldpassword" className='me-2'>Old Password:</Label>
+                                        </Col>
+                                        <Col>
+                                            <Field type="password" name="oldpassword" />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs='3'>
+                                            <Label htmlFor="newpassword" className='me-2'>New Password:</Label>
+                                        </Col>
+                                        <Col>
+                                            <Field type="password" name="newpassword" />
+                                        </Col>
+                                    </Row>
+                                    <Button type="submit" color="danger">Submit</Button>
+                                </Form>
+                            </Formik>
+                        </ModalBody>
+                </Modal>
             </Container>
         )
     }
-
-
 }
 
 export default EditUser

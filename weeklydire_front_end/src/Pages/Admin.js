@@ -124,7 +124,7 @@ const Admin = () => {
     // Give the app time to check if the existing user is an admin
     setTimeout(() => {
         setIsLoading(false)
-    }, 500);
+    }, 1000);
     if (isLoading) {
         return <Loading />
     }

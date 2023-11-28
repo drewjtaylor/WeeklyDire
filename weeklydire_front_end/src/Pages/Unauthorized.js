@@ -7,7 +7,7 @@ const Unauthorized = () => {
   return (
     <Container>
         <Row className="align-items-center">
-            <Col xs={1}>
+            <Col lg='1' className="text-center">
                 <FontAwesomeIcon icon={faEyeSlash} style={{height: '75', width: '75'}} />
             </Col>
             <Col>

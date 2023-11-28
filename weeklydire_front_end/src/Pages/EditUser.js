@@ -9,7 +9,7 @@ import {
     ModalHeader,
     ModalBody
 } from 'reactstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { selectUser, updateUser, updatePassword, resetPassword } from '../sampledbOperations';
 import { useEffect, useState, useContext } from 'react';
 import { useCookies } from 'react-cookie';
@@ -28,6 +28,8 @@ const EditUser = () => {
     const [passwordResetModal, setPasswordResetModal] = useState(false);
 
     const [userFromContext] = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,6 +68,8 @@ const EditUser = () => {
         }
 
         await updateUser(userId, values, cookies.jwt);
+
+        navigate('/admin')
     }
 
     const togglepasswordUpdateModal = () => {

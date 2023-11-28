@@ -130,8 +130,8 @@ userRouter.route('/finduser/:username')
     res.end('DELETE operation not supported on /users/finduser/[username].');
 })
 
-// Route to reset a user's password.
-userRouter.route('/:userId/passwordreset')
+// Route to update a user's password.
+userRouter.route('/:userId/passwordupdate')
 .get((req, res, next) => {
     res.statusCode = 404;
     res.end('GET not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
@@ -148,6 +148,42 @@ userRouter.route('/:userId/passwordreset')
             if (req.user._id.equals(req.params.userId) || req.user.admin) {
                 user.changePassword(req.body.oldpassword, req.body.newpassword)
                 .then(() => {
+                    res.statusCode = 200;
+                    res.end(`The password for ${req.user.username} has been updated successfully.`)
+                })
+                .catch(err => next(err));
+            } else {
+                res.statusCode = 403;
+                res.end('You cannot change a password unless you are the user or you are an admin.')
+            }
+        })
+        .catch(err => next(err))
+    }
+)
+.delete((req, res, next) => {
+    res.statusCode = 404;
+    res.end('DELETE not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
+})
+
+// Route to reset a user's password.
+userRouter.route('/:userId/passwordreset')
+.get((req, res, next) => {
+    res.statusCode = 404;
+    res.end('GET not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
+})
+.post((req, res, next) => {
+    res.statusCode = 404;
+    res.end('POST not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
+})
+.put(
+    authenticate.verifyUser,
+    (req, res, next) => {
+        User.findById(req.params.userId)
+        .then(user => {
+            if (req.user._id.equals(req.params.userId) || req.user.admin) {
+                user.setPassword(req.body.password)
+                .then(() => {
+                    user.save();
                     res.statusCode = 200;
                     res.end(`The password for ${req.user.username} has been updated successfully.`)
                 })

@@ -131,7 +131,7 @@ export const updatePassword = async (userId, oldpassword, newpassword, jwt) => {
         oldpassword,
         newpassword
     };
-    const response = await fetch(dbUrl + `/users/${userId}/passwordreset`, {
+    const response = await fetch(dbUrl + `/users/${userId}/passwordupdate`, {
         method: "PUT",
         mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached

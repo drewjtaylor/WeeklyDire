@@ -82,7 +82,7 @@ const RegisterForm = ({closeModal}) => {
                 <Label htmlFor="password">Password:</Label>
             </Col>
               <Col xs='9'>
-                  <Field name="password" placeholder="" />
+                  <Field type="password" name="password" placeholder="" />
               </Col>
           </Row>
             <Button color='primary' type="submit" disabled={isSubmitting}>

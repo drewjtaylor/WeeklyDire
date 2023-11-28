@@ -167,17 +167,21 @@ const EditUser = () => {
                                 </div>
                             </Col>
                         </Row>
-                        <Row className='mb-3'>
+
+
+                        {/* <Row className='mb-3'>
                             <Col>
                                 <Button color='danger' onClick={togglepasswordUpdateModal}>
                                     Update password?
                                 </Button>
                             </Col>
-                        </Row>
+                        </Row> */}
+
+
                         <Row className='mb-3'>
                             <Col>
                                 <Button color='danger' onClick={togglepasswordResetModal}>
-                                    Reset password?
+                                    Reset password
                                 </Button>
                             </Col>
                         </Row>

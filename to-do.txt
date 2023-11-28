@@ -14,6 +14,10 @@ Make register/sign in forms look better.
 
 ***Involves back end***
 
+Handle failed password resets/login attempts better
+
+Make it so admin can reset a password even without knowing the previous password
+
 Create a way to change/reset password using passport (and possibly https://www.npmjs.com/package/passport-local-mongoose)
 
 username getting entered twice when using register? (username is automatically done by passport I think,

@@ -149,7 +149,7 @@ userRouter.route('/:userId/passwordupdate')
                 user.changePassword(req.body.oldpassword, req.body.newpassword)
                 .then(() => {
                     res.statusCode = 200;
-                    res.end(`The password for ${req.user.username} has been updated successfully.`)
+                    res.json(`The password for ${req.user.username} has been updated successfully.`)
                 })
                 .catch(err => next(err));
             } else {
@@ -185,7 +185,7 @@ userRouter.route('/:userId/passwordreset')
                 .then(() => {
                     user.save();
                     res.statusCode = 200;
-                    res.end(`The password for ${req.user.username} has been updated successfully.`)
+                    res.json(`The password for ${req.user.username} has been updated successfully.`)
                 })
                 .catch(err => next(err));
             } else {

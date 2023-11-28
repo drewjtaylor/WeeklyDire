@@ -1,6 +1,5 @@
 ***Mainly front end stuff***
 
-Redirect back to admin after submission on "edituser" page
 Redirect back to main page after submission on "EditSelf" page
 
 Made EditUser page refresh or send back to "admin", or give some kind of feedback after clicking submit

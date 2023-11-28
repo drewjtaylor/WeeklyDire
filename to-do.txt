@@ -12,7 +12,7 @@ Add error validation to LoginForm and Register Form
 Make register/sign in forms look better.
 
 ***Involves back end***
-
+Make it so admin can reset a password even without knowing the previous password
 Handle failed password resets/login attempts better
 Notify user of successful login
 Notify user of failed login

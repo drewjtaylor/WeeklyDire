@@ -10,7 +10,7 @@ import {
     ModalBody
 } from 'reactstrap';
 import { useParams } from 'react-router-dom';
-import { selectUser, updateUser, updatePassword, resetPassword } from '../sampledbOperations';
+import { selectUser, updateUser, updatePassword } from '../sampledbOperations';
 import { useEffect, useState, useContext } from 'react';
 import { useCookies } from 'react-cookie';
 import {Formik, Field, Form} from 'formik';
@@ -18,15 +18,13 @@ import { UserContext } from "../utils/UserContext";
 import Unauthorized from './Unauthorized';
 
 
-const EditUser = () => {
+const EditSelf = () => {
 
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const {userId} = useParams();
     const [cookies] = useCookies();
     const [passwordUpdateModal, setPasswordUpdateModal] = useState(false);
-    const [passwordResetModal, setPasswordResetModal] = useState(false);
-
     const [userFromContext] = useContext(UserContext);
 
     useEffect(() => {
@@ -36,7 +34,7 @@ const EditUser = () => {
                 setUser(fetchedUser);
                 setIsLoading(false);
             } catch (error) {
-                console.error('Error fetching your user: ', error)
+                console.error('Error fetching user: ', error)
             }
         }
         fetchData();
@@ -44,27 +42,11 @@ const EditUser = () => {
 
     const initialValues = {
         email: user.email,
-        username: user.username,
         firstName: user.firstName,
-        lastName: user.lastName,
-        admin: String(user.admin),
-        creator: String(user.creator)
+        lastName: user.lastName
     };
 
-    const handleEditUserSubmit = async (values) => {
-        // Radio buttons use strings. Convert to boolean true/false
-        if (values.admin === "true") {
-            values.admin = true;
-        } else {
-            values.admin = false;
-        };
-
-        if (values.creator === "true") {
-            values.creator = true;
-        } else {
-            values.creator = false
-        }
-
+    const handleEditSelfSubmit = async (values) => {
         await updateUser(userId, values, cookies.jwt);
     }
 
@@ -72,46 +54,39 @@ const EditUser = () => {
         setPasswordUpdateModal(!passwordUpdateModal)
     };
 
-    const togglepasswordResetModal = () => {
-        setPasswordResetModal(!passwordResetModal)
-    };
-
     const handleUpdatePasswordSubmit = async (values) => {
         await updatePassword(userId, values.oldpassword, values.newpassword, cookies.jwt);
     }
-    const handleResetPasswordSubmit = async (values) => {
-        await resetPassword(userId, values.password, cookies.jwt);
-    }
-
-    if (!userFromContext.admin) {
-        return <Unauthorized />
-    }
 
     if (userFromContext.admin) {
+        return <p className="text-center">You appear to have admin privelages. Please make changes on the admin page.</p>
+    }
+
+    if (true) { 
         return (
             isLoading ? <Loading /> : 
             <Container>
-                <h5>Edit information below for username: {user.username}</h5>
+                <h5>Edit your information below and hit submit.</h5>
                 <p>Fill out new values below:</p>
                 <Formik
                     initialValues={initialValues}
-                    onSubmit={handleEditUserSubmit}
+                    onSubmit={handleEditSelfSubmit}
                 >
                     <Form>
+                        <Row>
+                            <Col xs='3'>
+                                <Label htmlFor="username" className='me-2'>Username:</Label>
+                            </Col>
+                            <Col xs='9'>
+                                <p>{user.username}</p>
+                            </Col>
+                        </Row>
                         <Row>
                             <Col xs='3'>
                                 <Label htmlFor="email" className='me-2'>Email:</Label>
                             </Col>
                             <Col xs='9'>
                                 <Field name="email" />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs='3'>
-                                <Label htmlFor="username" className='me-2'>Username:</Label>
-                            </Col>
-                            <Col xs='9'>
-                                <Field name="username"  />
                             </Col>
                         </Row>
                         <Row>
@@ -132,52 +107,14 @@ const EditUser = () => {
                         </Row>
 
                         <Row>
-                            <Col xs='3'>
-                                <p>Admin?</p>
-                            </Col>
                             <Col>
-                                <div role="group">
-                                    <span>
-                                        <Label className='m-1'>
-                                            <Field type="radio" name="admin" value='true' />
-                                            Yes
-                                        </Label>
-                                        <Label className='m-1'>
-                                            <Field type="radio" name="admin" value='false' />
-                                            No
-                                        </Label>
-                                    </span>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs='3'>
-                                <p>Creator?</p>
-                            </Col>
-                            <Col>
-                                <div role="group">
-                                        <Label className='m-1'>
-                                            <Field type="radio" name="creator" value='true' />
-                                            Yes 
-                                        </Label>
-                                        <Label className='m-1'>
-                                            <Field type="radio" name="creator" value='false' />
-                                            No
-                                        </Label>
-                                </div>
+                                <p>You are currently {user.creator ? null : 'not '}a designated creator.</p>
                             </Col>
                         </Row>
                         <Row className='mb-3'>
                             <Col>
                                 <Button color='danger' onClick={togglepasswordUpdateModal}>
                                     Update password?
-                                </Button>
-                            </Col>
-                        </Row>
-                        <Row className='mb-3'>
-                            <Col>
-                                <Button color='danger' onClick={togglepasswordResetModal}>
-                                    Reset password?
                                 </Button>
                             </Col>
                         </Row>
@@ -221,34 +158,11 @@ const EditUser = () => {
                             </Formik>
                         </ModalBody>
                 </Modal>
-                <Modal isOpen={passwordResetModal} toggle={togglepasswordResetModal}>
-                    <ModalHeader toggle={togglepasswordResetModal}>
-                        Enter the old password and new password below, then hit submit.
-                    </ModalHeader>
-                        <ModalBody>
-                            <Formik
-                                initialValues={{
-                                    password: ''
-                                }}
-                                onSubmit={handleResetPasswordSubmit}
-                            >
-                                <Form>
-                                    <Row>
-                                        <Col xs='3'>
-                                            <Label htmlFor="password" className='me-2'>New Password:</Label>
-                                        </Col>
-                                        <Col>
-                                            <Field type="password" name="password" />
-                                        </Col>
-                                    </Row>
-                                    <Button type="submit" color="danger">Submit</Button>
-                                </Form>
-                            </Formik>
-                        </ModalBody>
-                </Modal>
             </Container>
         )
     }
+
+    return <Unauthorized />
 }
 
-export default EditUser
+export default EditSelf

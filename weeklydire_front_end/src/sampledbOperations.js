@@ -125,7 +125,7 @@ export const selectUser = async (userId, jwt) => {
         return response.json(); // parses JSON response into native JavaScript objects
 }
 
-//  Updates a user's password
+//  Updates a user's password using the oldpassword and new password
 export const updatePassword = async (userId, oldpassword, newpassword, jwt) => {
     const passwordData = {
         oldpassword,
@@ -146,6 +146,27 @@ export const updatePassword = async (userId, oldpassword, newpassword, jwt) => {
       });
       if (!response.ok) {
         return Promise.reject('Unable to update password: ' + response.status)
+      };
+      return response.json(); // parses JSON response into native JavaScript objects
+}
+
+// Updates a user's password when the old password isn't known.
+export const resetPassword = async (userId, newpassword, jwt) => {
+    const response = await fetch(dbUrl + `/users/${userId}/passwordreset`, {
+        method: "PUT",
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${jwt}`
+        },
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify({password: newpassword})
+      });
+      if (!response.ok) {
+        return Promise.reject('Unable to reset password: ' + response.status)
       };
       return response.json(); // parses JSON response into native JavaScript objects
 }

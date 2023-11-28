@@ -86,9 +86,9 @@ const NavbarHeader = () => {
 
   return (
       <Navbar style={headerStyle} className='mb-3 navbar-dark'>
-        <NavLink href='/'>
-            <NavbarBrand><img className='logo' src={gradientLogo} alt='weekly dire' /></NavbarBrand>
-        </NavLink>
+            <NavbarBrand href='/'>
+                <img className='logo' src={gradientLogo} alt='weekly dire' />
+            </NavbarBrand>
         <NavbarText color='white'>{currentUser.firstName ? `Welcome ${currentUser.firstName}` : null}</NavbarText>
 
             {/* Used regular bootstrap classes to hide/display each type of navbar depending on screen size */}

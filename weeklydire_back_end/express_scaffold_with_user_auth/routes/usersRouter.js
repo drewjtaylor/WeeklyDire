@@ -25,6 +25,7 @@ userRouter.route('/current')
 })
 
 userRouter.route('/')
+// Gets all users. Must be admin
 .get(
     authenticate.verifyUser, 
     authenticate.verifyAdmin, 
@@ -40,6 +41,7 @@ userRouter.route('/')
     })
     .catch(err => next(err))
 })
+// Register a new user. Requires at least an email, uesrname, and password
 .post((req, res, next) => {
     User.register(
         new User({email: req.body.email, username: req.body.username}),
@@ -108,7 +110,10 @@ userRouter.route('/login')
 
 // Route searches for user by username
 userRouter.route('/finduser/:username')
-.get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+.get(
+    authenticate.verifyUser, 
+    authenticate.verifyAdmin, 
+    (req, res, next) => {
     User.findOne({username: req.params.username})
     .then(user => {
         res.statusCode = 200;
@@ -209,7 +214,6 @@ userRouter.route('/:userId')
     (req, res, next) => {
     User.findById(req.params.userId)
     .then(user => {
-        console.log('user found');
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(user);
@@ -249,6 +253,25 @@ userRouter.route('/:userId')
         res.json(response);
     })
 });
+
+// Route for looking up non-sensitive information using a userId
+userRouter.route('/:userId/publiclookup')
+.get(
+    (req, res, next) => {
+    User.findById(req.params.userId)
+    .then(user => {
+        const limitedUser = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            username: user.username
+        };
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(limitedUser);
+    })
+    .catch(err => next(err))
+})
+
 
 // Returns the current logged in user
 userRouter.route('/current')

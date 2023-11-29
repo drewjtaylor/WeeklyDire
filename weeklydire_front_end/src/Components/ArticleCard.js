@@ -1,8 +1,5 @@
 import {
     Card, 
-    // Container, 
-    // Row, 
-    // Col, 
     CardImg, 
     CardBody, 
     CardTitle, 
@@ -18,7 +15,7 @@ const ArticleCard = ({article}) => {
     <Card className='h-100 shadow zoom'>
             <CardImg src={thumbnail ? thumbnail : logo} className='mh-100'/>
         <CardBody>
-            <CardTitle>{title}</CardTitle>
+            <CardTitle><strong>{title}</strong></CardTitle>
         </CardBody>
     </Card>
   )

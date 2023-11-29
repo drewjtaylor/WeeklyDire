@@ -12,22 +12,21 @@ import Comment from '../Components/Comment';
 
 const FullArticle = () => {
     
-    // const testComments = [{
-    //         body: 'test body',
-    //         author: 'test author'
-    //     },
-    //     {
-    //         body: 'test body 2',
-    //         author: 'test author 2'
-    //     }
-    // ];
-
+    const testComments = [{
+            body: 'test body',
+            author: 'test author'
+        },
+        {
+            body: 'test body 2',
+            author: 'test author 2'
+        }
+    ];
 
     const [article, setArticle] = useState({});
     const [creator, setCreator] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const {articleId} = useParams();
-    // const [comments, setComments] = useState([])
+    const [comments, setComments] = useState(testComments)
 
 
     useEffect(() => {
@@ -103,16 +102,12 @@ const FullArticle = () => {
                 <Row>
                     <h3>Comments:</h3>
                 </Row>
-                {/* {comments.map((comment, index) => 
-                        <div key={index}>
-                            <Col>
-                                <p>{comment.body}</p>
-                            </Col>
-                            <Col>
-                                <p>{comment.author}</p>
-                            </Col>
-                    </div>
-                )} */}
+
+
+                {comments.map((comment, idx) => 
+                    <Comment key={idx} body={comment.body} author={comment.author}/>
+                )}
+
             </Container>
         )
     };

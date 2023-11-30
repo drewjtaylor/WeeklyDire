@@ -4,8 +4,7 @@ const {Schema} = mongoose;
 const commentSchema = new Schema({
     body: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,

@@ -30,20 +30,25 @@ commentRouter.route('/:articleId')
 // For posting a new comment to article with articleId
 //  Must be a user. User posting is the 'author' for new comment
 .post(
-    // authenticate.verifyUser, 
-    // authenticate.verifyCreator, 
+    authenticate.verifyUser, 
     (req, res, next) => {
-        const {body} = req.body;
-
         Comment.create({
-            body: body,
-            author: req.body.author, // Replace this line with "author: req.user._id, " after signing in users is figured out again
+            body: req.body.commentBody,
+            author: req.user._id,
             article: req.params.articleId
         })
         .then(comment => {
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.json(comment)
+            Article.findByIdAndUpdate(
+                req.params.articleId, 
+                { $push: {
+                    comments: comment._id
+                }}
+            )
+            .then(article => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(comment)
+            })
         })
         .catch(err => next(err))
 

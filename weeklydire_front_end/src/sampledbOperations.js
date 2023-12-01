@@ -1,4 +1,3 @@
-// import { comments, creators, subscribers, articles } from "./sampledb";
 import { dbUrl } from './utils/dbUrl';
 
 // Returns all comments (not sure if there's a use-case for this)
@@ -6,6 +5,16 @@ export const selectAllComments = async () => {
     const response = await fetch(dbUrl + '/comments');
     if (!response.ok) {
         return Promise.reject('Unable to fetch comments, status: ' + response.status);
+    };
+    const data = await response.json();
+    return data
+};
+
+//Returns all comments associated to given articleId
+export const selectCommentsByArticle = async (articleId) => {
+    const response = await fetch(dbUrl + `/comments/${articleId}`);
+    if (!response.ok) {
+        return Promise.reject('Unable to fetch comments, status: ' + response.status)
     };
     const data = await response.json();
     return data
@@ -46,17 +55,6 @@ export const deleteArticleById = async (articleId, jwt) => {
     const data = await response.json();
     return data
 }
-
-//Returns all comments associated to given articleId
-export const selectCommentByArticle = async (articleId) => {
-    const response = await fetch(dbUrl + '/comments');
-    if (!response.ok) {
-        return Promise.reject('Unable to fetch comments, status: ' + response.status)
-    };
-    const data = await response.json();
-    const comments = data.filter((comment) => parseInt(articleId)===comment.articleId)
-    return comments
-};
 
 //Returns all articles
 export const selectAllDbArticles = async () => {

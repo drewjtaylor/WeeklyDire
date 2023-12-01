@@ -14,7 +14,6 @@ const Logout = () => {
     
     const handleLogout = () => {
         removeCookie('jwt');
-        setCookie('jwt', null);
         setUserFromContext({});
     }
 

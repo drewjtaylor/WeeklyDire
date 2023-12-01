@@ -1,20 +1,23 @@
 import Loading from '../Components/Loading';
+import AddComment from '../Components/AddComment';
+import Comment from '../Components/Comment';
 import {
     Container, 
     Row, 
     Col
 } from 'reactstrap';
+import { selectArticleById, selectUserPublic, selectCommentsByArticle } from '../sampledbOperations';
 import { useParams, Link } from 'react-router-dom';
-import { selectArticleById, selectUserPublic } from '../sampledbOperations';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../utils/UserContext';
 import logo from '../Assets/WeeklyDireLogoGradient.png';
-import Comment from '../Components/Comment';
 
 const FullArticle = () => {
+    const [userFromContext] = useContext(UserContext);
     
     const testComments = [{
-            body: 'test body',
-            author: 'test author'
+            body: 'fake comment body',
+            author: 'fake comment author'
         },
         {
             body: 'test body 2',
@@ -28,7 +31,7 @@ const FullArticle = () => {
     const {articleId} = useParams();
     const [comments, setComments] = useState(testComments)
 
-
+    // Retrieve article and load author, if possible
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -42,9 +45,22 @@ const FullArticle = () => {
                     console.error('Error finding the author for this article: ', error)
                 };
             } catch (error) {
+                setIsLoading(false);
                 console.error('Error fetching your article: ', error)
             };
-
+        };
+        fetchData();
+    }, [articleId])
+    
+    // Retrieve comments on load
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const fetchedComments = await selectCommentsByArticle(articleId);
+                setComments(fetchedComments);
+            } catch (error) {
+                console.error('Error finding the comments for this article: ', error)
+            }
         };
         fetchData();
     }, [articleId])
@@ -99,13 +115,19 @@ const FullArticle = () => {
                             })}
                     </Col>
                 </Row>
+
+                <Row>
+                    <Col>
+                        {userFromContext.username ? <AddComment /> : <p>Please sign in to leave a comment</p>}
+                    </Col>
+                </Row>
                 <Row>
                     <h3>Comments:</h3>
                 </Row>
 
 
                 {comments.map((comment, idx) => 
-                    <Comment key={idx} body={comment.body} author={comment.author}/>
+                    <Comment key={idx} body={comment.body} authorId={comment.author}/>
                 )}
 
             </Container>

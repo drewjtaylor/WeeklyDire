@@ -1,8 +1,32 @@
 import {Row, Col} from 'reactstrap';
+import { selectUserPublic } from '../sampledbOperations';
+import { useEffect, useState } from 'react';
 
-const Comment = ({body, author}) => {
-    console.log(body);
-    console.log(author);
+
+
+const Comment = ({body, authorId}) => {
+    const [commentAuthor, setCommentAuthor] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const fetchedAuthor = await selectUserPublic(authorId);
+                setCommentAuthor(fetchedAuthor);
+                setIsLoading(false);
+            } catch (error) {
+                console.error(`Error retrieving comment author for ${authorId}`)
+                setIsLoading(false);
+            }
+        };
+        fetchData();
+    }, [authorId])
+
+    if (isLoading) {
+        return null
+    };
+
   return (
     <>
         <Row>
@@ -11,7 +35,7 @@ const Comment = ({body, author}) => {
             </Col>
         </Row>
         <Row>
-            <Col><em>--{author}</em></Col>
+            <Col><em>--{`${commentAuthor.username}`}</em></Col>
         </Row>
         <hr />
     </>

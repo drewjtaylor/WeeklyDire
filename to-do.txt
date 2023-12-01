@@ -17,6 +17,11 @@ Make register/sign in forms look better.
 
 Add reference to comments under Article. Possibly rework calls to retrieve comments
 in sampleDbOperations
+Research mongoose/mongoDB "populate", so article/comment relationships 
+is tracked in a more sensible way in the back, so we don't have to do things like
+get the article-> then get the comments -> then get the comment author.
+It would be better to just get the article. Get the comments. Display info from there.
+
 
 Make it so admin can reset a password even without knowing the previous password
 Handle failed password resets/login attempts better
@@ -37,9 +42,6 @@ Fix commentsRouter comment.create using the body username, and instead make it u
 
 Rethink routes for manipulating comments. The most sensible is probably:
 "[articleId]/comments", then do CRUD operations from there. Move app.use(commentsRouter) from 'app.js' to articlesRouter.js'?
-
-Comments having error if commentBody is the same on different comments. This should
-be able to be a duplicate field.
 
 Make a basic "Error/this doesn't exist" page for server errors
 

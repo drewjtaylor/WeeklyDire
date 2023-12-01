@@ -6,7 +6,6 @@ import { useContext } from "react";
 
 const Logout = () => {
     // const [cookies, setCookie, removeCookie] = useCookies([]);
-    const setCookie = useCookies([])[1];
     const removeCookie = useCookies([])[2]
 
     // const [userFromContext, setUserFromContext] = useContext(UserContext);

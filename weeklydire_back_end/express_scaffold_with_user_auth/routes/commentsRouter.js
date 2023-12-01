@@ -34,7 +34,7 @@ commentRouter.route('/:articleId')
     (req, res, next) => {
         Comment.create({
             body: req.body.commentBody,
-            author: req.user._id,
+            authorId: req.user._id,
             article: req.params.articleId
         })
         .then(comment => {

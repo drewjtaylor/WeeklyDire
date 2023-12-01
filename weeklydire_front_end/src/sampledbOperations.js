@@ -10,7 +10,7 @@ export const selectAllComments = async () => {
     return data
 };
 
-//Returns all comments associated to given articleId
+// Returns all comments associated to given articleId
 export const selectCommentsByArticle = async (articleId) => {
     const response = await fetch(dbUrl + `/comments/${articleId}`);
     if (!response.ok) {
@@ -19,6 +19,30 @@ export const selectCommentsByArticle = async (articleId) => {
     const data = await response.json();
     return data
 };
+
+// Add a new comment
+export const addComment = async (articleId, commentBody, jwt) => {
+    const response = await fetch(dbUrl + `/comments/${articleId}`,
+        {
+            method: "POST",
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify({commentBody}), // body data type must match "Content-Type" header
+        }
+    );
+    if (!response.ok) {
+        return Promise.reject('Unable to post comment, status: ' + response.status)
+    };
+    return response.json();
+    
+}
 
 //Returns a single article matching the given articleId
 export const selectArticleById = async (articleId) => {

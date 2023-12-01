@@ -15,6 +15,11 @@ Make register/sign in forms look better.
 
 ***Involves back end***
 
+Front component "FullArticle" pulls comments, then performs "reverse" on the array to 
+put them in "most recent order. Explore if it would be better to change on 
+the back end to make express get them by date and send them in order in 
+the first place. (Especially if this goes to lazy-loading later, this may make a difference)
+
 Add reference to comments under Article. Possibly rework calls to retrieve comments
 in sampleDbOperations
 Research mongoose/mongoDB "populate", so article/comment relationships 
@@ -66,6 +71,8 @@ Write, Read and update readme
 ***"Icing on the cake" ideas.***
 These are not part of the MVP (Minimum Viable Product). Once the basics are all DONE and polished, these features can be added.
 No working on these until the MVP is DONE.
+
+Use Lazy loading for articles/comments
 
 --Write page changes
 Add a "publish time" to the "Write" page to allow creators to choose when their articles go live

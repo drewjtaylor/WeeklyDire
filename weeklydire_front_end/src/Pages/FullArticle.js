@@ -14,22 +14,12 @@ import logo from '../Assets/WeeklyDireLogoGradient.png';
 
 const FullArticle = () => {
     const [userFromContext] = useContext(UserContext);
-    
-    const testComments = [{
-            body: 'fake comment body',
-            author: 'fake comment author'
-        },
-        {
-            body: 'test body 2',
-            author: 'test author 2'
-        }
-    ];
 
     const [article, setArticle] = useState({});
     const [creator, setCreator] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const {articleId} = useParams();
-    const [comments, setComments] = useState(testComments)
+    const [comments, setComments] = useState([])
 
     // Retrieve article and load author, if possible
     useEffect(() => {
@@ -57,7 +47,7 @@ const FullArticle = () => {
         const fetchData = async () => {
             try {
                 const fetchedComments = await selectCommentsByArticle(articleId);
-                setComments(fetchedComments);
+                setComments(fetchedComments.reverse());
             } catch (error) {
                 console.error('Error finding the comments for this article: ', error)
             }
@@ -118,18 +108,16 @@ const FullArticle = () => {
 
                 <Row>
                     <Col>
-                        {userFromContext.username ? <AddComment /> : <p>Please sign in to leave a comment</p>}
+                        {userFromContext.username ? <AddComment articleId={articleId} comments={comments} setComments={setComments} /> : <p>Please sign in to leave a comment</p>}
                     </Col>
                 </Row>
                 <Row>
                     <h3>Comments:</h3>
                 </Row>
 
-
                 {comments.map((comment, idx) => 
-                    <Comment key={idx} body={comment.body} authorId={comment.author}/>
+                    <Comment key={idx} body={comment.body} authorId={comment.authorId}/>
                 )}
-
             </Container>
         )
     };

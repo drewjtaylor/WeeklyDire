@@ -102,7 +102,7 @@ const FullArticle = () => {
               <p className="text-center">
                 <em>Date: {formattedDate}</em>
               </p>
-              <p>{body}</p>
+              <p style={{whiteSpace: "pre-line"}}>{body}</p>
             </Col>
           </Row>
         </Row>

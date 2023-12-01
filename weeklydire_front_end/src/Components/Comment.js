@@ -2,7 +2,8 @@ import { Row, Col } from "reactstrap";
 import { selectUserPublic } from "../backendDbOperations";
 import { useEffect, useState } from "react";
 
-const Comment = ({ body, authorId, createdAt }) => {
+const Comment = ({ comment }) => {
+  const {body, authorId, createdAt} = comment;
   const [commentAuthor, setCommentAuthor] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 

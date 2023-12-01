@@ -145,7 +145,7 @@ const FullArticle = () => {
         </Row>
 
         {comments.map((comment, idx) => (
-          <Comment key={idx} body={comment.body} authorId={comment.authorId} />
+          <Comment key={idx} body={comment.body} authorId={comment.authorId} createdAt={comment.createdAt}/>
         ))}
       </Container>
     );

@@ -2,9 +2,18 @@ import { Row, Col } from "reactstrap";
 import { selectUserPublic } from "../backendDbOperations";
 import { useEffect, useState } from "react";
 
-const Comment = ({ body, authorId }) => {
+const Comment = ({ body, authorId, createdAt }) => {
   const [commentAuthor, setCommentAuthor] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+    const readableDate = new Date(createdAt).toLocaleDateString('en-us', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+    })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +42,7 @@ const Comment = ({ body, authorId }) => {
       </Row>
       <Row>
         <Col>
-          <em>--Written by username {`${commentAuthor.username}`}</em>
+          <p className="m-0">--Written by: <em>{commentAuthor.username}</em> on {readableDate}</p>
         </Col>
       </Row>
       <hr />

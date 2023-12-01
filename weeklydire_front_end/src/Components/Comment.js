@@ -35,7 +35,7 @@ const Comment = ({body, authorId}) => {
             </Col>
         </Row>
         <Row>
-            <Col><em>--{`${commentAuthor.username}`}</em></Col>
+            <Col><em>--Written by username {`${commentAuthor.username}`}</em></Col>
         </Row>
         <hr />
     </>

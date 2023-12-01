@@ -21,7 +21,7 @@ the back end to make express get them by date and send them in order in
 the first place. (Especially if this goes to lazy-loading later, this may make a difference)
 
 Add reference to comments under Article. Possibly rework calls to retrieve comments
-in sampleDbOperations
+in backendDbOperations
 Research mongoose/mongoDB "populate", so article/comment relationships 
 is tracked in a more sensible way in the back, so we don't have to do things like
 get the article-> then get the comments -> then get the comment author.

@@ -20,21 +20,18 @@ put them in "most recent order. Explore if it would be better to change on
 the back end to make express get them by date and send them in order in 
 the first place. (Especially if this goes to lazy-loading later, this may make a difference)
 
-Add reference to comments under Article. Possibly rework calls to retrieve comments
-in backendDbOperations
 Research mongoose/mongoDB "populate", so article/comment relationships 
 is tracked in a more sensible way in the back, so we don't have to do things like
 get the article-> then get the comments -> then get the comment author.
 It would be better to just get the article. Get the comments. Display info from there.
 
 
-Make it so admin can reset a password even without knowing the previous password
 Handle failed password resets/login attempts better
 Notify user of successful login
 Notify user of failed login
 Notify user of successful password change
 notify user of failed password change
-    track failed password attempts
+    track failed password attempts, "lock" account after too many failed attempts
 
 username getting entered twice when using register? (username is automatically done by passport I think,
 or passport-local-mongoose. Remove from front end submission and manual entry on route(s))
@@ -42,8 +39,6 @@ or passport-local-mongoose. Remove from front end submission and manual entry on
 Clean up "post" implementation in front end. Could be more concise.
 Anywhere that has the "postData" function can just be combined with
 whatever function is under it (handleSubmit/login, etc)
-
-Fix commentsRouter comment.create using the body username, and instead make it use the logged in user.
 
 Rethink routes for manipulating comments. The most sensible is probably:
 "[articleId]/comments", then do CRUD operations from there. Move app.use(commentsRouter) from 'app.js' to articlesRouter.js'?

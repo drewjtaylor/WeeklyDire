@@ -2,7 +2,7 @@ import ArticleCard from "../Components/ArticleCard";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
 import { selectAllDbArticles } from "../backendDbOperations";
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -10,13 +10,18 @@ const Homepage = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [displayedArticles, setDisplayedArticles] = useState([]);
+  const [displayedArticlesPage, setDisplayedArticlesPage] = useState(4);
+
 
   // Fetch articles from database and update "isLoading"
   useEffect(() => {
     const fetchData = async () => {
       try {
         const fetchedArticles = await selectAllDbArticles();
-        setArticles(fetchedArticles);
+        const reversedArticles = fetchedArticles.reverse();
+        setArticles(reversedArticles);
+        setDisplayedArticles(reversedArticles.slice(0, displayedArticlesPage))
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -25,7 +30,13 @@ const Homepage = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [displayedArticlesPage]);
+
+  // Function to load more articles
+  const handleLoadMoreArticles = () => {
+    setDisplayedArticles(articles.slice(0, displayedArticlesPage+4));
+    setDisplayedArticlesPage(displayedArticlesPage+4);
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -44,7 +55,7 @@ const Homepage = () => {
         </Col>
       </Row>
       <Row>
-        {articles.map((article) => {
+        {displayedArticles.map((article) => {
           return (
             <Col md="6" className="mb-5" key={article._id}>
               <Link to={`/read/${article._id}`}>
@@ -54,8 +65,13 @@ const Homepage = () => {
           );
         })}
       </Row>
+      {displayedArticles.length >= articles.length ? null : 
+            <Button color="primary" onClick={handleLoadMoreArticles}>Load more</Button>
+        }
     </Container>
   );
 };
+
+
 
 export default Homepage;

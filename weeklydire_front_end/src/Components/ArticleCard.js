@@ -2,8 +2,7 @@ import {
     Card, 
     CardImg, 
     CardBody, 
-    CardTitle, 
-    // CardText
+    CardTitle
 } 
 from 'reactstrap';
 import logo from '../Assets/WeeklyDireLogoGradient.png';
@@ -13,7 +12,7 @@ const ArticleCard = ({article}) => {
 
     return (
     <Card className='h-100 shadow zoom'>
-            <CardImg src={thumbnail ? thumbnail : logo} className='mh-100' loading='lazy'/>
+        <CardImg src={thumbnail ? thumbnail : logo} className='mh-100' loading='lazy'/>
         <CardBody>
             <CardTitle><strong>{title}</strong></CardTitle>
         </CardBody>

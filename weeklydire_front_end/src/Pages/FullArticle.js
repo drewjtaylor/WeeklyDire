@@ -1,7 +1,7 @@
 import Loading from "../Components/Loading";
 import AddComment from "../Components/AddComment";
 import Comment from "../Components/Comment";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 import {
   selectArticleById,
   selectUserPublic,
@@ -20,6 +20,8 @@ const FullArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { articleId } = useParams();
   const [comments, setComments] = useState([]);
+  const [displayedComments, setDisplayedComments] = useState([])
+  const [displayedCommentsPage, setDisplayedCommentsPage] = useState(4)
 
   // Retrieve article and load author, if possible
   useEffect(() => {
@@ -47,13 +49,21 @@ const FullArticle = () => {
     const fetchData = async () => {
       try {
         const fetchedComments = await selectCommentsByArticle(articleId);
-        setComments(fetchedComments.reverse());
+        const commentsInReverse = fetchedComments.reverse()
+        setComments(commentsInReverse);
+        setDisplayedComments(commentsInReverse.slice(0, 4));
       } catch (error) {
         console.error("Error finding the comments for this article: ", error);
       }
     };
     fetchData();
   }, [articleId]);
+
+  // Load more comments
+  const handleLoadMoreComments = () => {
+    setDisplayedComments(comments.slice(0, displayedCommentsPage+4));
+    setDisplayedCommentsPage(displayedCommentsPage+4);
+  }
 
   const formattedDate = new Date(article.createdAt).toLocaleDateString(
     "en-US",
@@ -144,9 +154,12 @@ const FullArticle = () => {
           <h3>Comments:</h3>
         </Row>
 
-        {comments.map((comment, idx) => (
+        {displayedComments.map((comment, idx) => (
           <Comment key={idx} comment={comment} />
         ))}
+        {displayedComments.length === comments.length ? null : 
+            <Button color="primary" onClick={handleLoadMoreComments}>Load more</Button>
+        }
       </Container>
     );
   }

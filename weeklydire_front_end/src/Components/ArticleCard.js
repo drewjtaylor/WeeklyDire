@@ -13,7 +13,7 @@ const ArticleCard = ({article}) => {
 
     return (
     <Card className='h-100 shadow zoom'>
-            <CardImg src={thumbnail ? thumbnail : logo} className='mh-100'/>
+            <CardImg src={thumbnail ? thumbnail : logo} className='mh-100' loading='lazy'/>
         <CardBody>
             <CardTitle><strong>{title}</strong></CardTitle>
         </CardBody>

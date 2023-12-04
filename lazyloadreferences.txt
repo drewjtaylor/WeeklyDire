@@ -1,0 +1,9 @@
+Guide on lazy loading images
+https://www.freecodecamp.org/news/how-to-lazy-load-images-in-react/
+
+Example with images: https://unsplash.com/
+
+
+
+Guide on lazy loading a list (infinite list)
+https://plainenglish.io/blog/react-infinite-scrolling-and-lazy-loading-171909f92b54

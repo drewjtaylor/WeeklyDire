@@ -15,9 +15,6 @@ Make register/sign in forms look better.
 
 ***Involves back end***
 
-"Lazy Loading" does not currently involve the back end. The front end requests the full article list/comment list, then renders in parts.
-Research lazy loading the back end data being sent. (For example, add a useState for "range", and request most recent 50, then next 50, and so on)
-
 Front component "FullArticle" pulls comments, then performs "reverse" on the array to 
 put them in "most recent order. Explore if it would be better to change on 
 the back end to make express get them by date and send them in order in 
@@ -70,7 +67,8 @@ Write, Read and update readme
 These are not part of the MVP (Minimum Viable Product). Once the basics are all DONE and polished, these features can be added.
 No working on these until the MVP is DONE.
 
-Use Lazy loading for articles/comments
+"Lazy Loading" does not currently involve the back end. For example, on the fullArticle page, 
+the front end requests the full article list/comment list, then renders in parts.
 
 --Write page changes
 Add a "publish time" to the "Write" page to allow creators to choose when their articles go live

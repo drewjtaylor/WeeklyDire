@@ -13,6 +13,7 @@ import Admin from './Pages/Admin';
 import EditUser from './Pages/EditUser';
 import EditSelf from './Pages/EditSelf';
 import TaggedArticlesResults from './Pages/TaggedArticlesResults';
+import FailedLogin from './Pages/FailedLogin';
 import { UserContext } from './utils/UserContext';
 import { useState } from 'react';
 import useCheckUser from './utils/useCheckUser';
@@ -37,6 +38,8 @@ function App() {
                     <Route path='/admin' element={<Admin />} />
                     <Route path='/users/:userId/update' element={<EditSelf />} />
                     <Route path='/admin/users/:userId' element={<EditUser />} />
+                    <Route path='/failedlogin' element={<FailedLogin />} />
+
                 </Routes>
             </div>
             <Footer />

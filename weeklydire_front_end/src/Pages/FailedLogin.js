@@ -1,19 +1,23 @@
+import { useState } from 'react';
 import {Formik, Field, Form} from 'formik';
-import {Label, Button, Col, Row} from 'reactstrap';
+import {Container, Label, Button, Col, Row, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import {dbUrl} from "../utils/dbUrl";
 import { useCookies } from "react-cookie";
-import {useNavigate} from 'react-router-dom';
 
-const LoginForm = ({closeModal}) => {
+const FailedLogin = () => {
+
+    const [failureModal, setFailureModal] = useState(false);
+
 
     const setCookie = useCookies([])[1];
-
     const initialValues = {
         username: '',
-        password: '',
-    };
+        password: ''
+    }
 
-    const navigate = useNavigate();
+    const toggleFailureModal = () => {
+        setFailureModal(!failureModal)
+    }
 
     const postData = async (url, data) => {
         // Default options are marked with *
@@ -47,17 +51,27 @@ const LoginForm = ({closeModal}) => {
         
         try {
             await postData(dbUrl + '/users/login', values);
-            closeModal();
         } catch (error) {
             console.log(error);
-            navigate('/failedlogin')
-            closeModal();
+            setFailureModal(true);
         }
     }
 
+
   return (
-<div>
-    <Formik
+    <Container>
+        <Row>
+            <Col className="text-center">
+                <h2>There was an error logging you in</h2>
+                <p>Please check your username and password and try again</p>
+            </Col>
+        </Row>
+        <Row>
+            <Col>
+
+            </Col>
+        </Row>
+        <Formik
       initialValues={initialValues}
       onSubmit={handleLoginSubmit}
     >
@@ -86,8 +100,14 @@ const LoginForm = ({closeModal}) => {
         </Form>
       )}
     </Formik>
-  </div>
+
+    <Modal isOpen={failureModal} toggle={toggleFailureModal}>
+        <ModalHeader toggle={toggleFailureModal}>Login failed again</ModalHeader>
+        <ModalBody>Either your username and password were incorrect, or they don't exist. If you continue to have trouble, please reset your password or contact an administrator.</ModalBody>
+    </Modal>
+
+    </Container>
   )
 }
 
-export default LoginForm
+export default FailedLogin

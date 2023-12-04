@@ -157,7 +157,7 @@ const FullArticle = () => {
         {displayedComments.map((comment, idx) => (
           <Comment key={idx} comment={comment} />
         ))}
-        {displayedComments.length === comments.length ? null : 
+        {displayedComments.length >= comments.length ? null : 
             <Button color="primary" onClick={handleLoadMoreComments}>Load more</Button>
         }
       </Container>

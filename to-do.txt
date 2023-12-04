@@ -15,10 +15,6 @@ Make register/sign in forms look better.
 
 ***Involves back end***
 
-Front component "FullArticle" pulls comments, then performs "reverse" on the array to 
-put them in "most recent order. Explore if it would be better to change on 
-the back end to make express get them by date and send them in order in 
-the first place. (Especially if this goes to lazy-loading later, this may make a difference)
 
 Research mongoose/mongoDB "populate", so article/comment relationships 
 is tracked in a more sensible way in the back, so we don't have to do things like
@@ -69,6 +65,12 @@ No working on these until the MVP is DONE.
 
 "Lazy Loading" does not currently involve the back end. For example, on the fullArticle page, 
 the front end requests the full article list/comment list, then renders in parts.
+
+Example: Front component "FullArticle" pulls comments, then performs "reverse" on the array to 
+put them in "most recent order. Explore if it would be better to change on 
+the back end to make express get them by date and send them in order in 
+the first place. (Especially if this goes to lazy-loading later, this may make a difference)
+Also, "Homepage.js" on front end does this for "articles"
 
 --Write page changes
 Add a "publish time" to the "Write" page to allow creators to choose when their articles go live

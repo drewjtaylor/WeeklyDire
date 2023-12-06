@@ -15,6 +15,9 @@ Make register/sign in forms look better.
 
 ***Involves back end***
 
+Creators should required to have the firstName and lastName field's filled in.
+This might also be able to be blocked on the "write" page, redirecting to the
+EditUser page. This is because articles display the firstname and lastname of the author.
 
 Research mongoose/mongoDB "populate", so article/comment relationships 
 is tracked in a more sensible way in the back, so we don't have to do things like
@@ -60,6 +63,13 @@ Write, Read and update readme
 
 
 ***"Icing on the cake" ideas.***
+
+Add "Are you sure" modal to deleting anything from the admin page
+
+Add the ability for creators to edit their content
+
+Add parameters to the article model: display (default true), featured (and show featured first on front)
+
 These are not part of the MVP (Minimum Viable Product). Once the basics are all DONE and polished, these features can be added.
 No working on these until the MVP is DONE.
 
@@ -77,5 +87,10 @@ Add a "publish time" to the "Write" page to allow creators to choose when their 
 Add an "Edit" page to creators can change existing articles (that THEY wrote) (keep previous versions?) Use "PUT" route.
 Add a spot for "highlight quote" for article, and render it in a large bold section aside on its display page
 Instead of a thumbnail, allow uploading files (which would then need storage, adding complexity)
+
+--Admin page changes
+Instead of showing ALL users or ALL articles, develop a "search by" feature.
+In theory, a fully-functioning news site might have thousands of users
+and articles. Scrolling through to find a specific one would be tedious.
 
 Email verification for user registration

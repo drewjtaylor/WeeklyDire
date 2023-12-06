@@ -1,102 +1,141 @@
-"WeeklyDire" is a fictional news site themed around finding the silver lining in tragedy.
+# WeeklyDire
 
-The ultimate purpose is to show what I am capable of as a developer, but hopefully a secondary effect will be your inspiration at some of these stories.
+"WeeklyDire" is a fictional news site themed around finding the silver lining in tragedy and generally reporting good news.
 
-This app is comprised of a front end built with React, a back end using node/express, and a database using MongoDB.
+The ultimate purpose is to show what I am capable of as a developer, but hopefully a secondary effect will be your inspiration or encouragement at some of these stories.
+
+This app is comprised of the following:
+1. The [front end](#front-end-react) is built with React
+2. The [back end](#back-end-nodeexpress) server is built with node/express
+3. [Mongoose is used](#database-mongodbmongoose) to deal with a the database set up with MongoDB in their cloud, Atlas.
+
+Notable features:
+1. [User authentication](#authentication)
+2. An Admin page
+3. A "Write" page for users designated as creators to add articles.
+4. A "Comments" section on each article page where any user with an account can add comments
+5. A "Search by Tag" feature where a user can search by keyword to bring up a list of articles with that tag
+
 
 ## Front end (React)
 
-Routing: react-router-dom
-Styling and responsive layout: Bootstrap/Rectstrap
-Forms: Formik
+### Libraries and tools
 
-Deployed on: Netlify. Any pushes to the main branch on github will trigger a redploy of the front end.
+1. Routing: react-router-dom
+2. Styling and responsive layout: Bootstrap/Rectstrap
+3. Forms: Formik
+4. Deployment: Netlify. Any pushes to the main branch on github will trigger a redploy of the front end.
 
 ### Home page
-The home page displays all articles from an asynchronous request to the server.
+The home page displays all articles from an asynchronous request to the server, loading 4 articles at a time.
 
-Clicking one of the cards displaying articles leads to a full page
+Clicking one of the cards displaying articles leads to a full page.
 
 Each article has an array of "tags" indicating the subject matter of the article. By clicking one of the tags and using "useParam", the user is taken to a list of all articles that have that specific tag.
 
-Clicking to "Log In" or "Register" at the top right opens an appropriate modal with a form.
-
 ### Variable Header
 
-The Header component changes depending on whether or not a user is logged in, and whether or not they are designated as a "creator" or "admin."
+The Header component changes depending on whether or not a user is logged in and whether or not they have "creator" or "admin" privelages.
 
-When no user is logged in, there will be buttons for "Register" or "Login"
-When any user is logged in, they will see a welcome message and a "Logout" button
-If the user is a creator, they will see a "Write" button that takes them to a form to write an article.
-If the user is an admin, they will see an "Admin" button that takes them to the admin page where various tasks can be performed.
+* When no user is logged in, there will be buttons for "Register" and "Login."
+* When any user is logged in, they will see a welcome message and a "Logout" button.
+* If the user is a creator, they will also see a "Write" button that takes them to a form to write an article.
+* If the user is an admin, they will also see an "Admin" button that takes them to the admin page.
 
 ### "Write" form (Formik, form validation)
 
-When a user is logged in who is designated as a "creator", a link to write an article appears at the top right. This leads to the "write" form. (If a user attempts to manually go to the '/write' address, the Express server authenticates the user first so it can't be circumvented.)
+When a user is logged in who is designated as a "creator", a link to write an article appears at the top right. This leads to the "write" form. (If a user attempts to manually go to the '/write' route, the Express server authenticates the user first so it can't be circumvented.)
+
+The form to enter new articles uses a combination of Formik for handling the form, and Reactstrap/Bootstrap to style it.
+
+The Title and Body are required and will show an error message if blank.
+
+The thumbnail field currently uses a link to any image url, or if left blank it will default to the logo file.
+
+Finally, the author can attribute keywords, also known as tags, to their article. This allows users to later search for articles by tag, showing all articles about "Thanksgiving," "Charity," or whatever.
 
 I considered two ways to implement "tags" for articles:
-Option 1: Create a regular expression to separate a single submission into separate tags
+1. Option 1: Create a regular expression to separate a single submission into separate tags.
 Pros: Theoretically simpler for the user to just separate tags with a semicolon or comma
-Cons: Relies on the user to separate tags correctly or more complicated regular expression. Then if the user wants specific punctuation for some reason it would be difficult/impossible.
+Cons: Relies on the author to separate tags correctly or the developer to contrive a more complicated regular expression. Then if the user wants specific punctuation for some reason it may turn out to be difficult.
 
-Option 2: Create a way to enforce the user entering one tag at a time
-Pros: It is clear before submitting exactly what the tags will be, since they get separated into boxes
-      The user can inclue any punctuation they want
-Cons: Programmatically more complicated to figure out
-      Could be considered less convenient for the user than entering tags separated by puncutation
+2. Option 2: Create a way to enforce the user entering one tag at a time.
+- Pros: 
+    - It is clear before submitting exactly what the tags will be since they get separated into boxes.
+    - The user can inclue any punctuation they want (i.e., "S.O.S." or "feel-good").
+- Cons: 
+    - Programmatically more complicated to figure out.
+    - Could be considered less convenient for the user than entering tags separated by specific puncutation.
 
+I ended up going with option 2, mostly out of personal preference. I liked being able to see the tags as they get entered and felt like that was more clear to the author on submission.
 
+### Admin Page
+
+If a user is designated as an admin, a button shows up for them linking to the "/admin" route. As long as the user is authenticated and authorized as an admin, the page will display options to perform some basic admin tasks. 
+
+Clicking a user brings up an "edit user" page, where the admin can change the email associated with the account or reset their password.
+
+Radio buttons control whether or not the user is a creator and/or admin.
+
+In addition to users, the admin page currently allows the admin to delete articles.
+
+### Comments
+
+If a user is signed in, they will see a botton at the end of full articles to add a comment.
+
+Comments automatically detect the author using the jwt stored as a cookie and validating it against the database. Then the comments are shown in reverse order (4 at a time), including information about the author and when it was posted.
 
 ## Back end (Node/Express)
 
-Deployed using Google Cloud Functions
+- Deployed using Google Cloud Functions
+- Provides and Authenticates by 24-hour jwt
+- Uses Mongoose to enforce defined data structure
 
 ### Routes
 
-For the purpose of clarity, invalid methods sent to valid routes have all been given an appropriate error message. (i.e., "PUT operation not supported on /users")
+All routes are set up to hit one of three main endpoints or one of their subroutes:
+1. /users
+2. /articles
+3. /comments
 
-In the following documentation, only valid routes are listed.
-
-#### /users
-
-GET /users
-(This route is not utilized anywhere on the front end yet.)
-First checks if the user exists, then checks if that user is an admin.
-
-If the user is an admin, returns a list of all users in the database.
-
-POST /users
-This route accepts a user object as a JSON payload. Because "passportLocalMongoose" is included in the User Schema, the password that is submitted will automatically he hashed and salted before being saved in the database.
-
-This route requires an email, username, and password.
-If user object submitted also has a firstName and/or lastName attribute, those will be saved as well. 
-
-
-
-#### /articles
-
-
-
-#### /comments
+Details on how these routes work is documented [here](weeklydire_back_end/express_scaffold_with_user_auth/routes/README.md).
 
 ### Authentication
 
-Authentication is the very definition of a necessary evil. It's purpose is necessary. It's implementation is evil.
+The express server uses a combination of passport-local, passport-jwt, and mongoose-passport-local to handle user registration and authentication.
 
-The express server uses a local strategy with Passport to provide a jwt to the user. The jwt is stored as a cookie with a 24 hour life, and the server is set up for a jwt to only be valid 24 hours anyway, even if someone were to save it from the cookie.
+When a user clicks the "register" button in the header, they can provide a username, email, and password. (The user may enter an optional first and last name as well.)
 
-When accessing an endpoint that needs authentication or needs to verify if the user is a creator or admin, the React application provides the jwt as a Bearer token.
+This creates a new document in the "Users" collection that looks something like this:
+```json
+        {"_id": "65650a17b0efaf38a14c8f4f",
+        "firstName": "George",
+        "lastName": "Washington",
+        "creator": false,
+        "admin": false,
+        "email": "test@mailinator.com",
+        "username": "silver",
+        "salt": "ce6wef...",
+        "hash": "32z5ab...",
+        "createdAt": "2023-11-17T17:45:53.101+00:00",
+        "updatedAt": "2023-11-17T17:45:53.101+00:00",
+        "__v": 0
+        }
+```
 
-Passport-local-mongoose is used mainly to simplify hashing and saving passwords. 
+If a user logs in successfully with a correct username and password, a 24-hour jwt is provided in the response and stored as a 24-hour cookie with the client.
 
+When accessing an endpoint that needs authentication or needs to verify if the user is a creator or admin, the React application provides the jwt in the request as `Authorization: Bearer [jwt token]`. The authenticate.verifyUser middleware checks the jwt token and adds the user to the request as `req.user` if it validates, or rejects the request.
 
+Once a user is validated, it becomes much easier to perform operations such as checking if the user is a creator or admin, retrieving their _id or name, etc.
 
-
-
-## Database (MongoDB)
+## Database (MongoDB/Mongoose)
 
 The site uses a MongoDB database deployed using the free version of Atlas, MongoDB's cloud service.
 
+I won't go into an exhaustive explanation of MongoDB here except to say I used MongoDB because I find it convenient to use the JSON-friendly format throughout my application.
+
+Mongoose is a library used to create and enforce Schemas in an easy way. It is also used with passport-local-mongoose for password creation and validation, abstracting away the process of salting and hashing passwords and dealing with password updates and resets.
 
 ## Developement steps
 
@@ -104,18 +143,17 @@ Once I decided on making a fake news site (and not a "fake news" site), I starte
 
 ### Conceptualize
 
-Before starting on actually coding anything, I made a draw.io diagram/draft of how the database would be laid out. I also made a basic wireframe of how I wanted my pages and forms to look.
+Before starting on actually coding anything, I made a draw.io diagram/draft of how the database would be laid out. I also made a basic wireframe of how I wanted my pages and forms to look on pencil and paper.
 
 ### Strategy for development
 
-Then my "big-picture" plan was to get the front-end pages 80-90% done, then get the back-end and database 80-90% done. Then the last 10-20% in each section and bugs. Lastly, I would deploy it using AWS to stay online. Once the minimum viable product is working, this last phase would also involve setting up some kind of CD/CI system. (at the time of writing, this has not been done yet, so I don't know what I'm going to do. Probably some kind of update everytime the main branch of the github repo is updated.)
+Then my "big-picture" plan was to get the front-end pages 80-90% done, then get the back-end and database 80-90% done. Then the last 10-20% in each section and bugs. Lastly, I would deploy it to cloud services so it can live "on its own two feet." Once the minimum viable product is working, this last phase would also involve setting up some kind of CD/CI system.
 
+During all steps, I keep a "to-do" file. Basically this served the purpose of a Kanban board for a group. I have found this greatly helps me stay on track with current tasks. Instead of getting distrcted with wanting to fix bugs or add features I add a note to "to-dos", and continue working on my main goal for that session. Then occasionally I go back through my to-do list and address the issues I would have forgotten without it.
 
-
-During all steps, I keep a "to-do" file. Basically this served the purpose of a Kanban board for a group. I have found this greatly helps me stay on track with current tasks. Instead of getting distrcted with wanting to fix bugs or add features, instead I add a note to "to-dos", and continue working on my main goal for that session/day. Then occasionally I go back through my to-do list and go back through the issues I would have forgotten without it.
-
-Big picture the minimum viable product would be a website that allows users to read articles stored in a database. Users with a "creator" status can access a page to write new articles.
+The minimum viable product I envision would be a website that allows users to read articles stored in a database, provides administrative operations to users designated as such, and allows creators to write new articles.
 
 ## Specific challenges/solutions (rename this)
 
-Changing from original models (combining creators/subscribers into users with a "creator" boolean attribute)
+Originally I anticipated "Users" being a separate group from "Creators". However, the more I thought about this, the more it sounded unnecessary for them to be seperate. Instead, I ended up using one MongoDB collection: `Users`, with a boolean property of `creator`.
+

@@ -108,18 +108,19 @@ When a user clicks the "register" button in the header, they can provide a usern
 
 This creates a new document in the "Users" collection that looks something like this:
 ```json
-        {"_id": "65650a17b0efaf38a14c8f4f",
-        "firstName": "George",
-        "lastName": "Washington",
-        "creator": false,
-        "admin": false,
-        "email": "test@mailinator.com",
-        "username": "silver",
-        "salt": "ce6wef...",
-        "hash": "32z5ab...",
-        "createdAt": "2023-11-17T17:45:53.101+00:00",
-        "updatedAt": "2023-11-17T17:45:53.101+00:00",
-        "__v": 0
+        {
+            "_id": "65650a17b0efaf38a14c8f4f",
+            "firstName": "George",
+            "lastName": "Washington",
+            "creator": false,
+            "admin": false,
+            "email": "test@mailinator.com",
+            "username": "silver",
+            "salt": "ce6wef...",
+            "hash": "32z5ab...",
+            "createdAt": "2023-11-17T17:45:53.101+00:00",
+            "updatedAt": "2023-11-17T17:45:53.101+00:00",
+            "__v": 0
         }
 ```
 

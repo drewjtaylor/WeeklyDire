@@ -1,11 +1,11 @@
 const express = require('express');
 const commentRouter = express.Router();
-const mongoose = require('mongoose');
-const passport = require('passport');
+// const mongoose = require('mongoose');
+// const passport = require('passport');
 const authenticate = require('../authenticate');
 const Comment = require ('../models/Comment');
 const Article = require ('../models/Article');
-const User = require ('../models/User');
+// const User = require ('../models/User');
 
 
 
@@ -51,17 +51,12 @@ commentRouter.route('/:articleId')
             })
         })
         .catch(err => next(err))
-
 })
-
-// For editing an existing comment
-// Must be a user. User must match author
 .put(
     (req, res, next) => {
-    res.statusCode = 403;
-    res.end('PUT operation not supported on /comments/[articleId]. If you want to edit a specific comment, Please use comments/[articleId]/[commentId]')
+        res.statusCode = 403;
+        res.end('PUT operation not supported on /comments/[articleId]. If you want to edit a specific comment, Please use comments/[articleId]/[commentId]')
 })
-// Must be a user. User must match author or be admin
 .delete((req, res, next) => {
     res.statusCode = 403;
     res.end('DELETE operation not supported on /comments/[articleId]. Please use comments/[articleId]/[commentId]')
@@ -76,6 +71,8 @@ commentRouter.route('/:articleId/:commentId')
     res.statusCode = 403;
     res.end('DELETE operation not supported on /comments/[articleId]. Please use comments/[articleId]/[commentId]')
 })
+// For editing an existing comment
+// Must be a user. User must match author
 // .put()
 // .delete()
 

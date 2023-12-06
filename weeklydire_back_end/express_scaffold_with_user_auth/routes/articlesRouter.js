@@ -37,7 +37,7 @@ articleRouter.route('/')
             })
             .catch(err => next(err))
         } else {
-            const err = new Error('This error came from "articlesRouter" the express server')
+            const err = new Error('The body of the request must at least contain a "body" and "title".')
             err.statusCode = 400;
             return next(err)
         }
@@ -58,7 +58,7 @@ articleRouter.route('/:articleId')
     .then(article => {
         if (!article) {
             res.statusCode = 200;
-            res.end('There were no articles in the database')
+            res.end('No article found with this _id')
         };
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');

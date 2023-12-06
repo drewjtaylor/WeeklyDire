@@ -6,24 +6,6 @@ const authenticate = require('../authenticate');
 const User = require('../models/User');
 const cookieParser = require('cookie-parser');
 
-// Returns the current logged in user object
-userRouter.route('/current')
-.get(authenticate.verifyUser, (req, res, next) => {
-    res.end(JSON.stringify(req.user))
-})
-.post((req, res, next) => {
-    res.statusCode = 403;
-    res.end('POST operation not supported on /users/current');
-})
-.put((req, res, next) => {
-    res.statusCode = 403;
-    res.end('PUT operation not supported on /users/current');
-})
-.delete((req, res, next) => {
-    res.statusCode = 403;
-    res.end('DELETE operation not supported on /users/current');
-})
-
 userRouter.route('/')
 // Gets all users. Must be admin
 .get(
@@ -81,6 +63,7 @@ userRouter.route('/')
     res.statusCode = 403;
     res.end('PUT operation not supported on /users')
 })
+// Delete a user. Must be an admin
 .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     res.statusCode = 403;
     res.end('DELETE operation not supported on /users');
@@ -108,7 +91,56 @@ userRouter.route('/login')
     res.end('DELETE operation not supported on /users/login')
 })
 
-// Route searches for user by username
+// Returns the current logged in user object
+userRouter.route('/current')
+.get(authenticate.verifyUser, (req, res, next) => {
+    res.end(JSON.stringify(req.user))
+})
+.post((req, res, next) => {
+    res.statusCode = 403;
+    res.end('POST operation not supported on /users/current');
+})
+.put((req, res, next) => {
+    res.statusCode = 403;
+    res.end('PUT operation not supported on /users/current');
+})
+.delete((req, res, next) => {
+    res.statusCode = 403;
+    res.end('DELETE operation not supported on /users/current');
+})
+
+// Route for looking up non-sensitive information using a userId
+userRouter.route('/:userId/publiclookup')
+.get(
+    (req, res, next) => {
+    User.findById(req.params.userId)
+    .then(user => {
+        const limitedUser = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            username: user.username
+        };
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(limitedUser);
+    })
+    .catch(err => next(err))
+})
+.post((req, res, next) => {
+    res.statusCode = 403;
+    res.end(`POST operation not supported on /users/${req.params.userId}/publiclookup.`)
+})
+.put((req, res, next) => {
+    res.statusCode = 403;
+    res.end(`PUT operation not supported on /users/${req.params.userId}/publiclookup.`)
+})
+.delete((req, res, next) => {
+    res.statusCode = 403;
+    res.end(`DELETE operation not supported on /users/${req.params.userId}/publiclookup.`)
+})
+
+
+// Route searches for user by username. Returns all details. Must be admin.
 userRouter.route('/finduser/:username')
 .get(
     authenticate.verifyUser, 
@@ -133,77 +165,6 @@ userRouter.route('/finduser/:username')
 .delete((req, res, next) => {
     res.statusCode = 403;
     res.end('DELETE operation not supported on /users/finduser/[username].');
-})
-
-// Route to update a user's password.
-userRouter.route('/:userId/passwordupdate')
-.get((req, res, next) => {
-    res.statusCode = 404;
-    res.end('GET not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
-})
-.post((req, res, next) => {
-    res.statusCode = 404;
-    res.end('POST not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
-})
-.put(
-    authenticate.verifyUser,
-    (req, res, next) => {
-        User.findById(req.params.userId)
-        .then(user => {
-            if (req.user._id.equals(req.params.userId) || req.user.admin) {
-                user.changePassword(req.body.oldpassword, req.body.newpassword)
-                .then(() => {
-                    res.statusCode = 200;
-                    res.json(`The password for ${req.user.username} has been updated successfully.`)
-                })
-                .catch(err => next(err));
-            } else {
-                res.statusCode = 403;
-                res.end('You cannot change a password unless you are the user or you are an admin.')
-            }
-        })
-        .catch(err => next(err))
-    }
-)
-.delete((req, res, next) => {
-    res.statusCode = 404;
-    res.end('DELETE not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
-})
-
-// Route to reset a user's password.
-userRouter.route('/:userId/passwordreset')
-.get((req, res, next) => {
-    res.statusCode = 404;
-    res.end('GET not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
-})
-.post((req, res, next) => {
-    res.statusCode = 404;
-    res.end('POST not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
-})
-.put(
-    authenticate.verifyUser,
-    (req, res, next) => {
-        User.findById(req.params.userId)
-        .then(user => {
-            if (req.user._id.equals(req.params.userId) || req.user.admin) {
-                user.setPassword(req.body.password)
-                .then(() => {
-                    user.save();
-                    res.statusCode = 200;
-                    res.json(`The password for ${req.user.username} has been updated successfully.`)
-                })
-                .catch(err => next(err));
-            } else {
-                res.statusCode = 403;
-                res.end('You cannot change a password unless you are the user or you are an admin.')
-            }
-        })
-        .catch(err => next(err))
-    }
-)
-.delete((req, res, next) => {
-    res.statusCode = 404;
-    res.end('DELETE not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
 })
 
 // Routes for dealing with single user
@@ -254,41 +215,75 @@ userRouter.route('/:userId')
     })
 });
 
-// Route for looking up non-sensitive information using a userId
-userRouter.route('/:userId/publiclookup')
-.get(
+// Route to update a user's password. Requires old password.
+userRouter.route('/:userId/passwordupdate')
+.get((req, res, next) => {
+    res.statusCode = 404;
+    res.end('GET not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
+})
+.post((req, res, next) => {
+    res.statusCode = 404;
+    res.end('POST not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
+})
+.put(
+    authenticate.verifyUser,
     (req, res, next) => {
-    User.findById(req.params.userId)
-    .then(user => {
-        const limitedUser = {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            username: user.username
-        };
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(limitedUser);
-    })
-    .catch(err => next(err))
+        User.findById(req.params.userId)
+        .then(user => {
+            if (req.user._id.equals(req.params.userId) || req.user.admin) {
+                user.changePassword(req.body.oldpassword, req.body.newpassword)
+                .then(() => {
+                    res.statusCode = 200;
+                    res.json(`The password for ${req.user.username} has been updated successfully.`)
+                })
+                .catch(err => next(err));
+            } else {
+                res.statusCode = 403;
+                res.end('You cannot change a password unless you are the user or you are an admin.')
+            }
+        })
+        .catch(err => next(err))
+    }
+)
+.delete((req, res, next) => {
+    res.statusCode = 404;
+    res.end('DELETE not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
 })
 
-
-// Returns the current logged in user
-userRouter.route('/current')
-.get(authenticate.verifyUser, (req, res, next) => {
-    res.end(JSON.stringify(req.user))
+// Route to reset a user's password. Does not require old password.
+userRouter.route('/:userId/passwordreset')
+.get((req, res, next) => {
+    res.statusCode = 404;
+    res.end('GET not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
 })
-.post((req, res) => {
-    res.statusCode = 403;
-    res.end('POST operation not supported on /users/current. Use "GET" to check current user.')
+.post((req, res, next) => {
+    res.statusCode = 404;
+    res.end('POST not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
 })
-.put((req, res) => {
-    res.statusCode = 403;
-    res.end('PUT operation not supported on /users/current. Use "GET" to check current user.')
-})
-.delete((req, res) => {
-    res.statusCode = 403;
-    res.end('DELETE operation not supported on /users/current. Use "GET" to check current user.')
+.put(
+    authenticate.verifyUser,
+    (req, res, next) => {
+        User.findById(req.params.userId)
+        .then(user => {
+            if (req.user._id.equals(req.params.userId) || req.user.admin) {
+                user.setPassword(req.body.password)
+                .then(() => {
+                    user.save();
+                    res.statusCode = 200;
+                    res.json(`The password for ${req.user.username} has been updated successfully.`)
+                })
+                .catch(err => next(err));
+            } else {
+                res.statusCode = 403;
+                res.end('You cannot change a password unless you are the user or you are an admin.')
+            }
+        })
+        .catch(err => next(err))
+    }
+)
+.delete((req, res, next) => {
+    res.statusCode = 404;
+    res.end('DELETE not supported for this endpoint. Use PUT instead, and make sure you are signed in to an account with access.')
 })
 
 module.exports = userRouter;

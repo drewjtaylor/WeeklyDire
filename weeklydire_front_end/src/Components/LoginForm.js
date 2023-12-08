@@ -31,6 +31,8 @@ const LoginForm = ({closeModal}) => {
           body: JSON.stringify(data), // body data type must match "Content-Type" header
         })
         const completedResponse = await response.json();
+        
+        // Store the returned jwt as a 24-hour cookie
         const jwt = completedResponse.token;
         setCookie(
             'jwt', 
@@ -38,7 +40,7 @@ const LoginForm = ({closeModal}) => {
             {
                 path: '/',
                 maxAge: 86400
-            }) // See https://www.tutorialspoint.com/how-to-set-cookies-in-reactjs
+            })
         return completedResponse;
       }
 

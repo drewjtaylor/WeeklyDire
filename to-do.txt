@@ -1,5 +1,7 @@
 ***Mainly front end stuff***
 
+Make "FailedLogin.js" look better, fix layout
+
 Redirect back to main page after submission on "EditSelf" page
 
 Made EditUser page refresh or send back to "admin", or give some kind of feedback after clicking submit
@@ -31,9 +33,6 @@ Notify user of failed login
 Notify user of successful password change
 notify user of failed password change
     track failed password attempts, "lock" account after too many failed attempts
-
-username getting entered twice when using register? (username is automatically done by passport I think,
-or passport-local-mongoose. Remove from front end submission and manual entry on route(s))
 
 Clean up "post" implementation in front end. Could be more concise.
 Anywhere that has the "postData" function can just be combined with

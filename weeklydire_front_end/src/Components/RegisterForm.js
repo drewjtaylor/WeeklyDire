@@ -1,6 +1,7 @@
-import {Formik, Field, Form} from 'formik';
+import {Formik, Field, Form, ErrorMessage} from 'formik';
 import {Label, Button, Col, Row} from 'reactstrap';
 import { dbUrl } from '../utils/dbUrl';
+import { validateRegisterForm } from '../utils/validateRegisterForm';
 
 const RegisterForm = ({closeModal}) => {
 
@@ -41,15 +42,19 @@ const RegisterForm = ({closeModal}) => {
     <Formik
       initialValues={initialValues}
       onSubmit={handleRegisterSubmit}
+      validate={validateRegisterForm}
     >
       {({ isSubmitting }) => (
         <Form>
-          <Row>
+          <Row className='d-flex align-items-center'>
             <Col xs='3'>
                 <Label htmlFor="email" className='me-2'>Email:</Label>
             </Col>
               <Col xs='9'>
                   <Field name="email" placeholder="" />
+                  <ErrorMessage name="email">
+                    {(msg) => <p className='text-danger'>{msg}</p>}
+                  </ErrorMessage>
               </Col>
           </Row>
           <Row>
@@ -58,6 +63,9 @@ const RegisterForm = ({closeModal}) => {
             </Col>
               <Col xs='9'>
                   <Field name="username" placeholder="Your usernmame will be visible to others." />
+                  <ErrorMessage name="username">
+                    {(msg) => <p className='text-danger'>{msg}</p>}
+                  </ErrorMessage>
               </Col>
           </Row>
           <Row>
@@ -83,11 +91,41 @@ const RegisterForm = ({closeModal}) => {
             </Col>
               <Col xs='9'>
                   <Field type="password" name="password" placeholder="" />
+                  <ErrorMessage name="password">
+                    {(msg) => <p className='text-danger'>{msg}</p>}
+                  </ErrorMessage>
               </Col>
           </Row>
-            <Button color='primary' type="submit" disabled={isSubmitting}>
-                Submit
-            </Button>
+          <Row>
+              <Col xs='3'>
+                <Label htmlFor="passwordAgain">Reenter password:</Label>
+            </Col>
+              <Col xs='9'>
+                  <Field type="password" name="passwordAgain" placeholder="" />
+                  <ErrorMessage name="passwordAgain">
+                    {(msg) => <p className='text-danger'>{msg}</p>}
+                  </ErrorMessage>
+              </Col>
+          </Row>
+            <Row>
+                <Col className='text-center'>
+                    <Button color='primary' type="submit" disabled={isSubmitting} >
+                        Submit
+                    </Button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <p className='m-0'>Password must:</p>
+                    <ul>
+                        <li>Be at least 6 characters</li>
+                        <li>Contain one uppercase letter</li>
+                        <li>Contain one lowercase letter</li>
+                        <li>Contain one number</li>
+                        <li>Contain one these symbols: <strong>@ $ ! % * ? &</strong></li>
+                    </ul>
+                </Col>
+            </Row>
         </Form>
       )}
     </Formik>

@@ -3,7 +3,7 @@ import {Formik, Field, Form,} from 'formik';
 import {Container, Label, Button, Col, Row, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import {dbUrl} from "../utils/dbUrl";
 import { useCookies } from "react-cookie";
-import { useNavigate, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const FailedLogin = () => {
 
@@ -68,11 +68,7 @@ const FailedLogin = () => {
                 <p>Please check your username and password and try again</p>
             </Col>
         </Row>
-        <Row>
-            <Col>
 
-            </Col>
-        </Row>
         <Formik
       initialValues={initialValues}
       onSubmit={handleLoginSubmit}

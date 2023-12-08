@@ -106,6 +106,8 @@ The express server uses a combination of passport-local, passport-jwt, and mongo
 
 When a user clicks the "register" button in the header, they can provide a username, email, and password. (The user may enter an optional first and last name as well.)
 
+The form validates for required fields, improperly formatted email addresses, and a complex password before submittal.
+
 This creates a new document in the "Users" collection that looks something like this:
 ```json
         {

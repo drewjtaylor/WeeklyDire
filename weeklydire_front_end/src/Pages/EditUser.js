@@ -21,6 +21,7 @@ import { useCookies } from "react-cookie";
 import { Formik, Field, Form } from "formik";
 import { UserContext } from "../utils/UserContext";
 import Unauthorized from "./Unauthorized";
+import NotFound from './NotFound';
 
 const EditUser = () => {
   const [user, setUser] = useState({});
@@ -41,19 +42,24 @@ const EditUser = () => {
         setUser(fetchedUser);
         setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         console.error("Error fetching your user: ", error);
       }
     };
     fetchData();
   }, [userId, cookies.jwt]);
 
-  const initialValues = {
+  // If there is no user, an error could occur when a typo was in the address bar at "/admin/users/[userid]"
+  // Set the initial value of the email to something arbitrary to trigger the "Not Found" page later
+  const initialValues = user ? {
     email: user.email,
     username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
     admin: String(user.admin),
     creator: String(user.creator),
+  } : {
+    email: "none",
   };
 
   const handleEditUserSubmit = async (values) => {
@@ -70,8 +76,10 @@ const EditUser = () => {
       values.creator = false;
     }
 
+    // Send new user info to update, including boolean admin/creator
     await updateUser(userId, values, cookies.jwt);
 
+    // Navigate back to admin page
     navigate("/admin");
   };
 
@@ -91,12 +99,18 @@ const EditUser = () => {
       cookies.jwt
     );
   };
+
   const handleResetPasswordSubmit = async (values) => {
     await resetPassword(userId, values.password, cookies.jwt);
   };
 
   if (!userFromContext.admin) {
     return <Unauthorized />;
+  }
+
+  // If there is no user found, show 404: not found
+  if (initialValues.email === 'none') {
+    return <NotFound />
   }
 
   if (userFromContext.admin) {

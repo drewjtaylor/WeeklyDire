@@ -39,8 +39,6 @@ whatever function is under it (handleSubmit/login, etc)
 Rethink routes for manipulating comments. The most sensible is probably:
 "[articleId]/comments", then do CRUD operations from there. Move app.use(commentsRouter) from 'app.js' to articlesRouter.js'?
 
-Make a basic "Error/this doesn't exist" page for server errors
-
 
 
 ***Dockerizing***

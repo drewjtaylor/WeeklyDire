@@ -55,6 +55,8 @@ Use a mounted folder for data so it persists: https://docs.docker.com/storage/vo
 
 ***"Icing on the cake" ideas.***
 
+Incorporate signing in with Google/facebook account
+
 Add "Are you sure" modal to deleting anything from the admin page
 
 Add the ability for creators to edit their content

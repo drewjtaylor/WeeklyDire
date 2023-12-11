@@ -1,0 +1,6 @@
+Merging Google Oauth with a mern app:
+https://dev.to/veewebcode/mern-stack-login-system-with-jwt-and-google-oauth-1-425m
+
+Google with express:
+https://www.loginradius.com/blog/engineering/google-authentication-with-nodejs-and-passportjs/
+

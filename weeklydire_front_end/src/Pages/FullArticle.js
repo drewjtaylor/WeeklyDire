@@ -1,6 +1,7 @@
 import Loading from "../Components/Loading";
 import AddComment from "../Components/AddComment";
 import Comment from "../Components/Comment";
+import NotFound from "./NotFound";
 import { Container, Row, Col, Button } from "reactstrap";
 import {
   selectArticleById,
@@ -38,6 +39,7 @@ const FullArticle = () => {
         }
       } catch (error) {
         setIsLoading(false);
+        setArticle({})
         console.error("Error fetching your article: ", error);
       }
     };
@@ -76,6 +78,11 @@ const FullArticle = () => {
 
   if (isLoading) {
     return <Loading />;
+  }
+
+  // If no article found at that address, display NotFound. Used article.length because that was the first variable causing an error.
+  if (article.length===undefined) {
+    return <NotFound />
   }
 
   if (article) {

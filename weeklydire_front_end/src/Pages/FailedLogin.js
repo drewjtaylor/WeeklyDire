@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import {Formik, Field, Form} from 'formik';
+import {Formik, Field, Form,} from 'formik';
 import {Container, Label, Button, Col, Row, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import {dbUrl} from "../utils/dbUrl";
 import { useCookies } from "react-cookie";
+import { useNavigate } from 'react-router-dom';
 
 const FailedLogin = () => {
 
     const [failureModal, setFailureModal] = useState(false);
 
+    const navigate=useNavigate();
 
     const setCookie = useCookies([])[1];
     const initialValues = {
@@ -46,14 +48,14 @@ const FailedLogin = () => {
         return completedResponse;
       }
 
-    const handleLoginSubmit = async (values) => {
-        
-        
+    const handleLoginSubmit = async (values, {resetForm}) => {
         try {
             await postData(dbUrl + '/users/login', values);
+            navigate(-1)
         } catch (error) {
             console.log(error);
             setFailureModal(true);
+            resetForm();
         }
     }
 
@@ -66,11 +68,7 @@ const FailedLogin = () => {
                 <p>Please check your username and password and try again</p>
             </Col>
         </Row>
-        <Row>
-            <Col>
 
-            </Col>
-        </Row>
         <Formik
       initialValues={initialValues}
       onSubmit={handleLoginSubmit}

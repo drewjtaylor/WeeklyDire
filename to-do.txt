@@ -1,5 +1,8 @@
 ***Mainly front end stuff***
 
+Make "FailedLogin.js" look better, fix layout
+Make register/sign in forms look better.
+
 Redirect back to main page after submission on "EditSelf" page
 
 Made EditUser page refresh or send back to "admin", or give some kind of feedback after clicking submit
@@ -7,11 +10,8 @@ Make EditUser page ask for confirmation before submitting a request to change an
 
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
-More gracefully handle failed login attempts
-More gracefully handle error or success on the "/write" form
+More gracefully handle error on the "/write" form
 
-Add error validation to LoginForm and Register Form
-Make register/sign in forms look better.
 
 ***Involves back end***
 
@@ -39,7 +39,6 @@ whatever function is under it (handleSubmit/login, etc)
 Rethink routes for manipulating comments. The most sensible is probably:
 "[articleId]/comments", then do CRUD operations from there. Move app.use(commentsRouter) from 'app.js' to articlesRouter.js'?
 
-Make a basic "Error/this doesn't exist" page for server errors
 
 
 ***Dockerizing***

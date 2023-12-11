@@ -146,15 +146,35 @@ Once I decided on making a fake news site (and not a "fake news" site), I starte
 
 Before starting on actually coding anything, I made a draw.io diagram/draft of how the database would be laid out. I also made a basic wireframe of how I wanted my pages and forms to look on pencil and paper.
 
+The minimum viable product I envisioned would be a MERN-based website that allows users to read articles, provides some admin operations to admin users, and allows creators to write new articles.
+
 ### Strategy for development
 
-Then my "big-picture" plan was to get the front-end pages 80-90% done, then get the back-end and database 80-90% done. Then the last 10-20% in each section and bugs. Lastly, I would deploy it to cloud services so it can live "on its own two feet." Once the minimum viable product is working, this last phase would also involve setting up some kind of CD/CI system.
+Then my "big-picture" plan was to get the front-end pages 80-90% done, then get the back-end and database 80-90% done. Then the last 10-20% in each section, and bugs. Lastly, I would deploy it to cloud services so it can live "on its own two feet." In reality, once I got a basic version running locally, I went ahead and got it living "in the cloud". 
 
-During all steps, I keep a "to-do" file. Basically this served the purpose of a Kanban board for a group. I have found this greatly helps me stay on track with current tasks. Instead of getting distrcted with wanting to fix bugs or add features I add a note to "to-dos", and continue working on my main goal for that session. Then occasionally I go back through my to-do list and address the issues I would have forgotten without it.
+Once I had something living out in the wild, I formalized how I went about working on the codebase. Instead of just updating "main" all the time, I create a new branch titled something like "admin-page". Then when I'm done with that feature, I would merge it back into main, (also causing an automatic redeploy to any of the front end).
 
-The minimum viable product I envision would be a website that allows users to read articles stored in a database, provides administrative operations to users designated as such, and allows creators to write new articles.
+During all steps, I keep a "to-do" file. This was essentially a personal Kanban board, and I found this helps me stay on track with current tasks. Instead of getting distrcted with fixing bugs or add features I add a note to "to-dos", and continue working on my main goal for that session. Then occasionally I go back through my to-do list and address the issues I would have forgotten without it.
 
-## Specific challenges/solutions (rename this)
+## Challenges, solutions, and work-arounds (under construction)
 
-Originally I anticipated "Users" being a separate group from "Creators". However, the more I thought about this, the more it sounded unnecessary for them to be seperate. Instead, I ended up using one MongoDB collection: `Users`, with a boolean property of `creator`.
+-   <strong>Users, Creators, and Admins, oh my!</strong>
+Originally I anticipated "Users" being a separate group from "Creators" & "Admin". However, the more I thought about this, the more it sounded unnecessary for them to be seperate. Instead, I ended up using one MongoDB collection: `Users`, with boolean properties of `creator` and `admin`.
 
+-   <strong>Google Cloud Deployment.</strong> There was a lot of trial & error getting the Express server deployed on Google Cloud. In particular, I had trouble with how Google set up the port for their end. It would deploy successfully, but the logs would indicate an error saying "Port 8080 already in use." Something about the Google Cloud process was filling in the environment variable for PORT as 8080 and it was interacting with something in my code in a strange way. I suspect that the port used here really doesn't matter that much since Google sets up so many things in on their side, and the link they provide just works regardless of the port selected. I eventually eliminated the call to the environment variable and it overcame the issue. I changed code from this:
+
+    ```
+    var port = normalizePort( process.env.PORT || '3001' );
+    ```
+
+    to this:
+
+    ```
+    var port = normalizePort( '3001' );
+    ```
+
+-   
+
+<!-- -   <strong>Down footer, Down!</strong> Getting the footer to stay at the bottom on short pages (like Unauthorized.js)
+
+![Peter fighting window blinds](https://i.giphy.com/media/yYSSBtDgbbRzq/giphy.webp) -->

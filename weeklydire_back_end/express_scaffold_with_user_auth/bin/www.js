@@ -18,8 +18,9 @@ var port = normalizePort(
     // process.env.PORT || Google Cloud functions was not playing nice with the injected port.
     '3001'
 );
+
 app.set('port', port);
-app.set('secPort', port+443); // add second port for https (comes out to 3443)
+app.set('secPort', port+443); // add second port for https (not used. Other https code commented out while on Google Cloud Platform)
 
 /**
  * Create HTTP server.
@@ -47,6 +48,7 @@ const secureServer = https.createServer(options, app);
 
 /**
  * Listen on provided port, on all network interfaces.
+ * (Commented out, because https is already used through Google Cloud Platform)
  */
 
 //  secureServer.listen(app.get('secPort'), () => {

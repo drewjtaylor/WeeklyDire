@@ -6,6 +6,7 @@ const authenticate = require('../authenticate');
 const User = require('../models/User');
 const cookieParser = require('cookie-parser');
 
+
 userRouter.route('/')
 // Gets all users. Must be admin
 .get(

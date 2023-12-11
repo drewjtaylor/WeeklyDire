@@ -32,7 +32,7 @@ const AddComment = ({ articleId, comments, setComments }) => {
       </Button>
       <Modal isOpen={addCommentModal} toggle={() => setAddCommentModal(false)}>
         <ModalHeader toggle={() => setAddCommentModal(false)}>
-          Modalheader
+          Leave a comment below and hit submit.
         </ModalHeader>
         <ModalBody>
           <Formik
@@ -47,7 +47,7 @@ const AddComment = ({ articleId, comments, setComments }) => {
                     as="textarea"
                     rows="8"
                     name="commentBody"
-                    placeholder="Enter your comment here"
+                    placeholder="Enter your comment here."
                   />
                 </Col>
               </Row>

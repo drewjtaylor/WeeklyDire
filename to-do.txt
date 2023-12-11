@@ -8,7 +8,7 @@ Make EditUser page ask for confirmation before submitting a request to change an
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)
 
 More gracefully handle failed login attempts
-More gracefully handle error on the "/write" form
+More gracefully handle error or success on the "/write" form
 
 Add error validation to LoginForm and Register Form
 Make register/sign in forms look better.
@@ -32,9 +32,6 @@ Notify user of successful password change
 notify user of failed password change
     track failed password attempts, "lock" account after too many failed attempts
 
-username getting entered twice when using register? (username is automatically done by passport I think,
-or passport-local-mongoose. Remove from front end submission and manual entry on route(s))
-
 Clean up "post" implementation in front end. Could be more concise.
 Anywhere that has the "postData" function can just be combined with
 whatever function is under it (handleSubmit/login, etc)
@@ -54,11 +51,6 @@ Example: https://github.com/docker/awesome-compose/tree/master/react-express-mon
 Change root/username in yml file to be variables
 
 Use a mounted folder for data so it persists: https://docs.docker.com/storage/volumes/#mount-a-host-directory-as-a-data-volume
-
-
-***Before adding to portfolio***
-
-Write, Read and update readme
 
 
 

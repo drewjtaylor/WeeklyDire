@@ -1,12 +1,8 @@
 const express = require('express');
 const commentRouter = express.Router();
-// const mongoose = require('mongoose');
-// const passport = require('passport');
 const authenticate = require('../authenticate');
 const Comment = require ('../models/Comment');
 const Article = require ('../models/Article');
-// const User = require ('../models/User');
-
 
 
 commentRouter.route('/')
@@ -27,8 +23,9 @@ commentRouter.route('/:articleId')
     .catch(err => next(err))
 })
 
+
 // For posting a new comment to article with articleId
-//  Must be a user. User posting is the 'author' for new comment
+// Must be a user. User posting is the 'author' for new comment
 .post(
     authenticate.verifyUser, 
     (req, res, next) => {
@@ -61,6 +58,7 @@ commentRouter.route('/:articleId')
     res.statusCode = 403;
     res.end('DELETE operation not supported on /comments/[articleId]. Please use comments/[articleId]/[commentId]')
 })
+
 
 commentRouter.route('/:articleId/:commentId')
 .get((req, res) => {

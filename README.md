@@ -175,7 +175,7 @@ Originally I anticipated "Users" being a separate group from "Creators" & "Admin
     var port = normalizePort( '3001' );
     ```
 
--   
+-   <strong>Don't hate--populate!</strong> In the middle of working on my project I came across the documentation for using "populate" in queries with mongoose. This is a cleaner, more sensible way to handle queries where one document is related to another. For example, on the "FullArticle" page, a call is made to retrieve that article from the database. Before, the "creator" was returned in the form of another _id. Then another call had to be made to the database to get the public information for that user. With "populate," the actual information about the "creator" can be provided instead of just an _id. While it's never fun to realize you wasted effort and time coding, it is a genuine delight to find a better way to organize my code and learn something new. In the future, now this wlil be how I do this type of query by default. 
 
 <!-- -   <strong>Down footer, Down!</strong> Getting the footer to stay at the bottom on short pages (like Unauthorized.js)
 

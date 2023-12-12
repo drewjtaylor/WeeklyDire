@@ -46,7 +46,7 @@ There are three main "branches" of routes:
   - See Header.js in the front end for an example. This file hits this route to determine which buttons to display depending on the current user.
 
 ### /users/[userId]/publiclookup
-
+Note: This route is not currently implemented. It WAS used to retrieve author info for articles or comments. However, since learning to use "populate" in queries, this is now unnecessary. That being said, the route is being kept in case there is future need for getting the public information only for a user.
 - GET:
   - For the user with the given [_id], displays the users username, first name, and last name
   - Does NOT show email or if the user is an admin or creator
@@ -140,6 +140,7 @@ There are three main "branches" of routes:
 
 - GET:
   - Returns the article with the given [_id] in JSON format
+  - Populates the "creator" field with information about that user
 - DELETE:
   - Requires a valid jwt bearer token for an admin account [(see above)](#routes)
   - Deletes the article with the given [_id]
@@ -150,6 +151,7 @@ There are three main "branches" of routes:
 
 - GET:
   - Returns an array of comments for the article with the provided [articleId]
+  - Populates the "authorId" field with information about that user.
 - POST:
   - Requires a valid jwt bearer token [(see above)](#routes)
   - Requires a body with the following JSON:

@@ -15,6 +15,7 @@ commentRouter.route('/:articleId')
 // For getting all comments on a specific article with articleId
 .get((req, res, next) => {
     Comment.find({article: req.params.articleId})
+    .populate('authorId')
     .then(comments => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');

@@ -147,23 +147,24 @@ export const selectUser = async (userId, jwt) => {
     return response.json(); // parses JSON response into native JavaScript objects
 }
 
-// Looks up public info about a user by _id
-export const selectUserPublic = async (userId) => {
-    // Default options are marked with *
-    const response = await fetch(dbUrl + `/users/${userId}/publiclookup`, {
-      method: "GET",
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json"
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: null, // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-}
+// Looks up public info about a user by _id. No longer used since converting express requests to articles
+// and comments to use "populate"
+// export const selectUserPublic = async (userId) => {
+//     // Default options are marked with *
+//     const response = await fetch(dbUrl + `/users/${userId}/publiclookup`, {
+//       method: "GET",
+//       mode: "cors", // no-cors, *cors, same-origin
+//       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+//       credentials: "same-origin", // include, *same-origin, omit
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       redirect: "follow", // manual, *follow, error
+//       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+//       body: null, // body data type must match "Content-Type" header
+//     });
+//     return response.json(); // parses JSON response into native JavaScript objects
+// }
 
 //  Updates a user's password using the oldpassword and new password
 export const updatePassword = async (userId, oldpassword, newpassword, jwt) => {

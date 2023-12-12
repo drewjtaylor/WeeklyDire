@@ -19,10 +19,10 @@ Creators should required to have the firstName and lastName field's filled in.
 This might also be able to be blocked on the "write" page, redirecting to the
 EditUser page. This is because articles display the firstname and lastname of the author.
 
-Research mongoose/mongoDB "populate", so article/comment relationships 
-is tracked in a more sensible way in the back, so we don't have to do things like
-get the article-> then get the comments -> then get the comment author.
-It would be better to just get the article. Get the comments. Display info from there.
+    ****Research mongoose/mongoDB "populate", so article/comment relationships 
+    ****is tracked in a more sensible way in the back, so we don't have to do things like
+    ****get the article-> then get the comments -> then get the comment author.
+    ****It would be better to just get the article. Get the comments. Display info from there.
 
 
 Handle failed password resets/login attempts better

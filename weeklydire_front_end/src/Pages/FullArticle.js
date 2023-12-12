@@ -17,7 +17,6 @@ const FullArticle = () => {
   const [userFromContext] = useContext(UserContext);
 
   const [article, setArticle] = useState({});
-  const [creator, setCreator] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { articleId } = useParams();
   const [comments, setComments] = useState([]);
@@ -31,12 +30,6 @@ const FullArticle = () => {
         const fetchedArticle = await selectArticleById(articleId);
         setArticle(fetchedArticle);
         setIsLoading(false);
-        try {
-          const fetchedCreator = await selectUserPublic(fetchedArticle.creator);
-          setCreator(fetchedCreator);
-        } catch (error) {
-          console.error("Error finding the author for this article: ", error);
-        }
       } catch (error) {
         setIsLoading(false);
         setArticle({})
@@ -114,7 +107,7 @@ const FullArticle = () => {
             <Col>
               <h2 className="mb-3 text-center">{title}</h2>
               <p className="m-0 text-center">
-                <em>{`Written by ${creator.firstName} ${creator.lastName}`}</em>
+                <em>{`Written by ${article.creator.firstName} ${article.creator.lastName}`}</em>
               </p>
               <p className="text-center">
                 <em>Date: {formattedDate}</em>

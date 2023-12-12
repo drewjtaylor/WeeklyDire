@@ -55,6 +55,7 @@ articleRouter.route('/')
 articleRouter.route('/:articleId')
 .get((req, res, next) => {
     Article.findById(req.params.articleId)
+    .populate('creator')
     .then(article => {
         if (!article) {
             res.statusCode = 200;

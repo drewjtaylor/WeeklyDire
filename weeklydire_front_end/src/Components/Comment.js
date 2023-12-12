@@ -1,5 +1,4 @@
 import { Row, Col } from "reactstrap";
-import { useState } from "react";
 
 const Comment = ({ comment }) => {
   const {body, authorId, createdAt} = comment;

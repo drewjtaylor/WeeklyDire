@@ -63,6 +63,16 @@ const NavbarHeader = () => {
             </NavLink>
         }
 
+        {/* Conditional "Edit my account" button shows user is logged in */}
+        <NavItem>
+            {currentUser.creator ?
+                <NavLink href={`/users/update/${currentUser._id}`}>
+                    <Button color='success'>My Account</Button>
+                </NavLink> :
+                null
+            }
+        </NavItem>
+
         {/* Conditional link to "Write" if the user has the "creator" property */}
         <NavItem>
             {currentUser.creator ?

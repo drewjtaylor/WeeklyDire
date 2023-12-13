@@ -33,7 +33,7 @@ function App() {
                     <Route path='read/tags/:tag' element={<TaggedArticlesResults />} />
                     <Route path='/write' element={<Write />} />
                     <Route path='/admin' element={<Admin />} />
-                    <Route path='/users/:userId/update' element={<EditSelf />} />
+                    <Route path='/users/update/:userId' element={<EditSelf />} />
                     <Route path='/admin/users/:userId' element={<EditUser />} />
                     <Route path='/failedlogin' element={<FailedLogin />} />
                     <Route path='*' element={<NotFound />} />

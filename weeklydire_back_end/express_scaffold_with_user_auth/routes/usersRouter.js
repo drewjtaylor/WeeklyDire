@@ -201,12 +201,15 @@ userRouter.route('/:userId')
     User.findById(req.params.userId)
     .then(user => {
         if (req.user.admin || req.user.username === user.username) {
-            User.findByIdAndUpdate(req.params.userId, 
+            User.findByIdAndUpdate(req.user._id, 
                 {
                     $set: req.body
                 },
             {
                 new: true
+            })
+            .then(user => {
+                user.save()
             })
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');

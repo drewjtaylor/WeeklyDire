@@ -9,13 +9,13 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { selectUser, updateUser, updatePassword } from "../backendDbOperations";
 import { useEffect, useState, useContext } from "react";
 import { useCookies } from "react-cookie";
 import { Formik, Field, Form } from "formik";
 import { UserContext } from "../utils/UserContext";
-import Unauthorized from "./Unauthorized";
+import NotFound from "./NotFound";
 
 const EditSelf = () => {
   const [user, setUser] = useState({});
@@ -24,6 +24,8 @@ const EditSelf = () => {
   const [cookies] = useCookies();
   const [passwordUpdateModal, setPasswordUpdateModal] = useState(false);
   const [userFromContext] = useContext(UserContext);
+
+    const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,6 +48,7 @@ const EditSelf = () => {
 
   const handleEditSelfSubmit = async (values) => {
     await updateUser(userId, values, cookies.jwt);
+    navigate(-1)
   };
 
   const togglepasswordUpdateModal = () => {
@@ -64,16 +67,35 @@ const EditSelf = () => {
   if (userFromContext.admin) {
     return (
       <p className="text-center">
-        You appear to have admin privelages. Please make changes on the admin
-        page.
+        Your account has admin privelages. Please make changes on the admin page.
       </p>
     );
   }
 
-  if (true) {
-    return isLoading ? (
-      <Loading />
-    ) : (
+  console.log('user')
+  console.log(user)
+
+
+//   If no user is logged in, return not found
+ if (userFromContext.username === undefined) {
+    return <div className="text-center">
+        <NotFound />
+        <p>You are not currently logged in</p>
+        <p>If you are trying to edit your user information, please sign in</p>
+    </div>
+ }
+
+//  If the logged in user does not match the user being edited, return not found
+ if (userFromContext.username !== user.username) {
+    return <div className="text-center">
+        <NotFound />
+        <p>This is not the correct address to change your user information.</p>
+        <p> Please try logging out and back in, or contact an admin if you continue to have problems.</p>
+    </div>
+ }
+
+
+    return isLoading ? (<Loading />) : (
       <Container>
         <h5>Edit your information below and hit submit.</h5>
         <p>Fill out new values below:</p>
@@ -183,9 +205,7 @@ const EditSelf = () => {
         </Modal>
       </Container>
     );
-  }
-
-  return <Unauthorized />;
+  
 };
 
 export default EditSelf;

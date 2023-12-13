@@ -172,13 +172,22 @@ userRouter.route('/finduser/:username')
 userRouter.route('/:userId')
 .get(
     authenticate.verifyUser,
-    authenticate.verifyAdmin,
     (req, res, next) => {
     User.findById(req.params.userId)
     .then(user => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(user);
+        if (req.user.admin || req.user.username === user.username) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(user)
+        } else {
+            res.status(403)
+            res.setHeader('Content-Type', 'application/json');
+            res.json({
+                errorMessage: "You were not authorized for this action",
+                loggedInAs: req.user
+            });
+            
+        }
     })
     .catch(err => next(err))
 })
@@ -188,19 +197,21 @@ userRouter.route('/:userId')
 })
 .put(
     authenticate.verifyUser,
-    authenticate.verifyAdmin,
     (req, res, next) => {
-    User.findByIdAndUpdate(req.params.userId, 
-        {
-            $set: req.body
-        },
-    {
-        new: true
-    })
+    User.findById(req.params.userId)
     .then(user => {
-        res.statusCode = 201;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(user);
+        if (req.user.admin || req.user.username === user.username) {
+            User.findByIdAndUpdate(req.params.userId, 
+                {
+                    $set: req.body
+                },
+            {
+                new: true
+            })
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(user)
+        }
     })
     .catch(err => next(err))
 })

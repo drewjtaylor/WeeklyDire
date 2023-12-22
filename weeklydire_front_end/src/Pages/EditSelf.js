@@ -55,25 +55,31 @@ const EditSelf = () => {
     setPasswordUpdateModal(!passwordUpdateModal);
   };
 
-  const handleUpdatePasswordSubmit = async (values) => {
-    await updatePassword(
+  const handleUpdatePasswordSubmit = (values) => {
+    
+    updatePassword(
       userId,
       values.oldpassword,
       values.newpassword,
       cookies.jwt
-    );
+    )
+    .then(msg => {
+        alert(msg);
+        togglepasswordUpdateModal();
+    })
+    .catch(err => {
+        alert('The old password was incorrect. Your password has not changed.');
+        console.log(err)
+    });
   };
 
   if (userFromContext.admin) {
     return (
       <p className="text-center">
-        Your account has admin privelages. Please make changes on the admin page.
+        Your account has admin privileges. Please make changes on the admin page.
       </p>
     );
   }
-
-  console.log('user')
-  console.log(user)
 
 
 //   If no user is logged in, return not found
@@ -93,7 +99,6 @@ const EditSelf = () => {
         <p> Please try logging out and back in, or contact an admin if you continue to have problems.</p>
     </div>
  }
-
 
     return isLoading ? (<Loading />) : (
       <Container>

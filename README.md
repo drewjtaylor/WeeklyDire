@@ -79,6 +79,14 @@ Radio buttons control whether or not the user is a creator and/or admin.
 
 In addition to users, the admin page currently allows the admin to delete articles.
 
+### EditSelf page
+
+When logged in, the user a button conditionally renders labeled "My Account."
+
+Users can edit their email, first or last name, or update their password.
+
+On submitting the form to update the password, an alert pops up to give feedback if it was successful or not.
+
 ### Comments
 
 If a user is signed in, they will see a botton at the end of full articles to add a comment.

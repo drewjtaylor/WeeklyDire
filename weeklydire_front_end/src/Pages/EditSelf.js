@@ -73,34 +73,35 @@ const EditSelf = () => {
     });
   };
 
-  if (userFromContext.admin) {
-    return (
-      <p className="text-center">
-        Your account has admin privileges. Please make changes on the admin page.
-      </p>
-    );
-  }
+  if (isLoading) return <Loading />;
 
+    if (userFromContext.admin) {
+        return (
+        <p className="text-center">
+            Your account has admin privileges. Please make changes on the admin page.
+        </p>
+        );
+    }
 
 //   If no user is logged in, return not found
- if (userFromContext.username === undefined) {
-    return <div className="text-center">
-        <NotFound />
-        <p>You are not currently logged in</p>
-        <p>If you are trying to edit your user information, please sign in</p>
-    </div>
- }
+    if (userFromContext.username === undefined) {
+        return <div className="text-center">
+            <NotFound />
+            <p>You are not currently logged in</p>
+            <p>If you are trying to edit your user information, please sign in</p>
+        </div>
+    }
 
 //  If the logged in user does not match the user being edited, return not found
- if (userFromContext.username !== user.username) {
-    return <div className="text-center">
-        <NotFound />
-        <p>This is not the correct address to change your user information.</p>
-        <p> Please try logging out and back in, or contact an admin if you continue to have problems.</p>
-    </div>
- }
+    if (userFromContext.username !== user.username) {
+        return <div className="text-center">
+            <NotFound />
+            <p>This is not the correct address to change your user information.</p>
+            <p> Please try logging out and back in, or contact an admin if you continue to have problems.</p>
+        </div>
+    }
 
-    return isLoading ? (<Loading />) : (
+    return (
       <Container>
         <h5>Edit your information below and hit submit.</h5>
         <p>Fill out new values below:</p>

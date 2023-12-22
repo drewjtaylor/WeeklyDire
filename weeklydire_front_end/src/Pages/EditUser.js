@@ -104,19 +104,20 @@ const EditUser = () => {
     await resetPassword(userId, values.password, cookies.jwt);
   };
 
-  if (!userFromContext.admin) {
-    return <Unauthorized />;
-  }
+  if (isLoading) {return <Loading />};
 
-  // If there is no user found, show 404: not found
-  if (initialValues.email === 'none') {
-    return <NotFound />
-  }
+    // If the user is not an admin, show "Unauthorized" page
+    if (!userFromContext.admin) {
+        return <Unauthorized />;
+    }
+
+    // If there is no user found, show 404: not found
+    if (initialValues.email === 'none') {
+        return <NotFound />
+    }
 
   if (userFromContext.admin) {
-    return isLoading ? (
-      <Loading />
-    ) : (
+    return (
       <Container>
         <h5>Edit information below for username: {user.username}</h5>
         <p>Fill out new values below:</p>

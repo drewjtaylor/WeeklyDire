@@ -3,9 +3,6 @@
 Make "FailedLogin.js" look better, fix layout
 Make register/sign in forms look better.
 
-Redirect back to main page after submission on "EditSelf" page
-
-Made EditUser page refresh or send back to "admin", or give some kind of feedback after clicking submit
 Make EditUser page ask for confirmation before submitting a request to change an admin
 
 Make a "search by tag" modal and link to it on the home page (tagSearchModal)

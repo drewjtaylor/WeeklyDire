@@ -4,6 +4,7 @@ import {Container, Label, Button, Col, Row, Modal, ModalHeader, ModalBody} from 
 import {dbUrl} from "../utils/dbUrl";
 import { useCookies } from "react-cookie";
 import { useNavigate } from 'react-router-dom';
+import SizeChecker from '../utils/SizeChecker';
 
 const FailedLogin = () => {
 
@@ -75,26 +76,33 @@ const FailedLogin = () => {
     >
       {({ isSubmitting }) => (
         <Form>
-          <Row>
-              <Col xs='3'>
-                <Label htmlFor="username" className='me-2'>Username:</Label>
+
+            <SizeChecker />
+
+          <Row className='justify-content-center my-1'>
+              <Col xs='3' lg='1'>
+                <Label htmlFor="username" className='me-2 form-label'>Username:</Label>
             </Col>
-              <Col xs='9'>
-                  <Field name="username" placeholder="" />
+              <Col xs='6' md='4'>
+                  <Field name="username" placeholder="" className='form-control'/>
               </Col>
           </Row>
 
-          <Row>
-              <Col xs='3'>
-                <Label htmlFor="password">Password:</Label>
+          <Row className='justify-content-center my-1'>
+              <Col xs='3' lg='1'>
+                <Label htmlFor="password" className='form-label'>Password:</Label>
             </Col>
-              <Col xs='9'>
-                  <Field type="password" name="password" placeholder="" />
+              <Col xs='6' md='4'>
+                  <Field type="password" name="password" placeholder="" className='form-control'/>
               </Col>
           </Row>
-            <Button color='primary' type="submit" disabled={isSubmitting}>
-                Submit
-            </Button>
+            <Row className='justify-content-center mt-2'>
+                <Col xs='1'>
+                    <Button color='primary' type="submit" disabled={isSubmitting}>
+                        Submit
+                    </Button>
+                </Col>
+            </Row>
         </Form>
       )}
     </Formik>

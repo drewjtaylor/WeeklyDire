@@ -1,5 +1,9 @@
 import React from 'react'
 
+/**
+ * Returns a responsive component to track the bootstrap size of the viewport
+ * 
+ */
 const SizeChecker = () => {
   return (
     <>

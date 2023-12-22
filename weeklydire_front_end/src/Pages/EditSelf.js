@@ -101,49 +101,49 @@ const EditSelf = () => {
         <p>Fill out new values below:</p>
         <Formik initialValues={initialValues} onSubmit={handleEditSelfSubmit}>
           <Form>
-            <Row>
-              <Col xs="3">
-                <Label htmlFor="username" className="me-2">
+            <Row className="my-2">
+              <Col xs="2" className="">
+                <Label htmlFor="username" className="form-label">
                   Username:
                 </Label>
               </Col>
               <Col xs="9">
-                <p>{user.username}</p>
+                <p><strong>{user.username}</strong></p>
               </Col>
             </Row>
-            <Row>
-              <Col xs="3">
-                <Label htmlFor="email" className="me-2">
+            <Row className="my-2">
+              <Col xs="2" className="">
+                <Label htmlFor="email" className="form-label">
                   Email:
                 </Label>
               </Col>
-              <Col xs="9">
-                <Field name="email" />
+              <Col xs="5">
+                <Field name="email" className="form-control"/>
               </Col>
             </Row>
-            <Row>
-              <Col xs="3">
-                <Label htmlFor="firstName" className="me-2">
+            <Row className="my-2">
+              <Col xs="2" className="">
+                <Label htmlFor="firstName" className="form-label">
                   First Name:
                 </Label>
               </Col>
-              <Col xs="9">
-                <Field name="firstName" />
+              <Col xs="5">
+                <Field name="firstName" className="form-control"/>
               </Col>
             </Row>
-            <Row>
-              <Col xs="3">
-                <Label htmlFor="lastName" className="me-2">
+            <Row className="my-2">
+              <Col xs="2" className="">
+                <Label htmlFor="lastName" className="form-label">
                   Last Name:
                 </Label>
               </Col>
-              <Col xs="9">
-                <Field name="lastName" />
+              <Col xs="5">
+                <Field name="lastName" className="form-control"/>
               </Col>
             </Row>
 
             <Row>
-              <Col>
+              <Col xs="8" className="text-center">
                 <p>
                   You are currently {user.creator ? null : "not "}a designated
                   creator.

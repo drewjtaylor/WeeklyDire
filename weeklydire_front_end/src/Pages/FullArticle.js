@@ -100,7 +100,8 @@ const FullArticle = () => {
             <Col>
               <h2 className="mb-3 text-center">{title}</h2>
               <p className="m-0 text-center">
-                <em>{`Written by ${article.creator.firstName} ${article.creator.lastName}`}</em>
+                {/* If the author did not have a first or last name, show "Written by user: [username]". Otherwise, show first and last name of author */}
+                <em>{`Written by ${article.creator.firstName && article.creator.lastName ? `${article.creator.firstName} ${article.creator.lastName}` : `user: ${article.creator.username}`}`}</em>
               </p>
               <p className="text-center">
                 <em>Date: {formattedDate}</em>

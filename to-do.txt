@@ -13,11 +13,6 @@ More gracefully handle error on the "/write" form (or just prevent errors to beg
 
 ***Involves back end***
 
-Creators should required to have the firstName and lastName field's filled in.
-This might also be able to be blocked on the "write" page, redirecting to the
-EditUser page. This is because articles display the firstname and lastname of the author.
-
-
 Handle failed password resets/login attempts better
 Notify user of successful login
     track failed password attempts, "lock" account after too many failed attempts
@@ -29,7 +24,7 @@ whatever function is under it (handleSubmit/login, etc)
 Rethink routes for manipulating comments. The most sensible is probably:
 "[articleId]/comments", then do CRUD operations from there. Move app.use(commentsRouter) from 'app.js' to articlesRouter.js'?
 
-
+When changing the "noname" user from the admin page, the back end crashes with a "duplicate key" error in the email field
 
 ***Dockerizing***
 
@@ -44,6 +39,8 @@ Use a mounted folder for data so it persists: https://docs.docker.com/storage/vo
 
 
 ***"Icing on the cake" ideas.***
+
+Require authors to update their first/last name before writing articles instead of conditionally showing only the username if they have no first/last name.
 
 Incorporate signing in with Google/facebook account
 

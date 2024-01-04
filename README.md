@@ -69,6 +69,16 @@ Cons: Relies on the author to separate tags correctly or the developer to contri
 
 I ended up going with option 2, mostly out of personal preference. I liked being able to see the tags as they get entered and felt like that was more clear to the author on submission.
 
+### FullArticle page
+
+FullArticle.js displays the picture for the article, the full article body, and a comments section at the end. Since users don't HAVE to enter a first and last name when they create an account, it is theoretically possible that a user gets designated as a creator with no first and last name. If there is no first or last name for the author, the display will read "Written by user: [username]" instead of using the first and last name.
+
+Any tags for the article appear at the end, and can be clicked to go to a list of articles that match that tag.
+
+### Comments
+
+Comments are listed in reverse-date order, and they are visisble regardless of who is logged in. However, a user has to be logged in to be able to leave a comment. When a user leaves a comment, it is displayed along with the username of who wrote it.
+
 ### Admin Page
 
 If a user is designated as an admin, a button shows up for them linking to the "/admin" route. As long as the user is authenticated and authorized as an admin, the page will display options to perform some basic admin tasks. 

@@ -4,7 +4,6 @@ import {Container, Label, Button, Col, Row, Modal, ModalHeader, ModalBody} from 
 import {dbUrl} from "../utils/dbUrl";
 import { useCookies } from "react-cookie";
 import { useNavigate } from 'react-router-dom';
-import SizeChecker from '../utils/SizeChecker';
 
 const FailedLogin = () => {
 
@@ -76,20 +75,19 @@ const FailedLogin = () => {
       {({ isSubmitting }) => (
         <Form>
 
-          <Row className='justify-content-center my-1'>
-              <Col xs='3' md='2' lg="1">
-                <Label htmlFor="username" className='me-2 form-label'>Username:</Label>
+          <Row className='justify-content-center my-2'>
+              <Col xs='3' md='2' xl='2' className='text-end'>
+                <Label htmlFor="username" className='form-label'>Username:</Label>
             </Col>
-              <Col xs='6' md='4'>
+              <Col xs='6' md='4' xl='3'>
                   <Field name="username" placeholder="" className='form-control'/>
               </Col>
           </Row>
-
-          <Row className='justify-content-center my-1'>
-              <Col xs='3' md='2' lg='1'>
+          <Row className='justify-content-center my-2'>
+              <Col xs='3' md='2' xl='2' className='text-end'>
                 <Label htmlFor="password" className='form-label'>Password:</Label>
             </Col>
-              <Col xs='6' md='4'>
+              <Col xs='6' md='4' xl='3'>
                   <Field type="password" name="password" placeholder="" className='form-control'/>
               </Col>
           </Row>

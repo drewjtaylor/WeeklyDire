@@ -1,6 +1,5 @@
 ***Mainly front end stuff***
 
-Make "FailedLogin.js" look better, fix layout
 Make register/sign in forms look better.
 
 Make EditUser page ask for confirmation before submitting a request to change an admin
@@ -21,8 +20,6 @@ EditUser page. This is because articles display the firstname and lastname of th
 
 Handle failed password resets/login attempts better
 Notify user of successful login
-Notify user of successful password change
-notify user of failed password change
     track failed password attempts, "lock" account after too many failed attempts
 
 Clean up "post" implementation in front end. Could be more concise.

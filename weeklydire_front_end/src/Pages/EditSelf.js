@@ -55,25 +55,31 @@ const EditSelf = () => {
     setPasswordUpdateModal(!passwordUpdateModal);
   };
 
-  const handleUpdatePasswordSubmit = async (values) => {
-    await updatePassword(
+  const handleUpdatePasswordSubmit = (values) => {
+    
+    updatePassword(
       userId,
       values.oldpassword,
       values.newpassword,
       cookies.jwt
-    );
+    )
+    .then(msg => {
+        alert(msg);
+        togglepasswordUpdateModal();
+    })
+    .catch(err => {
+        alert('The old password was incorrect. Your password has not changed.');
+        console.log(err)
+    });
   };
 
   if (userFromContext.admin) {
     return (
       <p className="text-center">
-        Your account has admin privelages. Please make changes on the admin page.
+        Your account has admin privileges. Please make changes on the admin page.
       </p>
     );
   }
-
-  console.log('user')
-  console.log(user)
 
 
 //   If no user is logged in, return not found
@@ -94,56 +100,55 @@ const EditSelf = () => {
     </div>
  }
 
-
     return isLoading ? (<Loading />) : (
       <Container>
         <h5>Edit your information below and hit submit.</h5>
         <p>Fill out new values below:</p>
         <Formik initialValues={initialValues} onSubmit={handleEditSelfSubmit}>
           <Form>
-            <Row>
-              <Col xs="3">
-                <Label htmlFor="username" className="me-2">
+            <Row className="my-2">
+              <Col xs="2" className="">
+                <Label htmlFor="username" className="form-label">
                   Username:
                 </Label>
               </Col>
               <Col xs="9">
-                <p>{user.username}</p>
+                <p><strong>{user.username}</strong></p>
               </Col>
             </Row>
-            <Row>
-              <Col xs="3">
-                <Label htmlFor="email" className="me-2">
+            <Row className="my-2">
+              <Col xs="2" className="">
+                <Label htmlFor="email" className="form-label">
                   Email:
                 </Label>
               </Col>
-              <Col xs="9">
-                <Field name="email" />
+              <Col xs="5">
+                <Field name="email" className="form-control"/>
               </Col>
             </Row>
-            <Row>
-              <Col xs="3">
-                <Label htmlFor="firstName" className="me-2">
+            <Row className="my-2">
+              <Col xs="2" className="">
+                <Label htmlFor="firstName" className="form-label">
                   First Name:
                 </Label>
               </Col>
-              <Col xs="9">
-                <Field name="firstName" />
+              <Col xs="5">
+                <Field name="firstName" className="form-control"/>
               </Col>
             </Row>
-            <Row>
-              <Col xs="3">
-                <Label htmlFor="lastName" className="me-2">
+            <Row className="my-2">
+              <Col xs="2" className="">
+                <Label htmlFor="lastName" className="form-label">
                   Last Name:
                 </Label>
               </Col>
-              <Col xs="9">
-                <Field name="lastName" />
+              <Col xs="5">
+                <Field name="lastName" className="form-control"/>
               </Col>
             </Row>
 
             <Row>
-              <Col>
+              <Col xs="8" className="text-center">
                 <p>
                   You are currently {user.creator ? null : "not "}a designated
                   creator.

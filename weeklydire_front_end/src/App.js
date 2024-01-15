@@ -66,19 +66,19 @@ function App() {
             {/* Modals. Each model takes in these props: it's on/off status, the function to turn the guide off, and the function to toggle the NEXT modal */}
             <Welcome 
                 modalStatus={guideOpen && welcomeModal} 
-                modalToggle={() => {setWelcomeModal(!welcomeModal); setGuideOpen(false)}} 
+                modalToggle={() => {setWelcomeModal(!welcomeModal)}} 
                 toggleNextModal={setMongoDBInfoModal} />
             <MongoDBInfo 
                 modalStatus={guideOpen && mongoDBInfoModal} 
-                modalToggle={() => {setMongoDBInfoModal(!mongoDBInfoModal); setGuideOpen(false)}} 
+                modalToggle={() => {setMongoDBInfoModal(!mongoDBInfoModal)}} 
                 toggleNextModal={setExpressServerModal} />
             <ExpressServer 
                 modalStatus={guideOpen && expressServerModal} 
-                modalToggle={() => {setExpressServerModal(!expressServerModal); setGuideOpen(false)}} 
+                modalToggle={() => {setExpressServerModal(!expressServerModal)}} 
                 toggleNextModal={setGoogleCloudInfoModal} />
             <GoogleCloudInfo 
                 modalStatus={guideOpen && googleCloudInfoModal} 
-                modalToggle={() => {setGoogleCloudInfoModal(!googleCloudInfoModal); setGuideOpen(false)}} 
+                modalToggle={() => {setGoogleCloudInfoModal(!googleCloudInfoModal)}} 
                 toggleNextModal={setReactInfoModal} />
             <ReactInfo 
                 modalStatus={guideOpen && reactInfoModal} 

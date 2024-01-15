@@ -19,7 +19,7 @@ import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import Logout from './Logout';
 
-const NavbarHeader = () => {
+const NavbarHeader = ({resetGuide}) => {
 
     // Establish modal status for login
     const [loginModal, setLoginModal] = useState(false);
@@ -99,7 +99,8 @@ const NavbarHeader = () => {
             <NavbarBrand href='/'>
                 <img className='logo' src={gradientLogo} alt='weekly dire' />
             </NavbarBrand>
-        <NavbarText color='white'>{currentUser.firstName ? `Welcome ${currentUser.firstName}` : null}</NavbarText>
+            <Button onClick={() => {resetGuide()}}>How was this made?</Button>
+        <NavbarText color='white'>{currentUser.firstName ? `Welcome, ${currentUser.firstName}!` : null}</NavbarText>
 
             {/* Used regular bootstrap classes to hide/display each type of navbar depending on screen size */}
             {/* On medium screens and smaller, navbar collapses with hamburger button */}

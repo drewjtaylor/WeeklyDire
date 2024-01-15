@@ -5,19 +5,23 @@ const Welcome = ({modalStatus, modalToggle, toggleNextModal}) => {
       <Modal isOpen={modalStatus} toggle={modalToggle}>
   
           <ModalHeader toggle={modalToggle}>
-            Welcome Modal
+            Welcome!
           </ModalHeader>
   
           <ModalBody>
-          This should show a brief description and ask if the user wants to see how the site is built, or just wants to use it
+          <p>This is made of a MongoDB database, Express/Node.js for the server, and React.js for managing the interface.</p>
+
+          <p>Click below to see more details on these elements, or just click cancel to try using the site.</p>
+
+          <p>You can always click the "How was it made" button at the top to reopen this guide.</p>
           </ModalBody>
   
           <ModalFooter>
             <Button color="primary" onClick={() => {modalToggle(); toggleNextModal(true)}}>
-              Open next Modal
+              See how MongoDB is used
             </Button>{' '}
             <Button color="secondary" onClick={modalToggle}>
-              Cancel
+              Close this guide
             </Button>
           </ModalFooter>
   

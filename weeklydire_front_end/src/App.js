@@ -30,17 +30,24 @@ function App() {
     useCheckUser(user, setUser);
     
     // Establish overarching modals for showing app details
-    const [wantInfo, setWantInfo] = useState(true);
+    const [guideOpen, setGuideOpen] = useState(true);
     const [welcomeModal, setWelcomeModal] = useState(true);
     const [mongoDBInfoModal, setMongoDBInfoModal] = useState(false);
     const [expressServerModal, setExpressServerModal] = useState(false);
     const [reactInfoModal, setReactInfoModal] = useState(false);
     const [googleCloudInfoModal, setGoogleCloudInfoModal] = useState(false);
 
+    // Resets guide
+    const resetGuide = () => {
+        setGuideOpen(true);
+        setWelcomeModal(true)
+    }
+
     return (
     <div>
+        <h1>GuideOpen is {String(guideOpen)}</h1>
         <UserContext.Provider value={[user, setUser]}>
-            <NavbarHeader />
+            <NavbarHeader resetGuide={resetGuide}/>
             <div className='full-screen'>
                 <Routes>
                     <Route path='/' element={<Homepage />} />
@@ -57,12 +64,27 @@ function App() {
             </div>
             <Footer />
 
-            {/* Modals. Each model takes in these props: it's on/off status, the function to toggle itself, and the function to toggle the NEXT modal */}
-            <Welcome modalStatus={welcomeModal} modalToggle={() => {setWelcomeModal(!welcomeModal)}} toggleNextModal={setMongoDBInfoModal}/>
-            <MongoDBInfo modalStatus={mongoDBInfoModal} modalToggle={() => {setMongoDBInfoModal(!mongoDBInfoModal)}} toggleNextModal={setExpressServerModal} />
-            <ExpressServer modalStatus={expressServerModal} modalToggle={() => {setExpressServerModal(!expressServerModal)}} toggleNextModal={setGoogleCloudInfoModal} />
-            <GoogleCloudInfo modalStatus={googleCloudInfoModal} modalToggle={() => {setGoogleCloudInfoModal(!googleCloudInfoModal)}} toggleNextModal={setReactInfoModal} />
-            <ReactInfo modalStatus={reactInfoModal} modalToggle={() => {setReactInfoModal(!reactInfoModal)}} toggleNextModal={() => null} />
+            {/* Modals. Each model takes in these props: it's on/off status, the function to turn the guide off, and the function to toggle the NEXT modal */}
+            <Welcome 
+                modalStatus={guideOpen && welcomeModal} 
+                modalToggle={() => {setWelcomeModal(!welcomeModal); setGuideOpen(false)}} 
+                toggleNextModal={setMongoDBInfoModal} />
+            <MongoDBInfo 
+                modalStatus={guideOpen && mongoDBInfoModal} 
+                modalToggle={() => {setMongoDBInfoModal(!mongoDBInfoModal); setGuideOpen(false)}} 
+                toggleNextModal={setExpressServerModal} />
+            <ExpressServer 
+                modalStatus={guideOpen && expressServerModal} 
+                modalToggle={() => {setExpressServerModal(!expressServerModal); setGuideOpen(false)}} 
+                toggleNextModal={setGoogleCloudInfoModal} />
+            <GoogleCloudInfo 
+                modalStatus={guideOpen && googleCloudInfoModal} 
+                modalToggle={() => {setGoogleCloudInfoModal(!googleCloudInfoModal); setGuideOpen(false)}} 
+                toggleNextModal={setReactInfoModal} />
+            <ReactInfo 
+                modalStatus={guideOpen && reactInfoModal} 
+                modalToggle={() => {setReactInfoModal(!reactInfoModal)}} 
+                toggleNextModal={() => null} />
 
         </UserContext.Provider>
     </div>

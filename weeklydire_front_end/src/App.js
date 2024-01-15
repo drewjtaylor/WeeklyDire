@@ -39,25 +39,22 @@ function App() {
 
     // Resets guide
     const resetGuide = () => {
-        sessionStorage.clear();
         setGuideOpen(true);
-        setWelcomeModal(true)
+        setWelcomeModal(true);
+        sessionStorage.setItem('hasVisitedBefore', true);
     }
 
     useEffect(() => {
         const hasVisitedBefore = sessionStorage.getItem('hasVisitedBefore');
         if (!hasVisitedBefore) {
           setGuideOpen(true);
+          setWelcomeModal(true);
           sessionStorage.setItem('hasVisitedBefore', true);
-        } else {
-            setGuideOpen(false);
         }
       }, []);
 
     return (
     <div>
-        <p>{String(guideOpen)}</p>
-        <p></p>
         <UserContext.Provider value={[user, setUser]}>
             <NavbarHeader resetGuide={resetGuide}/>
             <div className='full-screen'>

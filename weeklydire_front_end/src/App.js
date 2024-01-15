@@ -14,7 +14,7 @@ import TaggedArticlesResults from './Pages/TaggedArticlesResults';
 import FailedLogin from './Pages/FailedLogin';
 import NotFound from './Pages/NotFound';
 import { UserContext } from './utils/UserContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useCheckUser from './utils/useCheckUser';
 import Welcome from './Components/infoModals/Welcome';
 import MongoDBInfo from './Components/infoModals/MongoDBInfo';
@@ -31,7 +31,7 @@ function App() {
     
     // Set up overarching modals for showing app details
     const [guideOpen, setGuideOpen] = useState(false);
-    const [welcomeModal, setWelcomeModal] = useState(false);
+    const [welcomeModal, setWelcomeModal] = useState(true);
     const [mongoDBInfoModal, setMongoDBInfoModal] = useState(false);
     const [expressServerModal, setExpressServerModal] = useState(false);
     const [reactInfoModal, setReactInfoModal] = useState(false);
@@ -39,12 +39,25 @@ function App() {
 
     // Resets guide
     const resetGuide = () => {
+        sessionStorage.clear();
         setGuideOpen(true);
         setWelcomeModal(true)
     }
 
+    useEffect(() => {
+        const hasVisitedBefore = sessionStorage.getItem('hasVisitedBefore');
+        if (!hasVisitedBefore) {
+          setGuideOpen(true);
+          sessionStorage.setItem('hasVisitedBefore', true);
+        } else {
+            setGuideOpen(false);
+        }
+      }, []);
+
     return (
     <div>
+        <p>{String(guideOpen)}</p>
+        <p></p>
         <UserContext.Provider value={[user, setUser]}>
             <NavbarHeader resetGuide={resetGuide}/>
             <div className='full-screen'>

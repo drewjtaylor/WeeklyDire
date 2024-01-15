@@ -13,10 +13,6 @@ const Homepage = ({resetGuide}) => {
   const [displayedArticles, setDisplayedArticles] = useState([]);
   const [displayedArticlesPage, setDisplayedArticlesPage] = useState(4);
 
-    useEffect(() => {
-        resetGuide()
-    }, [])
-
   // Fetch articles from database and update "isLoading"
   useEffect(() => {
     const fetchData = async () => {

@@ -29,9 +29,9 @@ function App() {
     const [user, setUser] = useState({});
     useCheckUser(user, setUser);
     
-    // Establish overarching modals for showing app details
-    const [guideOpen, setGuideOpen] = useState(true);
-    const [welcomeModal, setWelcomeModal] = useState(true);
+    // Set up overarching modals for showing app details
+    const [guideOpen, setGuideOpen] = useState(false);
+    const [welcomeModal, setWelcomeModal] = useState(false);
     const [mongoDBInfoModal, setMongoDBInfoModal] = useState(false);
     const [expressServerModal, setExpressServerModal] = useState(false);
     const [reactInfoModal, setReactInfoModal] = useState(false);
@@ -45,12 +45,11 @@ function App() {
 
     return (
     <div>
-        <h1>GuideOpen is {String(guideOpen)}</h1>
         <UserContext.Provider value={[user, setUser]}>
             <NavbarHeader resetGuide={resetGuide}/>
             <div className='full-screen'>
                 <Routes>
-                    <Route path='/' element={<Homepage />} />
+                    <Route path='/' element={<Homepage resetGuide={resetGuide}/>} />
                     <Route path='/read' element={<Read />} />
                     <Route path='/read/:articleId' element={<FullArticle />} />
                     <Route path='read/tags/:tag' element={<TaggedArticlesResults />} />

@@ -6,13 +6,16 @@ import { Row, Col, Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const Homepage = () => {
+const Homepage = ({resetGuide}) => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [displayedArticles, setDisplayedArticles] = useState([]);
   const [displayedArticlesPage, setDisplayedArticlesPage] = useState(4);
 
+    useEffect(() => {
+        resetGuide()
+    }, [])
 
   // Fetch articles from database and update "isLoading"
   useEffect(() => {

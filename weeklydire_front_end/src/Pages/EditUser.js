@@ -163,23 +163,26 @@ const EditUser = () => {
                 <Field name="lastName" />
               </Col>
             </Row>
-
             <Row>
               <Col xs="3">
                 <p>Admin?</p>
               </Col>
               <Col>
                 <div role="group">
-                  <span>
-                    <Label className="m-1">
-                      <Field type="radio" name="admin" value="true" />
-                      Yes
-                    </Label>
-                    <Label className="m-1">
-                      <Field type="radio" name="admin" value="false" />
-                      No
-                    </Label>
-                  </span>
+            {/* If the user is editing their own details, do not show "admin", so they can't take away their own admin status on accident */}
+                    {user.username === userFromContext.username ? 
+                        <p>You can't change your own admin status</p> : 
+                        <span>
+                            <Label className="m-1">
+                            <Field type="radio" name="admin" value="true" />
+                            Yes
+                            </Label>
+                            <Label className="m-1">
+                            <Field type="radio" name="admin" value="false" />
+                            No
+                            </Label>
+                        </span>
+                    }
                 </div>
               </Col>
             </Row>

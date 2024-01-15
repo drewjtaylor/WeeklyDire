@@ -1,6 +1,6 @@
 ***Mainly front end stuff***
 
-Make register/sign in forms look better.
+Make register/sign in/edituser forms look better with actual bootstrap.
 
 Make EditUser page ask for confirmation before submitting a request to change an admin
 
@@ -39,6 +39,8 @@ Use a mounted folder for data so it persists: https://docs.docker.com/storage/vo
 
 
 ***"Icing on the cake" ideas.***
+
+Have admins and super-admins, where only super-admins can give or take away admin access.
 
 Instead of deleting articles, have them get a "deleted" designation, so they are recoverable.
 

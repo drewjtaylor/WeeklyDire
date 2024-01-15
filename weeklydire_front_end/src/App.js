@@ -16,10 +16,26 @@ import NotFound from './Pages/NotFound';
 import { UserContext } from './utils/UserContext';
 import { useState } from 'react';
 import useCheckUser from './utils/useCheckUser';
+import Welcome from './Components/infoModals/Welcome';
+import MongoDBInfo from './Components/infoModals/MongoDBInfo';
+import ExpressServer from './Components/infoModals/ExpressServer';
+import ReactInfo from './Components/infoModals/ReactInfo';
+import GoogleCloudInfo from './Components/infoModals/GoogleCloudInfo';
+
 
 function App() {
+    
+    // Retrieve and set currently logged in user
     const [user, setUser] = useState({});
     useCheckUser(user, setUser);
+    
+    // Establish overarching modals for showing app details
+    const [wantInfo, setWantInfo] = useState(true);
+    const [welcomeModal, setWelcomeModal] = useState(true);
+    const [mongoDBInfoModal, setMongoDBInfoModal] = useState(false);
+    const [expressServerModal, setExpressServerModal] = useState(false);
+    const [reactInfoModal, setReactInfoModal] = useState(false);
+    const [googleCloudInfoModal, setGoogleCloudInfoModal] = useState(false);
 
     return (
     <div>
@@ -37,11 +53,17 @@ function App() {
                     <Route path='/admin/users/:userId' element={<EditUser />} />
                     <Route path='/failedlogin' element={<FailedLogin />} />
                     <Route path='*' element={<NotFound />} />
-
-
                 </Routes>
             </div>
             <Footer />
+
+            {/* Modals. Each model takes in these props: it's on/off status, the function to toggle itself, and the function to toggle the NEXT modal */}
+            <Welcome modalStatus={welcomeModal} modalToggle={() => {setWelcomeModal(!welcomeModal)}} toggleNextModal={setMongoDBInfoModal}/>
+            <MongoDBInfo modalStatus={mongoDBInfoModal} modalToggle={() => {setMongoDBInfoModal(!mongoDBInfoModal)}} toggleNextModal={setExpressServerModal} />
+            <ExpressServer modalStatus={expressServerModal} modalToggle={() => {setExpressServerModal(!expressServerModal)}} toggleNextModal={setGoogleCloudInfoModal} />
+            <GoogleCloudInfo modalStatus={googleCloudInfoModal} modalToggle={() => {setGoogleCloudInfoModal(!googleCloudInfoModal)}} toggleNextModal={setReactInfoModal} />
+            <ReactInfo modalStatus={reactInfoModal} modalToggle={() => {setReactInfoModal(!reactInfoModal)}} toggleNextModal={() => null} />
+
         </UserContext.Provider>
     </div>
   );

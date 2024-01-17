@@ -44,7 +44,7 @@ const FailedLogin = () => {
             {
                 path: '/',
                 maxAge: 86400
-            }) // See https://www.tutorialspoint.com/how-to-set-cookies-in-reactjs
+            })
         return completedResponse;
       }
 
@@ -58,7 +58,6 @@ const FailedLogin = () => {
             resetForm();
         }
     }
-
 
   return (
     <Container>
@@ -105,7 +104,7 @@ const FailedLogin = () => {
 
     <Modal isOpen={failureModal} toggle={toggleFailureModal}>
         <ModalHeader toggle={toggleFailureModal}>Login failed again</ModalHeader>
-        <ModalBody>Either your username and password were incorrect, or they don't exist. If you continue to have trouble, please reset your password or contact an administrator.</ModalBody>
+        <ModalBody>Either your username and password were incorrect, or they don't exist. Please create an account using the "register" button, or contact an administrator if you can't log in to an existing account.</ModalBody>
     </Modal>
 
     </Container>

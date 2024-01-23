@@ -31,7 +31,7 @@ The home page displays all articles from an asynchronous request to the server, 
 
 Clicking one of the cards displaying articles leads to a full page.
 
-Each article has an array of "tags" indicating the subject matter of the article. By clicking one of the tags and using "useParam", the user is taken to a list of all articles that have that specific tag.
+Each article has an array of "tags" for keywords associated to the article. The top of the homepage has a search bar where the user can enter a tag, which will redirect them to a list of only articles that match that tag. Using Formik with form-validation seemed like overkill, so the search bar is just a regular form.
 
 ### Variable Header
 

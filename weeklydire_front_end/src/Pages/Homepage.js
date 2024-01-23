@@ -48,7 +48,11 @@ const Homepage = ({resetGuide}) => {
 
   return (
     <Container>
-        <TagSearchBar />
+      <Row>
+        <Col className="text-end">
+            <TagSearchBar/>
+        </Col>
+      </Row>
       <Row>
         <Col className="text-center">
           <h1>Welcome to Weeklydire</h1>

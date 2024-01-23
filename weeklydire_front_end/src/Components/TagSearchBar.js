@@ -1,22 +1,23 @@
-import {useState, useRef} from 'react';
-import {Label, Button, Col, Row} from 'reactstrap';
+import {useRef} from 'react';
+import {Button} from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 
 const TagSearchBar = () => {
     const tagSearchInput = useRef();
+    const navigate = useNavigate();
 
+    // Navigate to the "TaggedArticlesResults.js" page using the keyword in the search bar
     const handleTagSearchSubmit = (e) => {
         e.preventDefault();
-
         const tagToSearch = tagSearchInput.current?.value;
-
-        console.log(tagToSearch)
+        navigate(`/read/tags/${tagToSearch}`)
     }
 
   return (
-    <form action="" onSubmit={handleTagSearchSubmit}>
-        <span>
-            <Label htmlFor='tagSearchInput'>Search by tag:</Label>
-            <input ref={tagSearchInput} className="form-control-sm mx-3" id='tagSearchInput' name='tagSearchInput' placeholder='Disaster, charity, etc'/>
+    <form onSubmit={handleTagSearchSubmit}>
+        <span >
+            <label htmlFor='tagSearchInput'>Search by tag:</label>
+            <input ref={tagSearchInput} className="form-control-sm mx-3" id='tagSearchInput' name='tagSearchInput' placeholder='Charity, police, etc'/>
             <Button color="primary" type='submit'>Submit</Button>
         </span>
     </form>

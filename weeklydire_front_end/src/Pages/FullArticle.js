@@ -122,10 +122,15 @@ const FullArticle = () => {
                       key={index}
                     >{`${tag.toUpperCase()}`}</Link>
                   ) : (
-                    <Link
-                      to={`/read/tags/${tag}`}
-                      key={index}
-                    >{`${tag.toUpperCase()}, `}</Link>
+                    <>
+                        <Link
+                          to={`/read/tags/${tag}`}
+                          key={index}
+                        >
+                            {`${tag.toUpperCase()}`}
+                        </Link>
+                        {", "}
+                    </>
                   );
                 })}
           </Col>

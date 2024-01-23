@@ -1,6 +1,7 @@
 import ArticleCard from "../Components/ArticleCard";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
+import TagSearchBar from "../Components/TagSearchBar";
 import { selectAllDbArticles } from "../backendDbOperations";
 import { Row, Col, Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -47,6 +48,7 @@ const Homepage = ({resetGuide}) => {
 
   return (
     <Container>
+        <TagSearchBar />
       <Row>
         <Col className="text-center">
           <h1>Welcome to Weeklydire</h1>

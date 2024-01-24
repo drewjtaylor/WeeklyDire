@@ -36,6 +36,7 @@ Add share-to-social-media buttons on the articles
 More data tracking
     times article viewed
     times site visited
+    last time article was viewed
 
 
 Have admins and super-admins, where only super-admins can give or take away admin access.
@@ -49,8 +50,6 @@ Require authors to update their first/last name before writing articles instead 
 Incorporate signing in with Google/facebook account
 
 Add "Are you sure" modal to deleting anything from the admin page
-
-Add the ability for creators to edit their content
 
 Add parameters to the article model: display (default true), featured (and show featured first on front)
 

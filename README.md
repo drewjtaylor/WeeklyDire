@@ -27,7 +27,7 @@ Notable features:
 4. Deployment: Netlify. Any pushes to the main branch on github will trigger a redploy of the front end.
 
 ### Home page
-The home page displays all articles from an asynchronous request to the server, loading 4 articles at a time.
+The home page displays all articles from an asynchronous request to the server, utilizing lazy loading to prevent a backlog of images, 4 articles at a time.
 
 Clicking one of the cards displaying articles leads to a full page.
 

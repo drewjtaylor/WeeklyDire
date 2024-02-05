@@ -30,6 +30,10 @@ Use a mounted folder for data so it persists: https://docs.docker.com/storage/vo
 
 
 ***"Icing on the cake" ideas.***
+These are not part of the MVP (Minimum Viable Product). Once the basics are all DONE and polished, these features can be added.
+No working on these until the MVP is DONE.
+
+Make it so author's can edit articles
 
 Add share-to-social-media buttons on the articles
 
@@ -43,8 +47,6 @@ Have admins and super-admins, where only super-admins can give or take away admi
 
 Instead of deleting articles, have them get a "deleted" designation, so they are recoverable.
 
-Make it so author's can edit articles
-
 Require authors to update their first/last name before writing articles instead of conditionally showing only the username if they have no first/last name.
 
 Incorporate signing in with Google/facebook account
@@ -52,9 +54,6 @@ Incorporate signing in with Google/facebook account
 Add "Are you sure" modal to deleting anything from the admin page
 
 Add parameters to the article model: display (default true), featured (and show featured first on front)
-
-These are not part of the MVP (Minimum Viable Product). Once the basics are all DONE and polished, these features can be added.
-No working on these until the MVP is DONE.
 
 "Lazy Loading" does not currently involve the back end. For example, on the fullArticle page, 
 the front end requests the full article list/comment list, then renders in parts.
@@ -68,13 +67,12 @@ Also, "Homepage.js" on front end does this for "articles"
 
 --Write page changes
 Add a "publish time" to the "Write" page to allow creators to choose when their articles go live
-Add an "Edit" page to creators can change existing articles (that THEY wrote) (keep previous versions?) Use "PUT" route.
-Add a spot for "highlight quote" for article, and render it in a large bold section aside on its display page
+
 Instead of a thumbnail, allow uploading files (which would then need storage, adding complexity)
 
 --Admin page changes
 Instead of showing ALL users or ALL articles, develop a "search by" feature.
-In theory, a fully-functioning news site might have thousands of users
-and articles. Scrolling through to find a specific one would be tedious.
+In theory, a fully-functioning news site might have thousands of users and/or articles.
+Scrolling through to find a specific one would be tedious.
 
 Email verification for user registration

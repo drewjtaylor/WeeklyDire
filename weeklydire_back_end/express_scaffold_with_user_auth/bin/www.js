@@ -36,15 +36,19 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+
+// Commented out section on creting an https server.
+// This was made obsolete when deployed on Google Cloud
+// Caused trouble, but kept in case I need it for reference later.
 /**
  * Create HTTPS server
  */
-const options = {
-    key: fs.readFileSync(__dirname+'/server.key'),
-    cert: fs.readFileSync(__dirname+'/server.cert')
-}
+// const options = {
+//     key: fs.readFileSync(__dirname+'/server.key'),
+//     cert: fs.readFileSync(__dirname+'/server.cert')
+// }
 
-const secureServer = https.createServer(options, app);
+// const secureServer = https.createServer(options, app);
 
 /**
  * Listen on provided port, on all network interfaces.

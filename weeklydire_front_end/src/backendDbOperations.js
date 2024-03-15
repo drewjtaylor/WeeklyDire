@@ -54,6 +54,58 @@ export const selectArticleById = async (articleId) => {
     return data
 }
 
+// Soft-delete an article with the given articleId
+export const softDeleteArticleById = async (articleId, jwt) => {
+    const response = await fetch(
+        dbUrl + `/articles/softDelete/${articleId}`,
+        {
+            method: "DELETE",
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${jwt}`
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: null, // body data type must match "Content-Type" header
+          }
+    );
+
+    if (!response.ok) {
+        return Promise.reject('Unable to delete article, status: ' + response.status)
+    };
+    const data = await response.json();
+    return data
+};
+
+// Restore a soft-deleted article with the given articleId
+export const restoreArticleById = async (articleId, jwt) => {
+    const response = await fetch(
+        dbUrl + `/articles/softDelete/${articleId}`,
+        {
+            method: "PATCH",
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${jwt}`
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: null, // body data type must match "Content-Type" header
+          }
+    );
+
+    if (!response.ok) {
+        return Promise.reject('Unable to delete article, status: ' + response.status)
+    };
+    const data = await response.json();
+    return data
+};
+
 // Delete an article with the given articleId
 export const deleteArticleById = async (articleId, jwt) => {
     const response = await fetch(

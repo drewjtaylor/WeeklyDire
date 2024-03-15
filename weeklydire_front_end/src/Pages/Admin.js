@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import {
   selectAllDbArticles,
   selectAllUsers,
+  softDeleteArticleById,
+  restoreArticleById,
   deleteArticleById,
 } from "../backendDbOperations";
 import { useCookies } from "react-cookie";
@@ -136,7 +138,7 @@ const Admin = () => {
                   <Button
                     color="danger"
                     onClick={() => {
-                      deleteArticleById(article._id, cookies.jwt);
+                      softDeleteArticleById(article._id, cookies.jwt);
                       setArticles(
                         articles.filter((each) => article._id !== each._id)
                       );

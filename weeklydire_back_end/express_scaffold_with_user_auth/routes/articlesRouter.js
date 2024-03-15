@@ -14,13 +14,13 @@ articleRouter
         if (!articles) {
           res.statusCode = 200;
           res.end("There were no articles in the database");
-        }
+        };
         const activeArticles = articles.filter(
           (article) => article.deleted === false
         );
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.json(activeArticles);
+        res.json(articles);
       })
       .catch((err) => next(err));
   })
@@ -82,11 +82,15 @@ articleRouter
   })
   .post((req, res, next) => {
     res.statusCode = 403;
-    res.end(`POST operation not supported on /articles/${req.params.articleId}.`);
+    res.end(
+      `POST operation not supported on /articles/${req.params.articleId}.`
+    );
   })
   .put((req, res, next) => {
     res.statusCode = 403;
-    res.end(`PUT operation not supported on /articles/${req.params.articleId}.`);
+    res.end(
+      `PUT operation not supported on /articles/${req.params.articleId}.`
+    );
   })
   // Fully deletes article at "articleId". Requires user to be an admin or the author
   // "soft" delete can be achieved using /articles/softDelete/:articleId
@@ -119,11 +123,9 @@ articleRouter
     Article.findById(req.params.articleId)
       .then((article) => {
         if (req.user.admin || article.creator.equals(req.user._id)) {
-          Article.findByIdAndUpdate(req.params.articleId, 
-              {
-                deleted: true
-              }
-            )
+          Article.findByIdAndUpdate(req.params.articleId, {
+            deleted: true,
+          })
             .then((article) => {
               res.statusCode = 200;
               res.setHeader("Content-Type", "text/json");
@@ -145,49 +147,43 @@ articleRouter
       });
   });
 
-  articleRouter
+articleRouter
   .route("/softDelete/:articleId")
   .get((req, res, next) => {
     res.statusCode = 403;
-    res.end(
-      'GET operation not supported at this route.'
-    );
+    res.end("GET operation not supported at this route.");
   })
   .post((req, res, next) => {
     res.statusCode = 403;
-    res.end(
-      'POST operation not supported at this route.'
-    );
+    res.end("POST operation not supported at this route.");
   })
   // Used to restore a "soft" deleted article by changing "deleted" to false
   .patch((req, res, next) => {
     Article.findById(req.params.articleId)
-    .then((article) => {
-      if (req.user.admin || article.creator.equals(req.user._id)) {
-        Article.findByIdAndUpdate(req.params.articleId, 
-            {
-              deleted: false
-            }
-          )
-          .then((article) => {
-            res.statusCode = 200;
-            res.setHeader("Content-Type", "text/json");
-            res.json(article);
+      .then((article) => {
+        if (req.user.admin || article.creator.equals(req.user._id)) {
+          Article.findByIdAndUpdate(req.params.articleId, {
+            deleted: false,
           })
-          .catch((err) => next(err));
-      } else {
-        const err = new Error(
-          "You must be an admin or the creator of this article to restore it."
+            .then((article) => {
+              res.statusCode = 200;
+              res.setHeader("Content-Type", "text/json");
+              res.json(article);
+            })
+            .catch((err) => next(err));
+        } else {
+          const err = new Error(
+            "You must be an admin or the creator of this article to restore it."
+          );
+          return next(err);
+        }
+      })
+      .catch((err) => {
+        res.statusCode = 403;
+        res.end(
+          `There was an error performing PATCH at /articles/softDelete/${req.params.articleId}`
         );
-        return next(err);
-      }
-    })
-    .catch((err) => {
-      res.statusCode = 403;
-      res.end(
-        `There was an error performing PATCH at /articles/softDelete/${req.params.articleId}`
-      );
-    });
+      });
   })
   // Soft deletes article at "articleId". Requires user to be an admin or the author
   // Full delete can be achieved by just using /articles/:articleId
@@ -195,11 +191,9 @@ articleRouter
     Article.findById(req.params.articleId)
       .then((article) => {
         if (req.user.admin || article.creator.equals(req.user._id)) {
-          Article.findByIdAndUpdate(req.params.articleId, 
-              {
-                deleted: true
-              }
-            )
+          Article.findByIdAndUpdate(req.params.articleId, {
+            deleted: true,
+          })
             .then((article) => {
               res.statusCode = 200;
               res.setHeader("Content-Type", "text/json");
@@ -220,6 +214,5 @@ articleRouter
         );
       });
   });
-
 
 module.exports = articleRouter;

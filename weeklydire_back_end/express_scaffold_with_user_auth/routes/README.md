@@ -145,6 +145,15 @@ Note: This route is not currently implemented. It WAS used to retrieve author in
   - Requires a valid jwt bearer token for an admin account [(see above)](#routes)
   - Deletes the article with the given [_id]
 
+  ### /articles/softDelete/[articleId]
+
+- DELETE:
+  - Requires a valid jwt bearer token for an admin account or the author of the article [(see above)](#routes)
+  - "Soft" deletes the article with the given [_id] by changing its `deleted` property to `true`.
+- PATCH:
+  - Returns the article with the given [_id] in JSON format
+  - Restores a soft-deleted article by changing its `deleted` property to `false`.
+
 ## COMMENTS
 
 ### /comments/[articleId]

@@ -87,7 +87,9 @@ Clicking a user brings up an "edit user" page, where the admin can change the em
 
 Radio buttons control whether or not the user is a creator and/or admin.
 
-In addition to users, the admin page currently allows the admin to delete articles.
+Users can be deleted.
+
+Articles can be soft-deleted, changing their `deleted` property to `true`. 
 
 ### EditSelf page
 

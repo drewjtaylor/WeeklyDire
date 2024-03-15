@@ -20,7 +20,7 @@ articleRouter
         );
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.json(articles);
+        res.json(activeArticles);
       })
       .catch((err) => next(err));
   })

@@ -10,6 +10,9 @@ that might be more accurate as well if there were multiple users
 
 ***Mainly front end stuff***
 
+Make "How was this made" modals only show up on home page, not whole app.
+Make articles open in new window?
+
 Make register/sign in/edituser forms look better with actual bootstrap.
 
 More gracefully handle error on the "/write" form (or just prevent errors to begin with)

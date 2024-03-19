@@ -5,7 +5,7 @@ const passport = require("passport");
 const authenticate = require("../authenticate");
 const Article = require("../models/Article");
 
-// Retrieve all articles
+// Retrieve all non-deleted articles
 articleRouter
   .route("/")
   .get((req, res, next) => {
@@ -59,6 +59,27 @@ articleRouter
     res.statusCode = 403;
     res.end("DELETE operation not supported on /articles.");
   });
+
+// Retrieve deleted articles
+articleRouter
+  .route("/deleted")
+  .get((req, res, next) => {
+    Article.find()
+      .then((articles) => {
+        if (!articles) {
+          res.statusCode = 200;
+          res.end("There were no deleted articles in the database");
+        };
+        const activeArticles = articles.filter(
+          (article) => article.deleted
+        );
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(activeArticles);
+      })
+      .catch((err) => next(err));
+  })
+
 
 articleRouter
   .route("/:articleId")
@@ -158,7 +179,7 @@ articleRouter
     res.end("POST operation not supported at this route.");
   })
   // Used to restore a "soft" deleted article by changing "deleted" to false
-  .patch((req, res, next) => {
+  .patch(authenticate.verifyUser, (req, res, next) => {
     Article.findById(req.params.articleId)
       .then((article) => {
         if (req.user.admin || article.creator.equals(req.user._id)) {

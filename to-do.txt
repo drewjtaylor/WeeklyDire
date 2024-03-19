@@ -1,3 +1,13 @@
+TO DO FOR SOFTDELETEBRANCH
+
+Update "Delete" and "Restore" button on admin article view.
+They correctly work, but the state doesn't update.
+Add logic to update articles and deletedArticles
+
+A slower way would be running useEffect whenever they change, but
+that might be more accurate as well if there were multiple users
+
+
 ***Mainly front end stuff***
 
 Make register/sign in/edituser forms look better with actual bootstrap.

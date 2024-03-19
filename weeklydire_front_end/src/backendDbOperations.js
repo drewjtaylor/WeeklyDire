@@ -100,7 +100,7 @@ export const restoreArticleById = async (articleId, jwt) => {
     );
 
     if (!response.ok) {
-        return Promise.reject('Unable to delete article, status: ' + response.status)
+        return Promise.reject('Unable to restore article, status: ' + response.status)
     };
     const data = await response.json();
     return data
@@ -132,11 +132,21 @@ export const deleteArticleById = async (articleId, jwt) => {
     return data
 }
 
-//Returns all articles
+//Returns all non-deleted articles
 export const selectAllDbArticles = async () => {
     const response = await fetch(dbUrl + '/articles');
     if (!response.ok) {
         return Promise.reject('Unable to fetch, status: ' + response.status)
+    };
+    const data = await response.json();
+    return data
+}
+
+// Returns deleted articles
+export const selectDeletedDbArticles = async () => {
+    const response = await fetch(dbUrl + '/articles/deleted');
+    if (!response.ok) {
+        return Promise.reject('Unable to fetch, status ' + response.status)
     };
     const data = await response.json();
     return data

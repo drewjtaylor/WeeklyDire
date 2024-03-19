@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import {
   selectAllDbArticles,
+  selectDeletedDbArticles,
   selectAllUsers,
   softDeleteArticleById,
   restoreArticleById,
@@ -17,6 +18,8 @@ const Admin = () => {
   const setErrorMessage = useState("")[1];
   const [articles, setArticles] = useState([]);
   const [articlesLoading, setArticlesLoading] = useState(true);
+  const [deletedArticles, setDeletedArticles] = useState([]);
+  const [deletedArticlesLoading, setDeletedArticlesLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [usersLoading, setUsersLoading] = useState(true);
   const [cookies] = useCookies();
@@ -43,6 +46,17 @@ const Admin = () => {
         console.error("Error fetching articles: ", error);
       }
     };
+    const fetchDeletedArticles = async () => {
+        try {
+            const fetchedDeletedArticles = await selectDeletedDbArticles();
+            setDeletedArticles(fetchedDeletedArticles);
+            setDeletedArticlesLoading(false);
+        } catch (error) {
+            setDeletedArticlesLoading(false);
+            setErrorMessage(error.message);
+            console.error("Error fetching deleted articles: ", error)
+        }
+    }
     const fetchUsersData = async () => {
       try {
         const fetchedUsers = await selectAllUsers(cookies.jwt);
@@ -56,6 +70,7 @@ const Admin = () => {
     };
 
     fetchArticleData();
+    fetchDeletedArticles();
     fetchUsersData();
   }, [cookies.jwt, setErrorMessage]);
 
@@ -142,6 +157,7 @@ const Admin = () => {
                       setArticles(
                         articles.filter((each) => article._id !== each._id)
                       );
+                      // Need to update deletedArticles to include soft-deleted article
                     }}
                   >
                     Delete
@@ -154,6 +170,75 @@ const Admin = () => {
       )}
     </>
   );
+
+  const deletedUsersTable = (<>
+  </>)
+
+  const deletedArticlesTable = (
+    <>
+      <Row id="articles">
+        <h1>Deleted Articles</h1>
+      </Row>
+      <Row>
+        <p>These articles are currently marked as "deleted" but recoverable</p>
+        <p>They will not show up on the main page or any searches.</p>
+        <p>To restore a deleted article, click "restore."</p>
+      </Row>
+      {deletedArticlesLoading ? (
+        <Loading />
+      ) : (
+        <Table bordered>
+          <thead>
+            <tr>
+              <th>Title:</th>
+              <th>Creator:</th>
+              <th>Tags:</th>
+              <th>Action:</th>
+            </tr>
+          </thead>
+          <tbody>
+            {deletedArticles.map((article, idx) => (
+              <tr key={idx}>
+                <td>{article.title}</td>
+                <td>{findCreatorUsername(article.creator)}</td>
+                <td>
+                  {article.tags.length === 0
+                    ? "None"
+                    : article.tags.map((tag, index, fullList) => {
+                        return index === fullList.length - 1 ? (
+                          <div
+                            className="m-0 p-0"
+                            key={index}
+                          >{`${tag.toUpperCase()}`}</div>
+                        ) : (
+                          <div
+                            className="m-0 p-0"
+                            key={index}
+                          >{`${tag.toUpperCase()}, `}</div>
+                        );
+                      })}
+                </td>
+                <td>
+                  <Button
+                    color="success"
+                    onClick={() => {
+                      restoreArticleById(article._id, cookies.jwt);
+                      setDeletedArticles(
+                        deletedArticles.filter((each) => article._id !== each._id)
+                      )
+                      // Need to set articles to include restored article
+                    }}
+                  >
+                    Restore
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+    </>
+  )
 
   // Give the app time to check if the existing user is an admin
   setTimeout(() => {
@@ -198,11 +283,22 @@ const Admin = () => {
           >
             Articles
           </Button>
+          <Button
+            className="m-2"
+            color={adminChoice === "deletedArticles" ? "primary" : "secondary"}
+            onClick={() => {
+              setAdminChoice("deletedArticles");
+            }}
+          >
+            Deleted Articles
+          </Button>
         </span>
         {adminChoice === "users" ? (
           usersTable
         ) : adminChoice === "articles" ? (
           articlesTable
+        ) : adminChoice === "deletedArticles" ? (
+            deletedArticlesTable
         ) : (
           <p>Please select a table to view.</p>
         )}

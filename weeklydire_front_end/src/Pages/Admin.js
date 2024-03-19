@@ -74,6 +74,29 @@ const Admin = () => {
     fetchUsersData();
   }, [cookies.jwt, setErrorMessage]);
 
+  // Function to mark an article as deleted. 
+  // Also updates the state of deletedArticles and articles
+  const deleteArticle = ((article) => {
+    const thisArticle = article;
+    softDeleteArticleById(article._id, cookies.jwt);
+    setArticles(
+        articles.filter((each) => article._id !== each._id)
+      );
+    setDeletedArticles([...deletedArticles, thisArticle])
+  })
+  
+  // Function to restore an article marked as deleted. 
+  // Also updates the state of deletedArticles and articles
+  const restoreArticle = ((article) => {
+    const thisArticle = article;
+    restoreArticleById(article._id, cookies.jwt);
+    setDeletedArticles(
+        deletedArticles.filter((each) => article._id !== each._id)
+      );
+    setArticles([...articles, thisArticle])
+  })
+  
+
   const usersTable = (
     <>
       <Row>
@@ -153,11 +176,7 @@ const Admin = () => {
                   <Button
                     color="danger"
                     onClick={() => {
-                      softDeleteArticleById(article._id, cookies.jwt);
-                      setArticles(
-                        articles.filter((each) => article._id !== each._id)
-                      );
-                      // Need to update deletedArticles to include soft-deleted article
+                      deleteArticle(article)
                     }}
                   >
                     Delete
@@ -222,11 +241,7 @@ const Admin = () => {
                   <Button
                     color="success"
                     onClick={() => {
-                      restoreArticleById(article._id, cookies.jwt);
-                      setDeletedArticles(
-                        deletedArticles.filter((each) => article._id !== each._id)
-                      )
-                      // Need to set articles to include restored article
+                      restoreArticle(article)
                     }}
                   >
                     Restore

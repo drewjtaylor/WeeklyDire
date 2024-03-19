@@ -77,6 +77,7 @@ const FullArticle = () => {
       <Container>
         <Row className="mt-3">
           <Col
+            className="text-center"
             md={{
               offset: 2,
               size: 8,

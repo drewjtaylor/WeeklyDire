@@ -48,8 +48,6 @@ More data tracking
 
 Have admins and super-admins, where only super-admins can give or take away admin access.
 
-Instead of deleting articles, have them get a "deleted" designation, so they are recoverable.
-
 Require authors to update their first/last name before writing articles instead of conditionally showing only the username if they have no first/last name.
 
 Incorporate signing in with Google/facebook account

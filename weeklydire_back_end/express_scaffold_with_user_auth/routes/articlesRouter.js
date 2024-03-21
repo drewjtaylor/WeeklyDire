@@ -31,7 +31,6 @@ articleRouter
     (req, res, next) => {
       const creatorId = req.user._id;
       const { body, title, thumbnail, tags } = req.body;
-      console.log(req.body);
       if (body && title) {
         Article.create({ body, title, thumbnail, tags, creator: creatorId })
           .then((article) => {
@@ -107,12 +106,58 @@ articleRouter
       `POST operation not supported on /articles/${req.params.articleId}.`
     );
   })
-  .put((req, res, next) => {
-    res.statusCode = 403;
-    res.end(
-      `PUT operation not supported on /articles/${req.params.articleId}.`
-    );
-  })
+.put(
+    authenticate.verifyUser,
+    (req, res, next) => {
+      const { body, title, thumbnail, tags } = req.body;
+      if (body && title) {
+        Article.findById(req.params.articleId)
+        .then(article => {
+            if (article.creator.equals(req.user._id)) {
+                Article.findByIdAndUpdate(req.params.articleId, { body, title, thumbnail, tags})
+                .then((article) => {
+                  res.statusCode = 200;
+                  res.setHeader("Content-Type", "application/json");
+                  res.json(article);
+                })
+                .catch((err) => next(err));
+            } else {
+                res.statusCode = 403;
+                res.end(`You must be the author to edit the article with ID: ${req.params.articleId}`)
+            }
+        })
+      } else {
+        const err = new Error(
+          'The body of the request must at least contain a "body" and "title".'
+        );
+        err.statusCode = 400;
+        return next(err);
+      }
+    }
+  )
+
+
+//   .put(authenticate.verifyUser, (req, res, next) => {
+//     // If the user is the author, update the existing document with this article ID
+    
+//     // If the user is not the author, reject with an error message
+
+//     // Default error otherwise
+
+//     res.statusCode = 403;
+//     res.end(
+//       `PUT operation not supported on /articles/${req.params.articleId}.`
+//     );
+//   })
+
+
+
+
+
+
+
+
+
   // Fully deletes article at "articleId". Requires user to be an admin or the author
   // "soft" delete can be achieved using /articles/softDelete/:articleId
   .delete(authenticate.verifyUser, (req, res, next) => {
@@ -134,7 +179,7 @@ articleRouter
         }
       })
       .catch((err) => {
-        res.statusCode = 403;
+        res.statusCode = 400;
         res.end(
           `There was an error performing DELETE at /articles/${req.params.articleId}`
         );

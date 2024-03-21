@@ -1,3 +1,8 @@
+SPECIFIC TO editArticle branch:
+"Myarticles" page now shows user-created articles.
+Need to format in a container
+Need to make the edit page and link to it
+
 ***Mainly front end stuff***
 
 Make "How was this made" modals only show up on home page, not whole app.

@@ -132,13 +132,24 @@ export const deleteArticleById = async (articleId, jwt) => {
     return data
 }
 
-//Returns all non-deleted articles
+// Returns all non-deleted articles
 export const selectAllDbArticles = async () => {
     const response = await fetch(dbUrl + '/articles');
     if (!response.ok) {
         return Promise.reject('Unable to fetch, status: ' + response.status)
     };
     const data = await response.json();
+    return data
+}
+
+// Returns all non-deleted articles by a certain creator
+export const selectAllDbArticlesByCreator = async (creatorId) => {
+    const response = await fetch(dbUrl + '/articles');
+    if (!response.ok) {
+        return Promise.reject('Unable to fetch, status: ' + response.status)
+    };
+    const allArticles = await response.json();
+    const data = allArticles.filter(article => article.creator === creatorId)
     return data
 }
 

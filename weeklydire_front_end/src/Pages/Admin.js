@@ -5,7 +5,6 @@ import {
   selectAllUsers,
   softDeleteArticleById,
   restoreArticleById,
-  deleteArticleById,
 } from "../backendDbOperations";
 import { useCookies } from "react-cookie";
 import { Container, Row, Table, Button } from "reactstrap";
@@ -189,9 +188,6 @@ const Admin = () => {
       )}
     </>
   );
-
-  const deletedUsersTable = (<>
-  </>)
 
   const deletedArticlesTable = (
     <>

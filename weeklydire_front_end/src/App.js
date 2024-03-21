@@ -7,6 +7,7 @@ import Homepage from './Pages/Homepage';
 import Read from './Pages/Read';
 import FullArticle from './Pages/FullArticle';
 import Write from './Pages/Write';
+import MyArticles from './Pages/MyArticles';
 import Admin from './Pages/Admin';
 import EditUser from './Pages/EditUser';
 import EditSelf from './Pages/EditSelf';
@@ -62,8 +63,9 @@ function App() {
                     <Route path='/' element={<Homepage resetGuide={resetGuide}/>} />
                     <Route path='/read' element={<Read />} />
                     <Route path='/read/:articleId' element={<FullArticle />} />
-                    <Route path='read/tags/:tag' element={<TaggedArticlesResults />} />
+                    <Route path='/read/tags/:tag' element={<TaggedArticlesResults />} />
                     <Route path='/write' element={<Write />} />
+                    <Route path='/myarticles' element={<MyArticles />}/>
                     <Route path='/admin' element={<Admin />} />
                     <Route path='/users/update/:userId' element={<EditSelf />} />
                     <Route path='/admin/users/:userId' element={<EditUser />} />

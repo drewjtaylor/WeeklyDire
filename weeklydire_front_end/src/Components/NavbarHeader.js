@@ -67,7 +67,17 @@ const NavbarHeader = ({resetGuide}) => {
         <NavItem>
             {currentUser.creator ?
                 <NavLink href={`/users/update/${currentUser._id}`}>
-                    <Button color='success'>My Account</Button>
+                    <Button color='info'>My Account</Button>
+                </NavLink> :
+                null
+            }
+        </NavItem>
+
+        {/* Conditional "My Articles" button shows if user has the "creator" property */}
+        <NavItem>
+            {currentUser.creator ?
+                <NavLink href='/myarticles'>
+                    <Button color='success'>My Articles</Button>
                 </NavLink> :
                 null
             }
@@ -77,7 +87,7 @@ const NavbarHeader = ({resetGuide}) => {
         <NavItem>
             {currentUser.creator ?
                 <NavLink href='/write'>
-                    <Button color='success'>Write</Button>
+                    <Button color='success'>New Article</Button>
                 </NavLink> :
                 null
             }

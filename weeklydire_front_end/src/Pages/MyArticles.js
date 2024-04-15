@@ -2,7 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../utils/UserContext";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
-import { Row, Col, Table, Button } from "reactstrap";
+import { Container, Row, Col, Table, Button } from "reactstrap";
+import { Link } from "react-router-dom";
 import {selectAllDbArticlesByCreator} from '../backendDbOperations';
 
 const MyArticles = () => {
@@ -28,6 +29,7 @@ const MyArticles = () => {
         fetchUsersArticles();
     }, [userFromContext._id])
 
+    // Deconstruct variables from the logged-in user
     const {
         firstName,
         lastName,
@@ -35,6 +37,7 @@ const MyArticles = () => {
         username
     } = userFromContext;
 
+    // Set up the table of articles written by the logged-in user
     const articlesPerCreatorTable = (
         <>
             <Row id="articles">
@@ -53,7 +56,11 @@ const MyArticles = () => {
                 <tbody>
                     {articles.map((article, idx) => {
                         return (<tr key={idx}>
-                            <td>{article.title}</td>
+                            <td>
+                                <Link to={`/read/${article._id}`}>
+                                    {article.title}
+                                </Link>
+                            </td>
                             <td>
                                 {article.tags.length === 0
                                 ? "None"
@@ -83,12 +90,12 @@ const MyArticles = () => {
     );
 
   return (
-    <div>
+    <Container>
         <h3>This is a list of your articles.</h3>
         <h4>Click the green "Edit" button to the right to open a form where you can make changes.</h4>
         <p>You are currently logged in as username: {username}</p>
         {articlesPerCreatorTable}
-    </div>
+    </Container>
   )
 }
 

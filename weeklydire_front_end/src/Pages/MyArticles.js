@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../utils/UserContext";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
-import { Container, Row, Col, Table } from "reactstrap";
+import { Container, Row, Table } from "reactstrap";
 import { Link } from "react-router-dom";
 import {selectAllDbArticlesByCreator} from '../backendDbOperations';
 
@@ -30,9 +30,9 @@ const MyArticles = () => {
 
     // Deconstruct variables from the logged-in user
     const {
-        firstName,
-        lastName,
-        _id, 
+        // firstName,
+        // lastName,
+        // _id, 
         username
     } = userFromContext;
 

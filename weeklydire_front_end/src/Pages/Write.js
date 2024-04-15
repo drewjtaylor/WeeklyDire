@@ -7,18 +7,18 @@ import { useCookies } from 'react-cookie';
 import Unauthorized from '../Pages/Unauthorized';
 import { UserContext } from '../utils/UserContext';
 import Loading from '../Components/Loading';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
     const Write = () => {
 
-
         const ref = useRef(null);
+        const navigate = useNavigate();
         const [cookies] = useCookies();
         const [isLoading, setIsLoading] = useState(true);
-        // const [isEditing, setIsEditing] =useState(false);
         const location = useLocation();
-        const [pendingTags, setPendingTags] = useState([...location?.state.tags]);
+        console.log(location.state?.tags ? true : false);
+        const [pendingTags, setPendingTags] = useState(location.state?.tags || []);
         
         const article = location.state;
         console.log(article);
@@ -76,6 +76,7 @@ import { useLocation } from 'react-router-dom';
             values.tags = pendingTags; // Gets all of the "pending tags" into values instead of just what's in the "Tags" field at the time
             handleArticleSubmit(values);
             resetForm();
+            navigate(article ? `/read/${article._id}` : '/myarticles')
         };
 
         // Give the app time to check if the existing user is a creator

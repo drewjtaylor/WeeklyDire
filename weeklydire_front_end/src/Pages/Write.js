@@ -9,35 +9,66 @@ import { UserContext } from '../utils/UserContext';
 import Loading from '../Components/Loading';
 
 
-    const Write = () => {
+    const Write = ({articleBeingEdited}) => {
+
         const ref = useRef(null);
         const [cookies] = useCookies();
         const [pendingTags, setPendingTags] = useState([]);
         const [isLoading, setIsLoading] = useState(true);
-        
+        const [isEditing, setIsEditing] =useState(false);
+
+
+        if (articleBeingEdited !== undefined) {
+            setIsEditing(true);
+        };
+
         // Check current user
         const [userFromContext] = useContext(UserContext);
 
         const postData = async (url, data) => {
             // Default options are marked with *
-            const response = await fetch(url, {
-              method: "POST",
-              mode: "cors", // no-cors, *cors, same-origin
-              cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-              credentials: "same-origin", // include, *same-origin, omit
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${cookies.jwt}`
-              },
-              redirect: "follow", // manual, *follow, error
-              referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-              body: JSON.stringify(data), // body data type must match "Content-Type" header
-            });
-            return response.json(); // parses JSON response into native JavaScript objects
+
+            // If this page is being opened to edit an article, uses PUT instead of POST
+            // For editing, the url passed to this function must include the article ID
+            // i.e., (`/articles/${articleId}`)
+            if (isEditing) {
+                const response = await fetch(url, {
+                    method: "PUT",
+                    mode: "cors", // no-cors, *cors, same-origin
+                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: "same-origin", // include, *same-origin, omit
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": `Bearer ${cookies.jwt}`
+                    },
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                    body: JSON.stringify(data), // body data type must match "Content-Type" header
+                  });
+                  return response.json(); // parses JSON response into native JavaScript objects
+            } else {
+                const response = await fetch(url, {
+                    method: "POST",
+                    mode: "cors", // no-cors, *cors, same-origin
+                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: "same-origin", // include, *same-origin, omit
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": `Bearer ${cookies.jwt}`
+                    },
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                    body: JSON.stringify(data), // body data type must match "Content-Type" header
+                  });
+                  return response.json(); // parses JSON response into native JavaScript objects
+            }
           }
 
         const handleArticleSubmit = async (values) => {
-            await postData(dbUrl + "/articles", values);
+            // If an article is being edited, use specific suffix
+            const urlSuffix = isEditing ? "/articles" : `/articles/${articleBeingEdited._id}`;
+
+            await postData(dbUrl + urlSuffix, values);
         }
 
         const handleSubmit = (values, { resetForm }) => {
@@ -73,7 +104,13 @@ import Loading from '../Components/Loading';
                     <Row>
                         <Col>
                             <Formik
-                                initialValues={{
+                            // If the article is being edited, fill initial values
+                                initialValues={ isEditing ? {
+                                    title: articleBeingEdited.title,
+                                    body: articleBeingEdited.body,
+                                    thumbnail: articleBeingEdited.thumbnail,
+                                    tags: articleBeingEdited.tags
+                                } : {
                                     title: '',
                                     body: '',
                                     thumbnail: '',

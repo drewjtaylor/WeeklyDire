@@ -15,17 +15,13 @@ import { useLocation } from 'react-router-dom';
 
         const ref = useRef(null);
         const [cookies] = useCookies();
-        const [pendingTags, setPendingTags] = useState([]);
         const [isLoading, setIsLoading] = useState(true);
         // const [isEditing, setIsEditing] =useState(false);
         const location = useLocation();
-
+        const [pendingTags, setPendingTags] = useState([...location?.state.tags]);
+        
         const article = location.state;
         console.log(article);
-
-        // if (article) {
-        //     setIsEditing(true);
-        // };
 
         // Check current user
         const [userFromContext] = useContext(UserContext);
@@ -114,7 +110,7 @@ import { useLocation } from 'react-router-dom';
                                     title: article.title,
                                     body: article.body,
                                     thumbnail: article.thumbnail,
-                                    tags: article.tags
+                                    tags: []
                                 } : {
                                     title: '',
                                     body: '',

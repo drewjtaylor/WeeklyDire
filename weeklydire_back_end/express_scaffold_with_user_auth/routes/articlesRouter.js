@@ -137,20 +137,6 @@ articleRouter
   )
 
 
-//   .put(authenticate.verifyUser, (req, res, next) => {
-//     // If the user is the author, update the existing document with this article ID
-    
-//     // If the user is not the author, reject with an error message
-
-//     // Default error otherwise
-
-//     res.statusCode = 403;
-//     res.end(
-//       `PUT operation not supported on /articles/${req.params.articleId}.`
-//     );
-//   })
-
-
 
 
 

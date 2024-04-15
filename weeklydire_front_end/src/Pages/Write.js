@@ -7,20 +7,25 @@ import { useCookies } from 'react-cookie';
 import Unauthorized from '../Pages/Unauthorized';
 import { UserContext } from '../utils/UserContext';
 import Loading from '../Components/Loading';
+import { useLocation } from 'react-router-dom';
 
 
-    const Write = ({articleBeingEdited}) => {
+    const Write = () => {
+
 
         const ref = useRef(null);
         const [cookies] = useCookies();
         const [pendingTags, setPendingTags] = useState([]);
         const [isLoading, setIsLoading] = useState(true);
-        const [isEditing, setIsEditing] =useState(false);
+        // const [isEditing, setIsEditing] =useState(false);
+        const location = useLocation();
 
+        const article = location.state;
+        console.log(article);
 
-        if (articleBeingEdited !== undefined) {
-            setIsEditing(true);
-        };
+        // if (article) {
+        //     setIsEditing(true);
+        // };
 
         // Check current user
         const [userFromContext] = useContext(UserContext);
@@ -31,7 +36,7 @@ import Loading from '../Components/Loading';
             // If this page is being opened to edit an article, uses PUT instead of POST
             // For editing, the url passed to this function must include the article ID
             // i.e., (`/articles/${articleId}`)
-            if (isEditing) {
+            if (article) {
                 const response = await fetch(url, {
                     method: "PUT",
                     mode: "cors", // no-cors, *cors, same-origin
@@ -66,8 +71,8 @@ import Loading from '../Components/Loading';
 
         const handleArticleSubmit = async (values) => {
             // If an article is being edited, use specific suffix
-            const urlSuffix = isEditing ? "/articles" : `/articles/${articleBeingEdited._id}`;
-
+            const urlSuffix = !article ? "/articles" : `/articles/${article._id}`;
+            console.log(urlSuffix)
             await postData(dbUrl + urlSuffix, values);
         }
 
@@ -105,11 +110,11 @@ import Loading from '../Components/Loading';
                         <Col>
                             <Formik
                             // If the article is being edited, fill initial values
-                                initialValues={ isEditing ? {
-                                    title: articleBeingEdited.title,
-                                    body: articleBeingEdited.body,
-                                    thumbnail: articleBeingEdited.thumbnail,
-                                    tags: articleBeingEdited.tags
+                                initialValues={ article ? {
+                                    title: article.title,
+                                    body: article.body,
+                                    thumbnail: article.thumbnail,
+                                    tags: article.tags
                                 } : {
                                     title: '',
                                     body: '',

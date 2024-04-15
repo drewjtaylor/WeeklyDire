@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../utils/UserContext";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
-import { Container, Row, Col, Table, Button } from "reactstrap";
+import { Container, Row, Col, Table } from "reactstrap";
 import { Link } from "react-router-dom";
 import {selectAllDbArticlesByCreator} from '../backendDbOperations';
 
@@ -13,7 +13,6 @@ const MyArticles = () => {
     const [userFromContext] = useContext(UserContext);
 
     // On page load, get articles for this user
-
     useEffect(() => {
         const fetchUsersArticles = async () => {
             try {
@@ -79,7 +78,9 @@ const MyArticles = () => {
                                 })}
                             </td>
                             <td>
-                                Edit
+                                <Link to='/write' state={article}>
+                                    Edit
+                                </Link>
                             </td>
                         </tr>)
                     })}

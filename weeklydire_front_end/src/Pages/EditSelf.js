@@ -32,10 +32,10 @@ const EditSelf = () => {
       try {
         const fetchedUser = await selectUser(userId, cookies.jwt);
         setUser(fetchedUser);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user: ", error);
-      }
+      };
+      setIsLoading(false);
     };
     fetchData();
   }, [userId, cookies.jwt]);
@@ -87,6 +87,7 @@ const EditSelf = () => {
     if (userFromContext.username === undefined) {
         return <div className="text-center">
             <NotFound />
+            <br/>
             <p>You are not currently logged in</p>
             <p>If you are trying to edit your user information, please sign in</p>
         </div>

@@ -151,6 +151,7 @@ const headerStyle = {
 };
 
     // Variables to define visibility conditional on screen size
+    // Add to the className of an element to control when it displays
 const hideOnLarge = 'd-block d-lg-none';
 const hideUpToLarge = 'd-none d-lg-flex'
 

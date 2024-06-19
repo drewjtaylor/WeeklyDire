@@ -41,8 +41,6 @@ Use a mounted folder for data so it persists: https://docs.docker.com/storage/vo
 These are not part of the MVP (Minimum Viable Product). Once the basics are all DONE and polished, these features can be added.
 No working on these until the MVP is DONE.
 
-Make it so author's can edit articles
-
 Add share-to-social-media buttons on the articles
 
 More data tracking

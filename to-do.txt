@@ -1,3 +1,13 @@
+SPECIFIC to the premiumContent branch:
+Update article schema to designate if it's premium-only
+Update user schema to designate if they are premium members
+Update how homepage is displayed to show a lock symbol on premium content
+Create a "Sorry, you must be a premium member for this content" page
+On backend, change routing to check if user is premium and block them if they're not.
+(Possibly a new branch) - Create a page to use paypal to upgrade to premium
+
+
+
 SPECIFIC TO editArticle branch:
 "Myarticles" page now shows user-created articles.
 Need to format in a container

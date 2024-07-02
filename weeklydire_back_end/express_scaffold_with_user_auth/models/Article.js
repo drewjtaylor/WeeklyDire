@@ -29,6 +29,10 @@ const articleSchema = new Schema({
     deleted: {
         type: Boolean,
         default: false
+    },
+    premiumOnly: {
+        type: Boolean,
+        default: false
     }
 },
 {

@@ -25,6 +25,10 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
+    premiumUser: {
+        type: Boolean,
+        default: false
+    },
     admin: {
         type: Boolean,
         default: false

@@ -1,7 +1,8 @@
 SPECIFIC to the premiumContent branch:
-Update article schema to designate if it's premium-only
-Update user schema to designate if they are premium members
-Update how homepage is displayed to show a lock symbol on premium content
+Update article schema to designate if it's premium-only - done
+Update user schema to designate if they are premium members - done
+Make front end check if current user is premium
+Update how homepage is displayed to show a lock symbol on premium content IF user is not premium
 Create a "Sorry, you must be a premium member for this content" page
 On backend, change routing to check if user is premium and block them if they're not.
 Update admin page to let admins turn premiumOnly off and on for articles
